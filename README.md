@@ -4,7 +4,7 @@
 
 ##### ACCESO A DATOS - 2º CURSO
 
-![logo-IESGP-FP](logo-IESGP-FP.png)
+![logo-IESGP-FP](./readmeAssets/logo-IESGP-FP.png)
 
 
 
@@ -40,7 +40,72 @@ Describe todos los requisitos no funcionales que se deben tener en cuenta para e
 
 ## Wireframe
 
-Incluye un boceto y la descripción de cada una de las pantallas de la aplicación
+LOGIN:
+El usuario entrará con su usuario en la aplicación pudiendo guarda la sesión. Ádemas, podrá recordar la contraseña si no la recuerda.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/login.png)
+
+REGISTRO:
+El usuario se podrá registrar en la aplicación y crear su propio usuario.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/registro.png)
+
+RECORDAR CONTRASEÑA:
+Aquí el usuario podrá recordar su contraseña recibiendo un correo a su email con un codigo concreto.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/recordarContrasenna.png)
+
+NUEVA CONTRASEÑA: 
+Aquí el usuario podrá crear una nueva contraseña para su cuenta.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/nuevaContrasenna.png)
+
+INICIO:
+Este es el menu inicial donde podrá encontrar los eventos que tiene ese dia, de lo contrario, podrá ir a buscar eventos.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/inicio.png)
+
+BUSQUEDA:
+Aquí el usuario buscará a los usuarios a los cuales desea citar un evento.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/busqueda.png)
+
+NOTIFICACIONES:
+Aqui se mostrarán las notificaciones de la aplicación.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/notificaciones.png)
+
+PERFIL PERSONAL:
+Aquí el usuario verá sus eventos puediendo modificarlos a su elección.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/perfilPersonal.png)
+
+PERFIL AJENO:
+Aquí el usuario podrá elegir el dia y la hora disponible para citar un evento a otro usuario.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/perfilAjeno.png)
+
+AJUSTES:
+Aquí encontrará la selección del idioma de la aplicación, ademas de otros datos de interés.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/ajustes.png)
+
+EVENTO:
+Aquí el usuario citador podrá ver la información de un evento puediendo cancelar su cita.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/evento.png)
+
+CITAR EVENTO:
+El usuario podrá seleccionar los datos de la cita.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/citarEvento.png)
+
+
+MODIFICAR EVENTO:
+El usuario podrá editar sus eventos e incluso cancelarlos.
+
+![logo-IESGP-FP](./readmeAssets/wireframe/modificarEvento.png)
+
 
 
 
