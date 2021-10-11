@@ -28,21 +28,19 @@ Esta aplicacion, permitirá al usuario solicitar eventos a otros usuarios, adema
 
 # Especificación de requisitos
 
-## Requisitos funcionales CMS
+## Requisitos funcionales
 
-DESCRIBIR CASOS DE USO Y USAR DIAGRAMA
+Describe cada una de las funcionalidades que debe incluir la aplicación. 
 
-## Wireframe
-
-Incluye un boceto y la descripción de cada una de las pantallas de la aplicación
-
-## API REST
-
-Describe los servicios, sus parámetros y el formato json de respuesta.
+Es recomendable incluir un diagrama de casos de uso.
 
 ## Requisitos no funcionales
 
 Describe todos los requisitos no funcionales que se deben tener en cuenta para el desarrollo de la aplicación (seguridad, conectividad, tipos de dispositivos, memoria, procesador, espacio de almacenamiento, etc.)
+
+## Wireframe
+
+Incluye un boceto y la descripción de cada una de las pantallas de la aplicación
 
 
 
@@ -54,7 +52,7 @@ Incluye las imágenes con el diseño de las pantallas y cualquier descripción o
 
 ## Diagrama de clases
 
-Se debe incluir un diagrama de clases, la descripción de las mismas.
+Se debe incluir un diagrama de clases y la descripción de las mismas.
 
 ## Diagrama E/R
 
@@ -62,7 +60,7 @@ Describe las tablas de la base de datos local e incluye un diagrama Entidad/Rela
 
 ## Plan de pruebas
 
-Define los casos de prueba que se deben realizar para comprobar el correcto funcionamiento de la aplicación web.
+Define los casos de prueba que se deben realizar para comprobar el correcto funcionamiento de la aplicación móvil.
 
 
 
@@ -88,11 +86,15 @@ En este punto se explicarán las diferentes tecnologías utilizadas para la real
 
 Describe los pasos a seguir para poder compilar el proyecto y ejecutarlo.
 
+## Informe de pruebas
 
+### Pruebas en emuladores y dispositivos reales
 
-# Informe de pruebas
+Incluye pantallazos de la ejecución de los casos de prueba realizadas en los emuladores y dispositivos reales.
 
-Describe el resultado de ejecutar los casos de prueba sobre la aplicación web y del API REST.
+### Pruebas remotas
+
+Incluye pantallazos de la ejecución de los casos de prueba realizadas en dispositivos reales remotos.
 
 
 
@@ -100,8 +102,8 @@ Describe el resultado de ejecutar los casos de prueba sobre la aplicación web y
 
 ## Conocimientos adquiridos
 
-Reflexiona sobre el trabajo realizado durante el desarrollo de la aplicación web y sobre los conocimientos adquiridos, problemas encontrados, etc.
+Reflexiona sobre el trabajo realizado durante el desarrollo de la aplicación móvil y sobre los conocimientos adquiridos, problemas encontrados, etc.
 
 ## Mejoras futuras
 
-Incluye aspectos y nueva funcionalidad que incluirías en el CMS en un futuro próximo. 
+Incluye aspectos y nueva funcionalidad que incluirías en la aplicación en un futuro próximo. 
