@@ -2,11 +2,11 @@ package com.marioparrillamaroto.myeventsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        setContentView(R.layout.activity_main);
+        Intent nuevaPantalla = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(nuevaPantalla);
     }
 }
