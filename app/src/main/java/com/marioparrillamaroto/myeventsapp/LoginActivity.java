@@ -22,9 +22,6 @@ public class LoginActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.txtUsername);
         password = (EditText) findViewById(R.id.txtPass);
-        guardarSesion = (CheckBox) findViewById(R.id.cbxRecordarSesion);
-        recordarPass = (TextView) findViewById(R.id.lblRecordarPass);
-
     }
 
     public void login(View view) {
