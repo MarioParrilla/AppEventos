@@ -11,11 +11,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentNotificationsBinding;
+import com.marioparrillamaroto.myeventsapp.ui.buscar.UserBsq;
+
+import java.util.ArrayList;
 
 public class NotificationsFragment extends Fragment {
+
+    private RecyclerView recView;
 
     private NotificationsViewModel notificationsViewModel;
     private FragmentNotificationsBinding binding;
@@ -28,13 +35,19 @@ public class NotificationsFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        ArrayList<Notifications> datos = new ArrayList<Notifications>();
+        datos.add(new Notifications("admin","¡En 10 minutos tendemos el evento presencial!"));
+        datos.add(new Notifications("admin2","He anulado el evento videomeeting"));
+
+
+        AdaptadorNotifications adapterData = new AdaptadorNotifications(datos);
+        LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
+        lym.setOrientation(LinearLayoutManager.VERTICAL);
+        recView = (RecyclerView) root.findViewById(R.id.recViewNotificaciones);
+        recView.setHasFixedSize(true);
+        recView.setLayoutManager(lym);
+        recView.setAdapter(adapterData);
+
         return root;
     }
 

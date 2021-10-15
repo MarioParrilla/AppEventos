@@ -4,17 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentBuscarBinding;
 
+import java.util.ArrayList;
+
 public class BuscarFragment extends Fragment {
+
+    private RecyclerView recView;
 
     private BuscarViewModel buscarViewModel;
     private FragmentBuscarBinding binding;
@@ -27,13 +31,19 @@ public class BuscarFragment extends Fragment {
         binding = FragmentBuscarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textBuscar;
-        buscarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        ArrayList<UserBsq> datos = new ArrayList<UserBsq>();
+        datos.add(new UserBsq("admin","Pruebas"));
+        datos.add(new UserBsq("admin2","Pruebas2"));
+
+
+        AdaptadorBusqueda adapterData = new AdaptadorBusqueda(datos);
+        LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
+        lym.setOrientation(LinearLayoutManager.VERTICAL);
+        recView = (RecyclerView) root.findViewById(R.id.recViewBusq);
+        recView.setHasFixedSize(true);
+        recView.setLayoutManager(lym);
+        recView.setAdapter(adapterData);
+
         return root;
     }
 

@@ -1,6 +1,5 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.home;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marioparrillamaroto.myeventsapp.ProximoEvento;
+import com.marioparrillamaroto.myeventsapp.R;
 
 import java.util.ArrayList;
 
-class AdaptadorProxmioEvento
-        extends RecyclerView.Adapter<AdaptadorProxmioEvento.ProximoEventoViewHolder>
+public class AdaptadorProximoEvento
+        extends RecyclerView.Adapter<AdaptadorProximoEvento.ProximoEventoViewHolder>
         implements View.OnClickListener {
 
     private View.OnClickListener listener;
@@ -29,18 +28,18 @@ class AdaptadorProxmioEvento
         public ProximoEventoViewHolder(View itemView) {
             super(itemView);
 
-            txtHorario = (TextView)itemView.findViewById(R.id.horario);
-            txtMensaje = (TextView)itemView.findViewById(R.id.mensaje);
+            txtHorario = (TextView)itemView.findViewById(R.id.lblUsernameNotification);
+            txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotification);
 
         }
 
-        public void bindTitular(ProximoEvento e) {
+        public void bindProximoEvento(ProximoEvento e) {
             txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
             txtMensaje.setText("Cita con "+e.getUsuarioCitado()+", hablarás sobre: \n #"+e.getTema());
         }
     }
 
-    public AdaptadorProxmioEvento(ArrayList<ProximoEvento> datos) {
+    public AdaptadorProximoEvento(ArrayList<ProximoEvento> datos) {
         this.datos = datos;
     }
 
@@ -62,7 +61,7 @@ class AdaptadorProxmioEvento
     public void onBindViewHolder(ProximoEventoViewHolder viewHolder, int pos) {
         ProximoEvento item = datos.get(pos);
 
-        viewHolder.bindTitular(item);
+        viewHolder.bindProximoEvento(item);
     }
 
     @Override

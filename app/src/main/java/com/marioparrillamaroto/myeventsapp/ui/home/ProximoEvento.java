@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.home;
 
 public class ProximoEvento {
     private String horaInicio, horaFinal, usuarioCitado, tema;
