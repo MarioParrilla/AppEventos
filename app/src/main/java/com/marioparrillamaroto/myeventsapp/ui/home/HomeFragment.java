@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
@@ -31,9 +32,9 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        ArrayList<ProximoEvento> datos = new ArrayList<ProximoEvento>();
-        datos.add(new ProximoEvento("17:00","18:00","@admin","Pruebas"));
-        datos.add(new ProximoEvento("18:00","19:00","@admin2","Pruebas2"));
+        ArrayList<Evento> datos = new ArrayList<Evento>();
+        datos.add(new Evento("17:00","18:00","@admin","Pruebas"));
+        datos.add(new Evento("18:00","19:00","@admin2","Pruebas2"));
 
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());

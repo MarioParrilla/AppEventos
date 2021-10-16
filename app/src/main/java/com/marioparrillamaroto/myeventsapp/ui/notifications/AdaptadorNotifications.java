@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.R;
-import com.marioparrillamaroto.myeventsapp.ui.buscar.UserBsq;
 
 import java.util.ArrayList;
 

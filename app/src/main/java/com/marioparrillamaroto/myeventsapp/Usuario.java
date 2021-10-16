@@ -1,10 +1,10 @@
-package com.marioparrillamaroto.myeventsapp.ui.buscar;
+package com.marioparrillamaroto.myeventsapp;
 
-public class UserBsq {
+public class Usuario {
 
     String username, description;
 
-    public UserBsq(String username, String description) {
+    public Usuario(String username, String description) {
         this.username = username;
         this.description = description;
     }

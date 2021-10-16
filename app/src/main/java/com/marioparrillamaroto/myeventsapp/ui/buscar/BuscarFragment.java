@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.Usuario;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentBuscarBinding;
 
 import java.util.ArrayList;
@@ -31,10 +32,17 @@ public class BuscarFragment extends Fragment {
         binding = FragmentBuscarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        ArrayList<UserBsq> datos = new ArrayList<UserBsq>();
-        datos.add(new UserBsq("admin","Pruebas"));
-        datos.add(new UserBsq("admin2","Pruebas2"));
-
+        ArrayList<Usuario> datos = new ArrayList<Usuario>();
+        datos.add(new Usuario("admin","Pruebas"));
+        datos.add(new Usuario("admin2","Pruebas2"));
+        datos.add(new Usuario("admin","Pruebas"));
+        datos.add(new Usuario("admin2","Pruebas2"));
+        datos.add(new Usuario("admin","Pruebas"));
+        datos.add(new Usuario("admin2","Pruebas2"));
+        datos.add(new Usuario("admin","Pruebas"));
+        datos.add(new Usuario("admin2","Pruebas2"));
+        datos.add(new Usuario("admin","Pruebas"));
+        datos.add(new Usuario("admin2","Pruebas2"));
 
         AdaptadorBusqueda adapterData = new AdaptadorBusqueda(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());

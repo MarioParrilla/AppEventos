@@ -4,9 +4,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
 import java.util.ArrayList;
@@ -16,14 +16,13 @@ public class AdaptadorProximoEvento
         implements View.OnClickListener {
 
     private View.OnClickListener listener;
-    private ArrayList<ProximoEvento> datos;
+    private ArrayList<Evento> datos;
 
     public static class ProximoEventoViewHolder
             extends RecyclerView.ViewHolder {
 
         private TextView txtMensaje;
         private TextView txtHorario;
-        private ImageView iconUser;
 
         public ProximoEventoViewHolder(View itemView) {
             super(itemView);
@@ -33,13 +32,13 @@ public class AdaptadorProximoEvento
 
         }
 
-        public void bindProximoEvento(ProximoEvento e) {
+        public void bindProximoEvento(Evento e) {
             txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
             txtMensaje.setText("Cita con "+e.getUsuarioCitado()+", hablarás sobre: \n #"+e.getTema());
         }
     }
 
-    public AdaptadorProximoEvento(ArrayList<ProximoEvento> datos) {
+    public AdaptadorProximoEvento(ArrayList<Evento> datos) {
         this.datos = datos;
     }
 
@@ -59,7 +58,7 @@ public class AdaptadorProximoEvento
 
     @Override
     public void onBindViewHolder(ProximoEventoViewHolder viewHolder, int pos) {
-        ProximoEvento item = datos.get(pos);
+        Evento item = datos.get(pos);
 
         viewHolder.bindProximoEvento(item);
     }

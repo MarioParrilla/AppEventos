@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.Usuario;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class AdaptadorBusqueda
         implements View.OnClickListener {
 
     private View.OnClickListener listener;
-    private ArrayList<UserBsq> datos;
+    private ArrayList<Usuario> datos;
 
     public static class BusquedaViewHolder
             extends RecyclerView.ViewHolder {
@@ -31,13 +32,13 @@ public class AdaptadorBusqueda
 
         }
 
-        public void bindBusqueda(UserBsq UB) {
+        public void bindBusqueda(Usuario UB) {
             lblUsernameBsq.setText("@"+UB.getUsername());
             lblDescripcionBsq.setText(UB.getDescription());
         }
     }
 
-    public AdaptadorBusqueda(ArrayList<UserBsq> datos) {
+    public AdaptadorBusqueda(ArrayList<Usuario> datos) {
         this.datos = datos;
     }
 
@@ -57,7 +58,7 @@ public class AdaptadorBusqueda
 
     @Override
     public void onBindViewHolder(BusquedaViewHolder viewHolder, int pos) {
-        UserBsq item = datos.get(pos);
+        Usuario item = datos.get(pos);
 
         viewHolder.bindBusqueda(item);
     }

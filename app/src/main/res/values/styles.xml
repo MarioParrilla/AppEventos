@@ -1,7 +1,8 @@
 <resources>
 
-    <style name="Widget.Theme.MyEventsApp.MyView" parent="">
-        <item name="android:background">@color/gray_400</item>
-        <item name="exampleColor">@color/light_blue_400</item>
+
+    <style name="Theme.MyEventsApp.PopMe">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 </resources>

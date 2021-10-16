@@ -1,9 +1,9 @@
-package com.marioparrillamaroto.myeventsapp.ui.home;
+package com.marioparrillamaroto.myeventsapp;
 
-public class ProximoEvento {
+public class Evento {
     private String horaInicio, horaFinal, usuarioCitado, tema;
 
-    public ProximoEvento(String horaInicio, String horaFinal, String usuarioCitado, String tema) {
+    public Evento(String horaInicio, String horaFinal, String usuarioCitado, String tema) {
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
         this.usuarioCitado = usuarioCitado;
