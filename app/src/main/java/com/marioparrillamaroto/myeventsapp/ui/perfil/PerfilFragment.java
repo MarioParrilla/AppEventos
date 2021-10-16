@@ -9,16 +9,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentPerfilBinding;
 import com.marioparrillamaroto.myeventsapp.popUpCrearEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.popUpCrearEventoPresencial;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 public class PerfilFragment extends Fragment {
 
+    private RecyclerView recView;
     private PerfilViewModel PerfilViewModel;
     private FragmentPerfilBinding binding;
     private FloatingActionButton fabAddEvent, fabAddPresencial, fabAddOnline;
@@ -36,6 +43,18 @@ public class PerfilFragment extends Fragment {
         fabAddEvent = root.findViewById(R.id.btn_new_add);
         fabAddPresencial = root.findViewById(R.id.btn_add_event_presencial);
         fabAddOnline = root.findViewById(R.id.btn_add_event_videomeeting);
+
+        ArrayList<Evento> datos = new ArrayList<Evento>();
+        datos.add(new Evento("Prueba3", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"@admin3","Pruebas3", true,"a"));
+        datos.add(new Evento("Prueba4",LocalDateTime.now(),LocalDateTime.now().plusHours(1),"@admin4","Pruebas4", false,"a"));
+
+        AdaptadorEvento adapterData = new AdaptadorEvento(datos);
+        LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
+        lym.setOrientation(LinearLayoutManager.VERTICAL);
+        recView = (RecyclerView) root.findViewById(R.id.recViewEventosP);
+        recView.setHasFixedSize(true);
+        recView.setLayoutManager(lym);
+        recView.setAdapter(adapterData);
 
         fabAddEvent.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -63,6 +82,7 @@ public class PerfilFragment extends Fragment {
                 startActivity(i);
                 fabAddPresencial.setVisibility(View.INVISIBLE);
                 fabAddOnline.setVisibility(View.INVISIBLE);
+                isOpen = false;
             }
         });
 
@@ -73,6 +93,7 @@ public class PerfilFragment extends Fragment {
                 startActivity(i);
                 fabAddPresencial.setVisibility(View.INVISIBLE);
                 fabAddOnline.setVisibility(View.INVISIBLE);
+                isOpen = false;
             }
         });
 

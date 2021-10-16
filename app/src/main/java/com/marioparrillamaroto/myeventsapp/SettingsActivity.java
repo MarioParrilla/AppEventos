@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -24,5 +25,9 @@ public class SettingsActivity extends AppCompatActivity {
     public void volverInicio(View view) {
         Intent nuevaPantalla = new Intent(SettingsActivity.this, MainActivity.class);
         startActivity(nuevaPantalla);
+    }
+
+    public void infoAcercaDe(View view) {
+        Toast.makeText(this.getApplicationContext(),"App Creada por: Mario Parrilla Maroto | 2021",Toast.LENGTH_SHORT).show();
     }
 }

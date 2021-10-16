@@ -14,7 +14,7 @@
         android:layout_height="104dp">
 
         <ImageView
-            android:id="@+id/imgEvento"
+            android:id="@+id/imgEventoP"
             android:layout_width="44dp"
             android:layout_height="38dp"
             android:layout_marginStart="300dp"
@@ -23,10 +23,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_dashboard_black_24dp" />
 
         <TextView
-            android:id="@+id/lblUsernameNotification"
+            android:id="@+id/lblUsernameNotificationP"
             android:layout_width="191dp"
             android:layout_height="34dp"
             android:text="@string/app_name"
@@ -39,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lblMessageNotification"
+            android:id="@+id/lblMessageNotificationP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -51,10 +52,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblUsernameNotification" />
+            app:layout_constraintTop_toBottomOf="@+id/lblUsernameNotificationP" />
 
         <TextView
-            android:id="@+id/lblNombreEvento"
+            android:id="@+id/lblNombreEventoP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NombreEvento"
@@ -62,7 +63,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lblUsernameNotification"
+            app:layout_constraintStart_toEndOf="@+id/lblUsernameNotificationP"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

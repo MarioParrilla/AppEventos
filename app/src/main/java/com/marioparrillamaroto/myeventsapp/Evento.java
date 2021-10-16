@@ -1,33 +1,49 @@
 package com.marioparrillamaroto.myeventsapp;
 
-public class Evento {
-    private String horaInicio, horaFinal, usuarioCitado, tema;
+import java.time.LocalDateTime;
 
-    public Evento(String horaInicio, String horaFinal, String usuarioCitado, String tema) {
+public class Evento {
+    private String nombreEvento, usuarioCitado, tema, coordenadas, enlaceVideoMeeting;
+    private LocalDateTime horaInicio, horaFinal;
+    private boolean eventPreference;
+
+    public Evento(String nombreEvento, LocalDateTime horaInicio, LocalDateTime horaFinal, String usuarioCitado, String tema, Boolean eventPreference,String datosExtras) {
+        this.nombreEvento=nombreEvento;
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
         this.usuarioCitado = usuarioCitado;
         this.tema = tema;
+        if (eventPreference) this.enlaceVideoMeeting=datosExtras;
+        else this.coordenadas=datosExtras;
+    }
+
+
+    public String getNombreEvento() {
+        return nombreEvento;
+    }
+
+    public void setNombreEvento(String nombreEvento) {
+        this.nombreEvento = nombreEvento;
     }
 
     public String getHoraInicio() {
-        return horaInicio;
+        return horaInicio.toLocalTime().toString().substring(0,5);
     }
 
-    public void setHoraInicio(String horaInicio) {
+    public void setHoraInicio(String LocalDateTime) {
         this.horaInicio = horaInicio;
     }
 
     public String getHoraFinal() {
-        return horaFinal;
+        return horaFinal.toLocalTime().toString().substring(0,5);
     }
 
-    public void setHoraFinal(String horaFinal) {
+    public void setHoraFinal(LocalDateTime horaFinal) {
         this.horaFinal = horaFinal;
     }
 
     public String getUsuarioCitado() {
-        return usuarioCitado;
+        return usuarioCitado.substring(0,5);
     }
 
     public void setUsuarioCitado(String usuarioCitado) {
@@ -40,5 +56,29 @@ public class Evento {
 
     public void setTema(String tema) {
         this.tema = tema;
+    }
+
+    public String getCoordenadas() {
+        return coordenadas;
+    }
+
+    public void setCoordenadas(String coordenadas) {
+        this.coordenadas = coordenadas;
+    }
+
+    public String getEnlaceVideoMeeting() {
+        return enlaceVideoMeeting;
+    }
+
+    public void setEnlaceVideoMeeting(String enlaceVideoMeeting) {
+        this.enlaceVideoMeeting = enlaceVideoMeeting;
+    }
+
+    public boolean getEventPreference() {
+        return eventPreference;
+    }
+
+    public void setEventPreference(boolean eventPreference) {
+        this.eventPreference = eventPreference;
     }
 }

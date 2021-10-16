@@ -15,6 +15,7 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -33,8 +34,8 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<Evento> datos = new ArrayList<Evento>();
-        datos.add(new Evento("17:00","18:00","@admin","Pruebas"));
-        datos.add(new Evento("18:00","19:00","@admin2","Pruebas2"));
+        datos.add(new Evento("Prueba1", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"@admin","Pruebas", true,"a"));
+        datos.add(new Evento("Prueba2",LocalDateTime.now(),LocalDateTime.now().plusHours(1),"@admin2","Pruebas2", false,"a"));
 
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());

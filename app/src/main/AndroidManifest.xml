@@ -8,24 +8,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyEventsApp"
-        >
-        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBD_daCjAfoDPJMyu2wc7KLfU8MmjN30qs" />
+        android:theme="@style/Theme.MyEventsApp">
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBD_daCjAfoDPJMyu2wc7KLfU8MmjN30qs" />
         <activity
-            android:name=".popUpCrearEventoPresencial"
-            android:label="Añadir Evento Presencial"
-            android:exported="true"
-            android:theme="@style/Theme.MyEventsApp.PopMe"/>
-        <activity
-            android:name=".popUpCrearEventoMeeting"
-            android:label="Añadir Evento Meeting"
-            android:exported="true"
-            android:theme="@style/Theme.MyEventsApp.PopMe"/>
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".LoginActivity"
+            android:name=".MyEventAppActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +22,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".popUpCrearEventoPresencial"
+            android:exported="true"
+            android:label="Añadir Evento Presencial"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
+        <activity
+            android:name=".popUpCrearEventoMeeting"
+            android:exported="true"
+            android:label="Añadir Evento Meeting"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="Ajustes" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="Login" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>

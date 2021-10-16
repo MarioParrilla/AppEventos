@@ -27,8 +27,8 @@ public class AdaptadorNotifications
         public NotificationsViewHolder(View itemView) {
             super(itemView);
 
-            lblUsernameEventOwner = (TextView)itemView.findViewById(R.id.lblUsernameNotification);
-            lblMessage = (TextView)itemView.findViewById(R.id.lblMessageNotification);
+            lblUsernameEventOwner = (TextView)itemView.findViewById(R.id.lblUsernameNotificationP);
+            lblMessage = (TextView)itemView.findViewById(R.id.lblMessageNotificationP);
 
         }
 

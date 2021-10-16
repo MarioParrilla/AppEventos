@@ -27,8 +27,8 @@ public class AdaptadorBusqueda
         public BusquedaViewHolder(View itemView) {
             super(itemView);
 
-            lblUsernameBsq = (TextView)itemView.findViewById(R.id.lblUsernameNotification);
-            lblDescripcionBsq = (TextView)itemView.findViewById(R.id.lblMessageNotification);
+            lblUsernameBsq = (TextView)itemView.findViewById(R.id.lblUsernameNotificationP);
+            lblDescripcionBsq = (TextView)itemView.findViewById(R.id.lblMessageNotificationP);
 
         }
 

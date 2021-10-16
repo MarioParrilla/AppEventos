@@ -13,7 +13,7 @@
         android:layout_height="104dp">
 
         <TextView
-            android:id="@+id/lblUsernameNotification"
+            android:id="@+id/lblUsernameNotificationP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lblMessageNotification"
+            android:id="@+id/lblMessageNotificationP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblUsernameNotification" />
+            app:layout_constraintTop_toBottomOf="@+id/lblUsernameNotificationP" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
