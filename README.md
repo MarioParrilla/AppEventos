@@ -121,7 +121,45 @@ Se debe incluir un diagrama de clases y la descripción de las mismas.
 
 ## Diagrama E/R
 
-Describe las tablas de la base de datos local e incluye un diagrama Entidad/Relación.
+### TABLA -- USUARIO
+
+Todos los datos de esta tabla son Not Null, no pueden ser nulos
+
+userID: Es la clave principal de la tabla, que será el identificador del usuario, que es de tipo bigint.
+
+username: Es el nombre de usuario, que es de tipo varchar.
+
+email: Es el correo electronico del usuario, que es de tipo varchar.
+
+password: Es la contraseña del usuario, que es de tipo varchar.
+
+phonenumber: Es el numero de telefono del usuario, que es de tipo varchar.
+
+enabled: Nos servirá para saber si el usuario puede utilizarse o no, que es de tipo bit que en verdad es un boolean.
+
+### TABLA -- EVENTO
+
+eventID: Es la clave principal de la tabla, que será el identificador del evento, que es de tipo bigint. NotNull.
+
+username: Es el nombre de evento, que es de tipo varchar. NotNull.
+
+start_time: Es la fecha y hora del inicio del evento, que es de tipo Datetime. NotNull.
+
+end_time: Es la fecha y hora de final del evento, que es de tipo Datetime. NotNull.
+
+event_preference: Con este dato, segun su valor, si es 0 será un evento presencial y si no, será un evento meeting y con esto trabajaremos con diferentes datos según este valor, es de tipo bit, que en realidad es un boolean. NotNull.
+
+coordinates: Son las coordenadas de la localizacion del lugar de quedada del evento, es de tipo varchar.
+
+videomeeting: Es el enlace de la videoconferencia del evento, es de tipo varchar.
+
+available: Con este dato sabremos si el evento esta activado o no según su valor (0 = desahabilitado / 1 = habilitado), es de tipo bit, pero en realidad es de tipo boolean. NotNull.
+
+user_owner_id_user: es la id del usuario que ha creado el evento, es de tipo bigint. NotNull.
+
+user_summoner_id_user: es la id del usuario que ha citado al creador el evento, es de tipo bigint.
+
+![entidadRealacion](./readmeAssets/Diagramas/entidadRelacion.png)
 
 ## Plan de pruebas
 
