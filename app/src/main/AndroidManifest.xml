@@ -9,10 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEventsApp">
+        <activity
+            android:name=".PopUpInfoEventoMeeting"
+            android:label="Info Evento"
+            android:exported="true"
+            android:theme="@style/Theme.MyEventsApp.PopMe"/>
+        <activity
+            android:name=".PopUpInfoEventoPresencial"
+            android:label="Info Evento"
+            android:exported="true"
+            android:theme="@style/Theme.MyEventsApp.PopMe"/>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBD_daCjAfoDPJMyu2wc7KLfU8MmjN30qs" />
+
         <activity
             android:name=".MyEventAppActivity"
             android:exported="true">
@@ -22,7 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".popUpCrearEventoPresencial"
             android:exported="true"
@@ -44,7 +54,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

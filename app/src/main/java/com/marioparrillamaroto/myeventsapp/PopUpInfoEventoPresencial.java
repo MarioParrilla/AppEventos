@@ -3,39 +3,45 @@ package com.marioparrillamaroto.myeventsapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import com.google.android.gms.maps.MapView;
+public class PopUpInfoEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 
-public class popUpCrearEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
-
+    private Evento e;
+    private TextView txtTitulo, txtInicio, txtFinal, txtTema;
     private MapView mapView;
-    private FloatingActionButton fab;
-    private EditText horaInicio, horaFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_crear_evento_presencial);
+        setContentView(R.layout.activity_pop_up_info_evento_presencial);
 
-        fab = (FloatingActionButton)findViewById(R.id.fabEventoPresencial);
-        horaInicio = (EditText)findViewById(R.id.dateHoraInicioPresencial);
-        horaFinal = (EditText)findViewById(R.id.dateHoraFinalPresencial);
+        e = (Evento) getIntent().getExtras().getSerializable("infoEvento");
 
+        txtTitulo = (TextView)findViewById(R.id.lblTituloEventoInfoPE);
+        txtInicio = (TextView)findViewById(R.id.lblHoraInicioEventoInfoPE);
+        txtFinal = (TextView)findViewById(R.id.lblHoraFinalEventoInfoPE);
+        txtTema = (TextView)findViewById(R.id.lblTemaEventoInfoPE);
+        mapView = (MapView)findViewById(R.id.mapEventoInfoPE);
+
+
+        txtTitulo.setText(e.getNombreEvento());
+        txtInicio.setText(e.getHoraInicio());
+        txtFinal.setText(e.getHoraFinal());
+        txtTema.setText(e.getTema());
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -52,16 +58,7 @@ public class popUpCrearEventoPresencial extends AppCompatActivity implements OnM
 
         getWindow().setAttributes(params);
 
-        mapView = findViewById(R.id.mapViewPresencial);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     @Override
@@ -110,4 +107,5 @@ public class popUpCrearEventoPresencial extends AppCompatActivity implements OnM
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
 }

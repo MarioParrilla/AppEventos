@@ -1,48 +1,26 @@
 package com.marioparrillamaroto.myeventsapp.ui.home;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.PopUpInfoEventoMeeting;
+import com.marioparrillamaroto.myeventsapp.PopUpInfoEventoPresencial;
 import com.marioparrillamaroto.myeventsapp.R;
 
 import java.util.ArrayList;
 
-public class AdaptadorProximoEvento
-        extends RecyclerView.Adapter<AdaptadorProximoEvento.ProximoEventoViewHolder>
-        implements View.OnClickListener {
+public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProximoEvento.ProximoEventoViewHolder>{
 
-    private View.OnClickListener listener;
     private ArrayList<Evento> datos;
 
-    public static class ProximoEventoViewHolder
-            extends RecyclerView.ViewHolder {
-
-        private TextView txtMensaje;
-        private TextView txtHorario;
-        private TextView txtNombreEvento;
-        private ImageView imgIcon;
-
-        public ProximoEventoViewHolder(View itemView) {
-            super(itemView);
-
-            txtHorario = (TextView)itemView.findViewById(R.id.lblUsernameNotification);
-            txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotification);
-            txtNombreEvento = (TextView)itemView.findViewById(R.id.lblNombreEvento);
-            imgIcon = (ImageView)itemView.findViewById(R.id.imgEvento);
-        }
-
-        public void bindProximoEvento(Evento e) {
-            txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
-            txtMensaje.setText("Cita con "+e.getUsuarioCitado()+", hablarás sobre: \n #"+e.getTema());
-            txtNombreEvento.setText(e.getNombreEvento());
-            if (e.getEventPreference())imgIcon.setImageResource(R.drawable.ic_pc);
-            else imgIcon.setImageResource(R.drawable.ic_walk);
-        }
+    public interface OnItemClickListener{
+        void onItemClick(Evento item);
     }
 
     public AdaptadorProximoEvento(ArrayList<Evento> datos) {
@@ -53,9 +31,6 @@ public class AdaptadorProximoEvento
     public ProximoEventoViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.tarjeta_evento, viewGroup, false);
-
-        itemView.setOnClickListener(this);
-        //android:background="?android:attr/selectableItemBackground"
 
         ProximoEventoViewHolder tvh = new ProximoEventoViewHolder(itemView);
 
@@ -75,13 +50,46 @@ public class AdaptadorProximoEvento
         return datos.size();
     }
 
-    public void setOnClickListener(View.OnClickListener listener) {
-        this.listener = listener;
-    }
+    public static class ProximoEventoViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public void onClick(View view) {
-        if(listener != null)
-            listener.onClick(view);
+        private TextView txtMensaje;
+        private TextView txtHorario;
+        private TextView txtNombreEvento;
+        private TextView txtTipo;
+
+        public ProximoEventoViewHolder(View itemView) {
+            super(itemView);
+
+            txtHorario = (TextView)itemView.findViewById(R.id.lblUsernameNotification);
+            txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotification);
+            txtNombreEvento = (TextView)itemView.findViewById(R.id.lblNombreEvento);
+            txtTipo = (TextView)itemView.findViewById(R.id.lblTipo);
+        }
+
+        public void bindProximoEvento(Evento e) {
+            txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
+            txtMensaje.setText("Cita con @"+e.getUsuarioCitado()+", hablarás sobre: \n #"+e.getTema());
+            txtNombreEvento.setText(e.getNombreEvento());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i;
+                    if (e.getEventPreference()){
+                        i = new Intent(itemView.getContext(), PopUpInfoEventoMeeting.class);
+                    }
+                    else{
+                        i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
+                    }
+                    i.putExtra("infoEvento",e);
+                    itemView.getContext().startActivity(i);
+                }
+            });
+            if (e.getEventPreference()){
+                txtTipo.setText("O");
+            }
+            else{
+                txtTipo.setText("P");
+            }
+        }
     }
 }

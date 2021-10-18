@@ -1,8 +1,9 @@
 package com.marioparrillamaroto.myeventsapp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Evento {
+public class Evento implements Serializable {
     private String nombreEvento, usuarioCitado, tema, coordenadas, enlaceVideoMeeting;
     private LocalDateTime horaInicio, horaFinal;
     private boolean eventPreference;
@@ -13,6 +14,7 @@ public class Evento {
         this.horaFinal = horaFinal;
         this.usuarioCitado = usuarioCitado;
         this.tema = tema;
+        this.eventPreference=eventPreference;
         if (eventPreference) this.enlaceVideoMeeting=datosExtras;
         else this.coordenadas=datosExtras;
     }
@@ -43,7 +45,7 @@ public class Evento {
     }
 
     public String getUsuarioCitado() {
-        return usuarioCitado.substring(0,5);
+        return usuarioCitado;
     }
 
     public void setUsuarioCitado(String usuarioCitado) {

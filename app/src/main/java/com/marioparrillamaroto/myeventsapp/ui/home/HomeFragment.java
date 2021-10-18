@@ -34,8 +34,8 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<Evento> datos = new ArrayList<Evento>();
-        datos.add(new Evento("Prueba1", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"@admin","Pruebas", true,"a"));
-        datos.add(new Evento("Prueba2",LocalDateTime.now(),LocalDateTime.now().plusHours(1),"@admin2","Pruebas2", false,"a"));
+        datos.add(new Evento("Prueba1", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin","Pruebas", true,"a"));
+        datos.add(new Evento("Prueba2",LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin2","Pruebas2", false,"a"));
 
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
