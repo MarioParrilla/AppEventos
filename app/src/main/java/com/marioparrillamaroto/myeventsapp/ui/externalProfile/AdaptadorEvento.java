@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp.ui.perfil;
+package com.marioparrillamaroto.myeventsapp.ui.externalProfile;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,9 +9,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoPresencial;
-import com.marioparrillamaroto.myeventsapp.R;
 
 import java.util.ArrayList;
 
@@ -88,13 +88,14 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
                 }
             });
 
-            if (e.getEventPreference()) txtTipo.setText("O");
+            if (e.getEventPreference())txtTipo.setText("O");
             else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) {
                 txtTipo.setText("");
                 txtHorario.setText("");
                 txtMensaje.setText("");
             }
             else if (!e.getEventPreference())txtTipo.setText("P");
+
         }
     }
 }

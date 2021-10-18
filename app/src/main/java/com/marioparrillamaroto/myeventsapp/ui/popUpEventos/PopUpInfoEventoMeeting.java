@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.R;
 
 public class PopUpInfoEventoMeeting extends AppCompatActivity {
 
@@ -21,7 +23,7 @@ public class PopUpInfoEventoMeeting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_info_evento_meeting);
 
-        e =(Evento) getIntent().getExtras().getSerializable("infoEvento");
+        e = (Evento) getIntent().getExtras().getSerializable("infoEvento");
 
         txtTitulo = (TextView)findViewById(R.id.lblTituloEventoInfoPEM);
         txtInicio = (TextView)findViewById(R.id.lblHoraInicioEventoInfoPEM);

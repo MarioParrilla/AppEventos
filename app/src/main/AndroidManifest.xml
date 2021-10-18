@@ -10,15 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEventsApp">
         <activity
-            android:name=".PopUpInfoEventoMeeting"
-            android:label="Info Evento"
-            android:exported="true"
+            android:name=".ui.externalProfile.ExternalProfileActivity"
+            android:exported="false"
             android:theme="@style/Theme.MyEventsApp.PopMe"/>
         <activity
-            android:name=".PopUpInfoEventoPresencial"
-            android:label="Info Evento"
+            android:name=".ui.popUpEventos.PopUpInfoEventoMeeting"
             android:exported="true"
-            android:theme="@style/Theme.MyEventsApp.PopMe"/>
+            android:label="Info Evento"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
+        <activity
+            android:name=".ui.popUpEventos.PopUpInfoEventoPresencial"
+            android:exported="true"
+            android:label="Info Evento"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -34,12 +38,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".popUpCrearEventoPresencial"
+            android:name=".ui.popUpEventos.popUpCrearEventoPresencial"
             android:exported="true"
             android:label="Añadir Evento Presencial"
             android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
-            android:name=".popUpCrearEventoMeeting"
+            android:name=".ui.popUpEventos.popUpCrearEventoMeeting"
             android:exported="true"
             android:label="Añadir Evento Meeting"
             android:theme="@style/Theme.MyEventsApp.PopMe" />
@@ -48,7 +52,7 @@
             android:exported="true"
             android:label="Ajustes" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="Login" />
         <activity

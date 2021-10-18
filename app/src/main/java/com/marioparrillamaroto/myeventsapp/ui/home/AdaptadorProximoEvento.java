@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
-import com.marioparrillamaroto.myeventsapp.PopUpInfoEventoMeeting;
-import com.marioparrillamaroto.myeventsapp.PopUpInfoEventoPresencial;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoMeeting;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoPresencial;
 import com.marioparrillamaroto.myeventsapp.R;
 
 import java.util.ArrayList;
@@ -76,20 +76,26 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
                     Intent i;
                     if (e.getEventPreference()){
                         i = new Intent(itemView.getContext(), PopUpInfoEventoMeeting.class);
+                        i.putExtra("infoEvento",e);
+                        itemView.getContext().startActivity(i);
                     }
-                    else{
+                    else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) i = null;
+                    else if(!e.getEventPreference()){
                         i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
-                    }
-                    i.putExtra("infoEvento",e);
-                    itemView.getContext().startActivity(i);
+                        i.putExtra("infoEvento",e);
+                        itemView.getContext().startActivity(i);
+                    };
+
                 }
             });
-            if (e.getEventPreference()){
-                txtTipo.setText("O");
+            if (e.getEventPreference()) txtTipo.setText("O");
+            else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) {
+                txtTipo.setText("");
+                txtHorario.setText("");
+                txtMensaje.setText("");
             }
-            else{
-                txtTipo.setText("P");
-            }
+            else if (!e.getEventPreference())txtTipo.setText("P");
+
         }
     }
 }

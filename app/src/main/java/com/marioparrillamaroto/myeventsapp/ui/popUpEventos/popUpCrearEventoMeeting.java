@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 
 
 import androidx.annotation.NonNull;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.gms.maps.MapView;
+import com.marioparrillamaroto.myeventsapp.R;
 
 public class popUpCrearEventoMeeting extends AppCompatActivity{
 

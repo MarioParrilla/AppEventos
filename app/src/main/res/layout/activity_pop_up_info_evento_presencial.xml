@@ -5,17 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E4D1F4"
-    tools:context=".PopUpInfoEventoPresencial">
+    tools:context=".ui.popUpEventos.PopUpInfoEventoPresencial">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapEventoInfoPE"
         android:layout_width="257dp"
         android:layout_height="119dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 

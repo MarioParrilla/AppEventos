@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E4D1F4"
     android:outlineAmbientShadowColor="#FFFFFF"
-    tools:context=".PopUpInfoEventoPresencial">
+    tools:context=".ui.popUpEventos.PopUpInfoEventoPresencial">
 
     <TextView
         android:id="@+id/textView20"

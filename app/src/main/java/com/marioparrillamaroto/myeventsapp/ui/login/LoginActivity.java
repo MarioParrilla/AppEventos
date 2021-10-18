@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.marioparrillamaroto.myeventsapp.MainActivity;
+import com.marioparrillamaroto.myeventsapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 

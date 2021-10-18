@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.R;
 
 public class PopUpInfoEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 

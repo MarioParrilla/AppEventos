@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
+import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 public class MyEventAppActivity extends AppCompatActivity {
 
