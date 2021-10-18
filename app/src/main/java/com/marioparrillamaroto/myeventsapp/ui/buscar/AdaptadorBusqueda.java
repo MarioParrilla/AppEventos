@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
-import com.marioparrillamaroto.myeventsapp.ui.externalProfile.ExternalProfileActivity;
-import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoMeeting;
+import com.marioparrillamaroto.myeventsapp.ui.ExternalProfile.ExternalProfileActivity;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.Usuario;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class AdaptadorBusqueda extends RecyclerView.Adapter<AdaptadorBusqueda.BusquedaViewHolder> {

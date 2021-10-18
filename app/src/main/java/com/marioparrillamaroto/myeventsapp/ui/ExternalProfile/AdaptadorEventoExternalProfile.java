@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp.ui.externalProfile;
+package com.marioparrillamaroto.myeventsapp.ui.ExternalProfile;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
-import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoMeeting;
-import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoPresencial;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCitarEventoMeeting;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCitarEventoPresencial;
 
 import java.util.ArrayList;
 
-public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.EventoViewHolder>{
+public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<AdaptadorEventoExternalProfile.EventoViewHolder>{
 
     private ArrayList<Evento> datos;
 
@@ -23,7 +23,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
         void onItemClick(Evento item);
     }
 
-    public AdaptadorEvento(ArrayList<Evento> datos) {
+    public AdaptadorEventoExternalProfile(ArrayList<Evento> datos) {
         this.datos = datos;
     }
 
@@ -75,13 +75,13 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
                 public void onClick(View v) {
                     Intent i;
                     if (e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpInfoEventoMeeting.class);
+                        i = new Intent(itemView.getContext(), PopUpCitarEventoMeeting.class);
                         i.putExtra("infoEvento",e);
                         itemView.getContext().startActivity(i);
                     }
                     else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) i = null;
                     else if(!e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
+                        i = new Intent(itemView.getContext(), PopUpCitarEventoPresencial.class);
                         i.putExtra("infoEvento",e);
                         itemView.getContext().startActivity(i);
                     };

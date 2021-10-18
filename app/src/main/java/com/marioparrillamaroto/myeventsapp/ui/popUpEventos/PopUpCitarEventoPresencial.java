@@ -3,40 +3,49 @@ package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import com.google.android.gms.maps.MapView;
+import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
-public class popUpCrearEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
+public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 
+
+    private Evento e;
+    private TextView txtTitulo, txtInicio, txtFinal, txtTema;
+    private Button btnCitar;
     private MapView mapView;
-    private FloatingActionButton fab;
-    private EditText horaInicio, horaFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_crear_evento_presencial);
+        setContentView(R.layout.activity_pop_up_citar_evento_presencial);
 
-        fab = (FloatingActionButton)findViewById(R.id.fabEventoPresencial);
-        horaInicio = (EditText)findViewById(R.id.dateHoraInicioPresencial);
-        horaFinal = (EditText)findViewById(R.id.dateHoraFinalPresencial);
+        e = (Evento) getIntent().getExtras().getSerializable("infoEvento");
 
+        txtTitulo = (TextView)findViewById(R.id.lblTituloEventoCitarP);
+        txtInicio = (TextView)findViewById(R.id.lblHoraInicioEventoCitarP);
+        txtFinal = (TextView)findViewById(R.id.lblHoraFinalEventoCitarP);
+        txtTema = (TextView)findViewById(R.id.lblTemaEventoCitarP);
+        mapView = (MapView)findViewById(R.id.mapEventoCitarP);
+        btnCitar = (Button)findViewById(R.id.btnCitarPresencial);
+
+        txtTitulo.setText(e.getNombreEvento());
+        txtInicio.setText(e.getHoraInicio());
+        txtFinal.setText(e.getHoraFinal());
+        txtTema.setText(e.getTema());
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -53,16 +62,10 @@ public class popUpCrearEventoPresencial extends AppCompatActivity implements OnM
 
         getWindow().setAttributes(params);
 
-        mapView = findViewById(R.id.mapViewPresencial);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
+    }
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    public void cerrar(View view){
+        finish();
     }
 
     @Override

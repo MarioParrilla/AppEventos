@@ -10,9 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEventsApp">
         <activity
-            android:name=".ui.externalProfile.ExternalProfileActivity"
-            android:exported="false"
+            android:name=".ui.popUpEventos.PopUpCitarEventoMeeting"
+            android:exported="true"
+            android:label="Citar Evento"
             android:theme="@style/Theme.MyEventsApp.PopMe"/>
+        <activity
+            android:name=".ui.popUpEventos.PopUpCitarEventoPresencial"
+            android:exported="true"
+            android:label="Citar Evento"
+            android:theme="@style/Theme.MyEventsApp.PopMe"/>
+        <activity
+            android:name=".ui.ExternalProfile.ExternalProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpInfoEventoMeeting"
             android:exported="true"
@@ -38,12 +48,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.popUpEventos.popUpCrearEventoPresencial"
+            android:name=".ui.popUpEventos.PopUpCrearEventoPresencial"
             android:exported="true"
             android:label="Añadir Evento Presencial"
             android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
-            android:name=".ui.popUpEventos.popUpCrearEventoMeeting"
+            android:name=".ui.popUpEventos.PopUpCrearEventoMeeting"
             android:exported="true"
             android:label="Añadir Evento Meeting"
             android:theme="@style/Theme.MyEventsApp.PopMe" />

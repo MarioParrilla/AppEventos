@@ -17,8 +17,8 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentPerfilBinding;
-import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.popUpCrearEventoMeeting;
-import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.popUpCrearEventoPresencial;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoMeeting;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoPresencial;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class PerfilFragment extends Fragment {
         fabAddPresencial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(root.getContext(), popUpCrearEventoPresencial.class);
+                Intent i = new Intent(root.getContext(), PopUpCrearEventoPresencial.class);
                 startActivity(i);
                 fabAddPresencial.setVisibility(View.INVISIBLE);
                 fabAddOnline.setVisibility(View.INVISIBLE);
@@ -91,7 +91,7 @@ public class PerfilFragment extends Fragment {
         fabAddOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(root.getContext(), popUpCrearEventoMeeting.class);
+                Intent i = new Intent(root.getContext(), PopUpCrearEventoMeeting.class);
                 startActivity(i);
                 fabAddPresencial.setVisibility(View.INVISIBLE);
                 fabAddOnline.setVisibility(View.INVISIBLE);

@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.MapView;
 import com.marioparrillamaroto.myeventsapp.R;
 
-public class popUpCrearEventoMeeting extends AppCompatActivity{
+public class PopUpCrearEventoMeeting extends AppCompatActivity{
 
     private FloatingActionButton fab;
     private EditText horaInicio, horaFinal;
