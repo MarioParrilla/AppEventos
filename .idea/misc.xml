@@ -6,6 +6,7 @@
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/drawable/ic_event_add_24.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/drawable/ic_search_24.xml" value="0.21875" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/drawable/icon_settings_24.xml" value="0.21875" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_chats.xml" value="0.3625" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_external_profile.xml" value="0.3625" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -20,6 +21,8 @@
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_pop_up_info_evento_meeting.xml" value="0.33" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_pop_up_info_evento_meetingx.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_pop_up_info_evento_presencial.xml" value="0.33242753623188404" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_pop_up_modificar_evento_meeting.xml" value="0.33" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_pop_up_modificar_evento_presencial.xml" value="0.3625" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/cardviewprueba.xml" value="0.353713768115942" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/fragment_buscar.xml" value="0.276268115942029" />
@@ -29,8 +32,10 @@
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/sample_my_view.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/settings.xml" value="0.22" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/settings_activity.xml" value="0.31431159420289856" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_Chat.xml" value="0.3625" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_busqueda.xml" value="0.5" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_busquedax.xml" value="0.353713768115942" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_chat.xml" value="0.3625" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_evento.xml" value="0.5" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_eventoPerfil.xml" value="0.35144927536231885" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/layout/tarjeta_evento_perfil.xml" value="0.5" />
@@ -43,6 +48,12 @@
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/menu/settingsToMain_main.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/menu/settings_main.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/menu/to_main.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21875" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/mipmap-anydpi-v26/ic_myeventsapp.xml" value="0.21875" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/mipmap-anydpi-v26/ic_myeventsappFinal.xml" value="0.21875" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/mipmap-anydpi-v26/ic_myeventsapp_round.xml" value="0.21875" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/mipmap-anydpi-v26/ic_myeventsappfinal.xml" value="0.21875" />
+        <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/mipmap-anydpi-v26/ic_myeventsappfinal_round.xml" value="0.21875" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/MyEvents/app/src/main/res/xml/root_preferences.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Mario/Desktop/2DAM/PMDM/app/src/main/res/drawable/ic_account_circle_24.xml" value="0.37864583333333335" />

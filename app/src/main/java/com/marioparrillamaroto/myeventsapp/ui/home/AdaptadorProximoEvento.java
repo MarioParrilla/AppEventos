@@ -88,7 +88,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
 
                 }
             });
-            if (e.getEventPreference()) txtTipo.setText("O");
+            if (e.getEventPreference())txtTipo.setText("M");
             else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) {
                 txtTipo.setText("");
                 txtHorario.setText("");

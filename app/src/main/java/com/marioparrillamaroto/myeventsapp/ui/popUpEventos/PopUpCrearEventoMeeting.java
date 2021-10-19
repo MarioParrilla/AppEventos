@@ -20,7 +20,7 @@ import com.marioparrillamaroto.myeventsapp.R;
 public class PopUpCrearEventoMeeting extends AppCompatActivity{
 
     private FloatingActionButton fab;
-    private EditText horaInicio, horaFinal;
+    private EditText horaInicio, horaFinal,tituloEvento, temaEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,8 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         setContentView(R.layout.activity_pop_up_crear_evento_meeting);
 
         fab = (FloatingActionButton)findViewById(R.id.fabEventoMeeting);
+        tituloEvento = (EditText)findViewById(R.id.txtTituloEventoMeeting);
+        temaEvento = (EditText)findViewById(R.id.txtTemaMeeting);
         horaInicio = (EditText)findViewById(R.id.dateHoraInicioMeeting);
         horaFinal = (EditText)findViewById(R.id.dateHoraFinalMeeting);
 

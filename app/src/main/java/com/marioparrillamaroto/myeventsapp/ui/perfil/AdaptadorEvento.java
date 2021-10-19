@@ -12,6 +12,8 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoPresencial;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpModificarEventoMeeting;
+import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpModificarEventoPresencial;
 
 import java.util.ArrayList;
 
@@ -75,20 +77,20 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
                 public void onClick(View v) {
                     Intent i;
                     if (e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpInfoEventoMeeting.class);
-                        i.putExtra("infoEvento",e);
+                        i = new Intent(itemView.getContext(), PopUpModificarEventoMeeting.class);
+                        i.putExtra("infoEventoP",e);
                         itemView.getContext().startActivity(i);
                     }
                     else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) i = null;
                     else if(!e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
-                        i.putExtra("infoEvento",e);
+                        i = new Intent(itemView.getContext(), PopUpModificarEventoPresencial.class);
+                        i.putExtra("infoEventoP",e);
                         itemView.getContext().startActivity(i);
                     };
                 }
             });
 
-            if (e.getEventPreference()) txtTipo.setText("O");
+            if (e.getEventPreference())txtTipo.setText("M");
             else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) {
                 txtTipo.setText("");
                 txtHorario.setText("");

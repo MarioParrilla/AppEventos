@@ -7,58 +7,59 @@
     tools:context=".ui.popUpEventos.PopUpCrearEventoPresencial">
 
     <EditText
-        android:id="@+id/txtTituloEventoMeeting"
+        android:id="@+id/txtTituloEventoMeetingPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Nombre del evento"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtTemaMeeting"
+        android:id="@+id/txtTemaMeetingPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
         android:hint="Tema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateHoraFinalMeeting" />
+        app:layout_constraintTop_toBottomOf="@+id/dateHoraFinalMeetingPM" />
 
     <EditText
-        android:id="@+id/txtEnlaceMeeting"
+        android:id="@+id/txtEnlaceMeetingPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="Enlace Videomeeting"
         android:ems="10"
+        android:hint="Enlace VideoMeeting"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTemaMeeting" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTemaMeetingPM"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/dateHoraInicioMeeting"
+        android:id="@+id/dateHoraInicioMeetingPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="Hora Inicio"
         android:inputType="time"
+        android:hint="Hora Inicio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTituloEventoMeeting" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloEventoMeetingPM" />
 
     <EditText
-        android:id="@+id/dateHoraFinalMeeting"
+        android:id="@+id/dateHoraFinalMeetingPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -68,19 +69,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateHoraInicioMeeting" />
+        app:layout_constraintTop_toBottomOf="@+id/dateHoraInicioMeetingPM" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabEventoMeeting"
+        android:id="@+id/fabEventoMeetingPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEnlaceMeeting"
-        app:srcCompat="@drawable/ic_add_24"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnlaceMeetingPM"
+        app:srcCompat="@drawable/ic_edit_24"
+        tools:ignore="OnClick" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabEventoMeetingPME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toEndOf="@+id/fabEventoMeetingPM"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnlaceMeetingPM"
+        app:srcCompat="@drawable/ic_delete_24"
         tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

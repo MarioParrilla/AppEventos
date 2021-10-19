@@ -3,9 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.marioparrillamaroto.myapplication.MainActivity">
     <item
+        android:id="@+id/action_chats"
+        android:icon="@drawable/ic_send_24"
+        android:orderInCategory="100"
+        android:title="Chats"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/icon_settings_24"
         android:orderInCategory="100"
         android:title="Ajustes"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>

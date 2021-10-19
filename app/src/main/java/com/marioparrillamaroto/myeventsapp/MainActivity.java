@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.marioparrillamaroto.myeventsapp.ui.chats.ChatsActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -55,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent nuevaPantalla = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(nuevaPantalla);
+            return true;
+        }else if (id == R.id.action_chats) {
+            Intent nuevaPantalla = new Intent(MainActivity.this, ChatsActivity.class);
             startActivity(nuevaPantalla);
             return true;
         }
