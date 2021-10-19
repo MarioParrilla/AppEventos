@@ -137,7 +137,75 @@ El usuario podrá editar sus eventos e incluso cancelarlos.
 
 ## Interfaz gráfico
 
-Incluye las imágenes con el diseño de las pantallas y cualquier descripción o comentario que creas conveniente.
+App:
+
+![gifApp](./readmeAssets/DisennoGrafico/app.gif)
+
+Login:
+
+![login](./readmeAssets/DisennoGrafico/login.jpg)
+
+Inicio: Aquí podemos ver como se ven las cardviews meeting, presencial y cuando no se tengan eventos disponibles.
+
+![inicio](./readmeAssets/DisennoGrafico/inicio.jpg)
+
+Info Evento Meeting: 
+
+![infoEventoMeeting](./readmeAssets/DisennoGrafico/infoEventoMeeting.jpg)
+
+Info Evento Presencial:
+
+![infoEventoPresencial](./readmeAssets/DisennoGrafico/infoEventoPresencial.jpg)
+
+Ajustes:
+
+![ajustes](./readmeAssets/DisennoGrafico/ajustes.jpg)
+
+Chats:
+
+![chats](./readmeAssets/DisennoGrafico/chats.jpg)
+
+Buscar:
+
+![buscar](./readmeAssets/DisennoGrafico/buscar.jpg)
+
+Perfil Externo:
+
+![perfilExterno](./readmeAssets/DisennoGrafico/perfilExterno.jpg)
+
+Citar Evento Meeting:
+
+![citarEventoMeeting](./readmeAssets/DisennoGrafico/citarEventoMeeting.jpg)
+
+Citar Evento Presencial:
+
+![citarEventoPresencial](./readmeAssets/DisennoGrafico/citarEventoPresencial.jpg)
+
+Perfil Personal:
+
+![perfil](./readmeAssets/DisennoGrafico/perfil.jpg)
+
+Perfil Personal Opciones: 
+
+![perfil2](./readmeAssets/DisennoGrafico/perfil2.jpg)
+
+Crear Evento Meeting:
+
+![crearEventoMeeting](./readmeAssets/DisennoGrafico/crearEventoMeeting.jpg)
+
+Crear Evento Presencial:
+
+![crearEventoPresencial](./readmeAssets/DisennoGrafico/crearEventoPresencial.jpg)
+
+Modificar/Borrar Evento Meeting:
+
+![modificarEventoMeeting](./readmeAssets/DisennoGrafico/modificarEventoMeeting.jpg)
+
+Modificar/Borrar Evento Presencial:
+
+![modificarEventoPresencial](./readmeAssets/DisennoGrafico/modificarEventoPresencial.jpg)
+
+
 
 ## Diagrama de clases
 
