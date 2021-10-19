@@ -139,72 +139,71 @@ El usuario podrá editar sus eventos e incluso cancelarlos.
 
 App:
 
-![gifApp](./readmeAssets/DisennoGrafico/app.gif)
+<img src="./readmeAssets/DisennoGrafico/app.gif" width="300" height="600">
 
 Login:
 
-![login](./readmeAssets/DisennoGrafico/login.jpg)
+<img src="./readmeAssets/DisennoGrafico/login.jpg" width="300" height="600">
 
 Inicio: Aquí podemos ver como se ven las cardviews meeting, presencial y cuando no se tengan eventos disponibles.
 
-![inicio](./readmeAssets/DisennoGrafico/inicio.jpg)
+<img src="./readmeAssets/DisennoGrafico/inicio.jpg" width="300" height="600">
 
 Info Evento Meeting: 
 
-![infoEventoMeeting](./readmeAssets/DisennoGrafico/infoEventoMeeting.jpg)
+<img src="./readmeAssets/DisennoGrafico/infoEventoMeeting.jpg" width="300" height="600">
 
 Info Evento Presencial:
 
-![infoEventoPresencial](./readmeAssets/DisennoGrafico/infoEventoPresencial.jpg)
+<img src="./readmeAssets/DisennoGrafico/infoEventoPresencial.jpg" width="300" height="600">
 
 Ajustes:
 
-![ajustes](./readmeAssets/DisennoGrafico/ajustes.jpg)
+<img src="./readmeAssets/DisennoGrafico/ajustes.jpg" width="300" height="600">
 
 Chats:
 
-![chats](./readmeAssets/DisennoGrafico/chats.jpg)
+<img src="./readmeAssets/DisennoGrafico/chats.jpg" width="300" height="600">
 
 Buscar:
 
-![buscar](./readmeAssets/DisennoGrafico/buscar.jpg)
+<img src="./readmeAssets/DisennoGrafico/buscar.jpg" width="300" height="600">
 
 Perfil Externo:
 
-![perfilExterno](./readmeAssets/DisennoGrafico/perfilExterno.jpg)
+<img src="./readmeAssets/DisennoGrafico/perfilExterno.jpg" width="300" height="600">
 
 Citar Evento Meeting:
 
-![citarEventoMeeting](./readmeAssets/DisennoGrafico/citarEventoMeeting.jpg)
+<img src="./readmeAssets/DisennoGrafico/citarEventoMeeting.jpg" width="300" height="600">
 
 Citar Evento Presencial:
 
-![citarEventoPresencial](./readmeAssets/DisennoGrafico/citarEventoPresencial.jpg)
+<img src="./readmeAssets/DisennoGrafico/citarEventoPresencial.jpg" width="300" height="600">
 
 Perfil Personal:
 
-![perfil](./readmeAssets/DisennoGrafico/perfil.jpg)
+<img src="./readmeAssets/DisennoGrafico/perfil.jpg" width="300" height="600">
 
 Perfil Personal Opciones: 
 
-![perfil2](./readmeAssets/DisennoGrafico/perfil2.jpg)
+<img src="./readmeAssets/DisennoGrafico/perfil2.jpg" width="300" height="600">
 
 Crear Evento Meeting:
 
-![crearEventoMeeting](./readmeAssets/DisennoGrafico/crearEventoMeeting.jpg)
+<img src="./readmeAssets/DisennoGrafico/crearEventoMeeting.jpg" width="300" height="600">
 
 Crear Evento Presencial:
 
-![crearEventoPresencial](./readmeAssets/DisennoGrafico/crearEventoPresencial.jpg)
+<img src="./readmeAssets/DisennoGrafico/crearEventoPresencial.jpg" width="300" height="600">
 
 Modificar/Borrar Evento Meeting:
 
-![modificarEventoMeeting](./readmeAssets/DisennoGrafico/modificarEventoMeeting.jpg)
+<img src="./readmeAssets/DisennoGrafico/modificarEventoMeeting.jpg" width="300" height="600">
 
 Modificar/Borrar Evento Presencial:
 
-![modificarEventoPresencial](./readmeAssets/DisennoGrafico/modificarEventoPresencial.jpg)
-
+<img src="./readmeAssets/DisennoGrafico/modificarEventoPresencial.jpg" width="300" height="600">
 
 
 ## Diagrama de clases
