@@ -24,15 +24,29 @@ He decidido realizar una aplicacion de eventos para dar solucion a las personas 
 
 ## Descripción de la aplicación
 
-Esta aplicacion, permitirá al usuario solicitar eventos a otros usuarios, ademas de aceptar eventos que le pidan otros usuarios. Los eventos podran ser presencialmente dando la ubicación del lugar de quedada/evento, o remotamente atraves de un enlace de una plataforma de videoconferencia como zoom, google meets,... Además, los eventos tendras una duración determinada, ademas de poder introducir comentarios a la hora de pedir cita del eveneto. El usuario al cual le estan citando, podrá cancelar eventos con su respectivo mensaje de explicación.
+Esta aplicacion, permitirá al usuario solicitar eventos a otros usuarios, ademas de aceptar eventos que le pidan otros usuarios. Los eventos podran ser presencialmente dando la ubicación del lugar de quedada/evento, o remotamente atraves de un enlace de una plataforma de videoconferencia como zoom, google meets,... Además, los eventos tendras una duración determinada. El usuario al cual le estan citando, podrá cancelar eventos.
 
 # Especificación de requisitos
 
 ## Requisitos funcionales
 
-Describe cada una de las funcionalidades que debe incluir la aplicación. 
+RQ1 - Login Activity: En esta actividad nos encontrarémos un formulario de login donde los usuarios iniciarán sesión. (Para tener cuenta de usuario en la app, se tendrá que dar de alta desde el CMS).
 
-Es recomendable incluir un diagrama de casos de uso.
+RQ2 - Main Activity: En esta actividad, encontraremos los fragmentos home, search y profile. Además, encontrarémos dos botones con los que se podrá acceder a las actividades Settings y Chats.
+
+RQ3 - Gestion de Eventos: En los diferentes fragmentos de main activity, podremos hacer CRUD con la información de los eventos.
+
+RQ4 - Settings Activity: En esta activity, encontraremos diferentes funcionalidades como acerca de, soporte y cerrar sesion del usuario actual.
+
+RQ5 - Chat Activity: En esta activity, encontraremos los diferentes chats bluetooth con otros usuarios. ⚠️🏗️[En desarrollo]🏗️⚠️
+
+RQ6 - Home Fragment: En este fragment, encontraremos las cardview de los eventos del dia actual con datos de importacia, donde el usuario a citados a otros usuarios. Si pinchamos sobre la tarjeta de un evento de esta ventana, se nos abrirá un pop up (una nueva actividad), donde podremos ver los detalles al completo del evento.
+
+RQ7 - Search Fragment: En este fragment, encontraremos una barra de busqueda donde podremos filtrar las cardviews por los nombres de los usuarios de la app. Además, veremos las cardview de los usuarios con su username y su descripción. Cuando hagamos click sobre una cardview, se abrirá un pop up (una nueva actividad), donde podremos ver el perfil del usuario con su información y todos sus eventos creados. Si pinchamos sobre un evento del perfil de este usuario, se nos motrará un pop up (una nueva actividad), con la información detallada de ese evento con la opción de citar este evento.
+
+RQ8 - Profile Fragment: En este fragment, encontraremos la informacion de nuestro usuario, ademas de las cardviews de nuestros eventos ya creados con la información más impotante. Si pinchamos sobre estos eventos, podremos ver su información más detallada, ademas de poder modificar su información y poder eliminar el evento. También, podremos crear nuevos eventos atraves de un fab el cual contendrá otros dos fab, donde podremos o crear un evento presencial, donde se podrá crear el evento con su información precisa o el crear un evento meeting, donde se podrá crear el evento con su información precisa.
+
+![casosDeUso](./readmeAssets/Diagramas/casosDeUso.png)
 
 ## Requisitos no funcionales
 
@@ -53,68 +67,68 @@ Almacenamiento: se necesitará minimo de un 1Gb de almacenamiento.
 LOGIN:
 El usuario entrará con su usuario en la aplicación pudiendo guarda la sesión. Ádemas, podrá recordar la contraseña si no la recuerda.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/login.png)
+![login](./readmeAssets/wireframe/login.png)
 
 REGISTRO:
 El usuario se podrá registrar en la aplicación y crear su propio usuario.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/registro.png)
+![registro](./readmeAssets/wireframe/registro.png)
 
 RECORDAR CONTRASEÑA:
 Aquí el usuario podrá recordar su contraseña recibiendo un correo a su email con un codigo concreto.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/recordarContrasenna.png)
+![recordarContrasenna](./readmeAssets/wireframe/recordarContrasenna.png)
 
 NUEVA CONTRASEÑA: 
 Aquí el usuario podrá crear una nueva contraseña para su cuenta.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/nuevaContrasenna.png)
+![nuevaContrasenna](./readmeAssets/wireframe/nuevaContrasenna.png)
 
 INICIO:
 Este es el menu inicial donde podrá encontrar los eventos que tiene ese dia, de lo contrario, podrá ir a buscar eventos.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/inicio.png)
+![inicio](./readmeAssets/wireframe/inicio.png)
 
 BUSQUEDA:
 Aquí el usuario buscará a los usuarios a los cuales desea citar un evento.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/busqueda.png)
+![busqueda](./readmeAssets/wireframe/busqueda.png)
 
 NOTIFICACIONES:
 Aqui se mostrarán las notificaciones de la aplicación.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/notificaciones.png)
+![notificaciones](./readmeAssets/wireframe/notificaciones.png)
 
 PERFIL PERSONAL:
 Aquí el usuario verá sus eventos puediendo modificarlos a su elección.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/perfilPersonal.png)
+![perfilPersonal](./readmeAssets/wireframe/perfilPersonal.png)
 
 PERFIL AJENO:
 Aquí el usuario podrá elegir el dia y la hora disponible para citar un evento a otro usuario.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/perfilAjeno.png)
+![perfilAjeno](./readmeAssets/wireframe/perfilAjeno.png)
 
 AJUSTES:
 Aquí encontrará la selección del idioma de la aplicación, ademas de otros datos de interés.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/ajustes.png)
+![ajustes](./readmeAssets/wireframe/ajustes.png)
 
 EVENTO:
 Aquí el usuario citador podrá ver la información de un evento puediendo cancelar su cita.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/evento.png)
+![evento](./readmeAssets/wireframe/evento.png)
 
 CITAR EVENTO:
 El usuario podrá seleccionar los datos de la cita.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/citarEvento.png)
+![citarEvento](./readmeAssets/wireframe/citarEvento.png)
 
 
 MODIFICAR EVENTO:
 El usuario podrá editar sus eventos e incluso cancelarlos.
 
-![logo-IESGP-FP](./readmeAssets/wireframe/modificarEvento.png)
+![modificarEvento](./readmeAssets/wireframe/modificarEvento.png)
 
 
 
