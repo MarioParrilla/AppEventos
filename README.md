@@ -36,7 +36,17 @@ Es recomendable incluir un diagrama de casos de uso.
 
 ## Requisitos no funcionales
 
-Describe todos los requisitos no funcionales que se deben tener en cuenta para el desarrollo de la aplicación (seguridad, conectividad, tipos de dispositivos, memoria, procesador, espacio de almacenamiento, etc.)
+Seguridad: El usuario necesitará un usuario con su información para poder accerder a la aplicación.
+
+Conectividad: El dispositivo movil, necesitará de conexión wifi, bluetooth y gps.
+
+Tipos de dispositivos: Smartphones y tablets android en principio con versiones de android apartir de 5.0 .
+
+Memoria: Los dispositivos necesitarán minimo 512MB de memoria RAM, aunque se recominenda 2Gb.
+
+Procesador: Minimo se necesitará un procesador con Quad Core a 1.2GHz.
+
+Almacenamiento: se necesitará minimo de un 1Gb de almacenamiento.
 
 ## Wireframe
 
