@@ -254,9 +254,11 @@ user_summoner_id_user: es la id del usuario que ha citado al creador el evento, 
 
 ## Plan de pruebas
 
-Define los casos de prueba que se deben realizar para comprobar el correcto funcionamiento de la aplicación móvil.
+Prueba 1: Comprobar Existencia del un Usuario en el login: Se pasaran como parametros un usuario y una contraseña y si el usuario existe, nos devolverá un true, si no, nos devolverá false.
 
+Prueba 2: Comprobar usuario agregado: Se pasará un objeto usuario y si el usuario se agrega correctamente, nos devolverá un true, si no, nos devolverá un flase.
 
+🏗️⚠️PLAN DE PRUEBAS EN DESARROLLO⚠️🏗️
 
 # Diseño Técnico
 
