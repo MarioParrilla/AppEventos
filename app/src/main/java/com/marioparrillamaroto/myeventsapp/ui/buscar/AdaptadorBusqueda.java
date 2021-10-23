@@ -80,7 +80,7 @@ public class AdaptadorBusqueda extends RecyclerView.Adapter<AdaptadorBusqueda.Bu
 
         public void bindBusqueda(Usuario UB) {
             lblUsernameBsq.setText("@"+UB.getUsername());
-            lblDescripcionBsq.setText(UB.getDescription());
+            lblDescripcionBsq.setText(UB.getPhonenumber());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

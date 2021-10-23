@@ -35,7 +35,7 @@ public class ExternalProfileActivity extends AppCompatActivity {
         lblDescription = (TextView)findViewById(R.id.lblDescripcionExternalProfile);
 
         lblUsername.setText(u.getUsername());
-        lblDescription.setText(u.getDescription());
+        lblDescription.setText(u.getPhonenumber());
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
