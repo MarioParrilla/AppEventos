@@ -208,7 +208,7 @@ Modificar/Borrar Evento Presencial:
 
 ## Diagrama de clases
 
-Se debe incluir un diagrama de clases y la descripción de las mismas.
+![diagramaClases](./readmeAssets/Diagramas/clases.png)
 
 ## Diagrama E/R
 
