@@ -2,6 +2,8 @@ package com.marioparrillamaroto.myeventsapp.core;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -14,7 +16,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.Usuario;
+import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,7 +93,9 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS "+EVENTO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS "+USUARIO_TABLE);
+        onCreate(db);
     }
 
     public void syncronizingData(Context context, String urlAPI){
@@ -160,22 +166,31 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
         try {
 
-            cv.put(COLUMN_USERID,user.getUserID());
-            cv.put(COLUMN_USERNAME,user.getUsername());
-            cv.put(COLUMN_EMAIL,user.getEmail());
-            cv.put(COLUMN_PASSWORD,user.getPassword());
-            cv.put(COLUMN_PHONENUMBER,user.getPhonenumber());
-            cv.put(COLUMN_CMS_ADMIN,user.getCmsAdmin());
-            cv.put(COLUMN_ENABLED,user.getEnabled());
+            Cursor mCursor = db.rawQuery("select count(*) from usuario where userID = ?", new String[]{user.getUserID().toString()});
 
-            isInserted = db.insert(USUARIO_TABLE, null, cv);
+            int exists = 0;
+            while(mCursor.moveToNext()){
+                exists = mCursor.getInt(0);
+            }
+            if (exists!=1){
+                cv.put(COLUMN_USERID,user.getUserID());
+                cv.put(COLUMN_USERNAME,user.getUsername());
+                cv.put(COLUMN_EMAIL,user.getEmail());
+                cv.put(COLUMN_PASSWORD,user.getPassword());
+                cv.put(COLUMN_PHONENUMBER,user.getPhonenumber());
+                cv.put(COLUMN_CMS_ADMIN,user.getCmsAdmin());
+                cv.put(COLUMN_ENABLED,user.getEnabled());
 
-            if (isInserted==-1L) throw new Exception("¡No se puedo hacer la inserción de datos!");
+                isInserted = db.insert(USUARIO_TABLE, null, cv);
 
-            ended = true;
+                if (isInserted==-1L) throw new Exception("¡No se puedo hacer la inserción de datos!");
+
+                ended = true;
+            }
+
         }catch (Exception e){
             ended = false;
-            e.printStackTrace();
+            System.err.println("Error al sincronizar usuarios: "+e.getMessage());
         }
         return ended;
     }
@@ -189,26 +204,35 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
         try {
 
-            cv.put(COLUMN_EVENTID,event.getEventID());
-            cv.put(COLUMN_EVENT_NAME,event.getNombreEvento());
-            cv.put(COLUMN_TEMA,event.getTema());
-            cv.put(COLUMN_START_TIME,event.getHoraInicio());
-            cv.put(COLUMN_END_TIME,event.getHoraFinal());
-            cv.put(COLUMN_AVAILABLE,event.getAvailable());
-            cv.put(COLUMN_EVENT_PREFERENCE,event.getEventPreference());
-            cv.put(COLUMN_COORDINATES,event.getCoordenadas());
-            cv.put(COLUMN_VIDEOMEETING,event.getEnlaceVideoMeeting());
-            cv.put(COLUMN_USER_OWNER_USERID,event.getUserOwnerID());
-            cv.put(COLUMN_USER_SUMMONER_USERID,event.getUserSummonerID());
+            Cursor mCursor = db.rawQuery("select count(*) from evento where eventID = ?", new String[]{event.getEventID().toString()});
 
-            isInserted = db.insert(EVENTO_TABLE, null, cv);
+            int exists = 0;
+            while(mCursor.moveToNext()){
+                exists = mCursor.getInt(0);
+            }
+            if (exists!=1){
+                cv.put(COLUMN_EVENTID,event.getEventID());
+                cv.put(COLUMN_EVENT_NAME,event.getNombreEvento());
+                cv.put(COLUMN_TEMA,event.getTema());
+                cv.put(COLUMN_START_TIME,event.getHoraInicio());
+                cv.put(COLUMN_END_TIME,event.getHoraFinal());
+                cv.put(COLUMN_AVAILABLE,event.getAvailable());
+                cv.put(COLUMN_EVENT_PREFERENCE,event.getEventPreference());
+                cv.put(COLUMN_COORDINATES,event.getCoordenadas());
+                cv.put(COLUMN_VIDEOMEETING,event.getEnlaceVideoMeeting());
+                cv.put(COLUMN_USER_OWNER_USERID,event.getUserOwnerID());
+                cv.put(COLUMN_USER_SUMMONER_USERID,event.getUserSummonerID());
 
-            if (isInserted==-1L) throw new Exception("¡No se puedo hacer la inserción de datos!");
+                isInserted = db.insert(EVENTO_TABLE, null, cv);
 
-            ended = true;
+                if (isInserted==-1L) throw new Exception("¡No se puedo hacer la inserción de datos!");
+
+                ended = true;
+            }
+
         }catch (Exception e){
             ended = false;
-            e.printStackTrace();
+            System.err.println("Error al sincronizar eventos: "+e.getMessage());
         }
         return ended;
     }
