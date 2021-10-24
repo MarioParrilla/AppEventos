@@ -28,12 +28,11 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        HomeModel hm = new HomeModel();
 
-        ArrayList<Evento> datos = new ArrayList<Evento>();
-        /*datos.add(new Evento("Prueba1", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin","Pruebas", true,true,0,0,0,"a"));
-        datos.add(new Evento("Prueba2",LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin2","Pruebas2", false,true,0,0,0,"a"));
-        datos.add(new Evento("¡No tiene Eventos!", LocalDateTime.now(),LocalDateTime.now(),"null","", false,true,0,0,0,""));*/
 
+
+        ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
 
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());

@@ -37,6 +37,10 @@ public class Evento implements Serializable {
     }
 
     public String getHoraInicio() {
+        return horaInicio.toString();
+    }
+
+    public String getHoraInicioParsed() {
         return horaInicio.toLocalTime().toString().substring(0,5);
     }
 
@@ -45,6 +49,10 @@ public class Evento implements Serializable {
     }
 
     public String getHoraFinal() {
+        return horaFinal.toString();
+    }
+
+    public String getHoraFinalParsed() {
         return horaFinal.toLocalTime().toString().substring(0,5);
     }
 

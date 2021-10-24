@@ -12,7 +12,9 @@ import java.util.ArrayList;
 
 public class HomeModel {
 
-    public ArrayList<?> eventsOfUser(Context context, String username){
+    private static final String LOGIN_TABLE = "'LoginInfo'";
+
+    public ArrayList<Evento> eventsOfUser(Context context, String username){
         ArrayList<Evento> events = new ArrayList<>();
 
         SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
@@ -25,6 +27,18 @@ public class HomeModel {
         }
 
         return events;
+    }
+
+    public String getLoginUser(Context context){
+        String username = "";
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        Cursor mCursor = db.rawQuery("select username from "+LOGIN_TABLE, null);
+
+        while(mCursor.moveToNext()){
+            username = mCursor.getString(0);
+        }
+
+        return username;
     }
 
 }

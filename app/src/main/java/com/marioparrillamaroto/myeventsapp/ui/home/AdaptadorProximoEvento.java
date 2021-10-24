@@ -67,7 +67,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
         }
 
         public void bindProximoEvento(Evento e) {
-            txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
+            txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraInicioParsed());
             txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
             txtNombreEvento.setText(e.getNombreEvento());
             itemView.setOnClickListener(new View.OnClickListener() {
