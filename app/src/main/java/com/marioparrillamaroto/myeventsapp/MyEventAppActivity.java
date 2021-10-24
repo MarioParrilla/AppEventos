@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 import org.json.JSONArray;
@@ -27,11 +28,17 @@ public class MyEventAppActivity extends AppCompatActivity {
 
     private boolean isLogin;
     private Intent nuevaPantalla;
+    private static final String URLAPI = "http://192.168.1.62:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_event_app);
+
+        FunctionsDatabase fd = new FunctionsDatabase(getApplicationContext());
+
+
+        fd.syncronizingData(getApplicationContext(),URLAPI);
 
         isLogin = false;
 

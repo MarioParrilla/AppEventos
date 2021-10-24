@@ -51,39 +51,13 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
 
         ArrayList<Usuario> datos = new ArrayList<Usuario>();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(root.getContext());
-        final String url = "http://192.168.1.62:8080/api/usuario/";
-
-        JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject object = (JSONObject) response.get(i);
-                        datos.add(new Usuario(object.getLong("userID"),object.getString("username"),object.getString("email"),object.getString("password"),
-                                object.getString("phonenumber"),object.getBoolean("cmsAdmin"),object.getBoolean("enabled")));
-                    }
-
-                    adapterData = new AdaptadorBusqueda(datos);
-                    LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
-                    lym.setOrientation(LinearLayoutManager.VERTICAL);
-                    recView = (RecyclerView) root.findViewById(R.id.recViewBusq);
-                    recView.setHasFixedSize(true);
-                    recView.setLayoutManager(lym);
-                    recView.setAdapter(adapterData);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        requestQueue.add(jAR);
+        adapterData = new AdaptadorBusqueda(datos);
+        LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
+        lym.setOrientation(LinearLayoutManager.VERTICAL);
+        recView = (RecyclerView) root.findViewById(R.id.recViewBusq);
+        recView.setHasFixedSize(true);
+        recView.setLayoutManager(lym);
+        recView.setAdapter(adapterData);
 
         /*datos.add(new Usuario("admin","Pruebas"));
         datos.add(new Usuario("admin2","Pruebas2"));

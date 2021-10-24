@@ -68,7 +68,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
 
         public void bindProximoEvento(Evento e) {
             txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
-            txtMensaje.setText("Cita con @"+e.getUsuarioCitado()+", hablarás sobre: \n #"+e.getTema());
+            txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
             txtNombreEvento.setText(e.getNombreEvento());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,7 +79,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
                         i.putExtra("infoEvento",e);
                         itemView.getContext().startActivity(i);
                     }
-                    else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) i = null;
+                    else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) i = null;
                     else if(!e.getEventPreference()){
                         i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
                         i.putExtra("infoEvento",e);
@@ -89,7 +89,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
                 }
             });
             if (e.getEventPreference())txtTipo.setText("M");
-            else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) {
+            else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) {
                 txtTipo.setText("");
                 txtHorario.setText("");
                 txtMensaje.setText("");

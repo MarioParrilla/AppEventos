@@ -46,9 +46,9 @@ public class PerfilFragment extends Fragment {
 
         ArrayList<Evento> datos = new ArrayList<Evento>();
 
-        datos.add(new Evento("Prueba3", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin3","Pruebas3", true,true,0,0,0,"Preuba"));
+        /*datos.add(new Evento("Prueba3", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin3","Pruebas3", true,true,0,0,0,"Preuba"));
         datos.add(new Evento("Prueba4", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin4","Pruebas4", false,true,0,0,0,"Preuba"));
-        datos.add(new Evento("¡No tiene Eventos!", LocalDateTime.now(),LocalDateTime.now(),"null","", false,true,0,0,0,""));
+        datos.add(new Evento("¡No tiene Eventos!", LocalDateTime.now(),LocalDateTime.now(),"null","", false,true,0,0,0,""));*/
 
         AdaptadorEvento adapterData = new AdaptadorEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());

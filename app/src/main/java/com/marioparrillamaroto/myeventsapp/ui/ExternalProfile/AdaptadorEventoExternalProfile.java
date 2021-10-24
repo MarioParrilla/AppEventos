@@ -67,7 +67,7 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
 
         public void bindEvento(Evento e) {
             txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
-            txtMensaje.setText("Cita con @"+e.getUsuarioCitado()+", hablarás sobre: \n #"+e.getTema());
+            txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
             txtNombreEvento.setText(e.getNombreEvento());
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
                         i.putExtra("infoEvento",e);
                         itemView.getContext().startActivity(i);
                     }
-                    else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) i = null;
+                    else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) i = null;
                     else if(!e.getEventPreference()){
                         i = new Intent(itemView.getContext(), PopUpCitarEventoPresencial.class);
                         i.putExtra("infoEvento",e);
@@ -89,7 +89,7 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
             });
 
             if (e.getEventPreference())txtTipo.setText("M");
-            else if (!e.getEventPreference() && e.getUsuarioCitado().equals("null")) {
+            else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) {
                 txtTipo.setText("");
                 txtHorario.setText("");
                 txtMensaje.setText("");

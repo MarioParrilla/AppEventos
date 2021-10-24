@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Evento implements Serializable {
-    private String nombreEvento, usuarioCitado, tema, coordenadas, enlaceVideoMeeting;
+    private String nombreEvento, tema, coordenadas, enlaceVideoMeeting;
     private LocalDateTime horaInicio, horaFinal;
     private boolean eventPreference, available;
     private int eventID;
     private int userOwnerID;
     private int userSummonerID;
 
-    public Evento(String nombreEvento, LocalDateTime horaInicio, LocalDateTime horaFinal, String usuarioCitado, String tema, Boolean eventPreference
-            , boolean available, Integer eventID, Integer userOwnerID, Integer userSummonerID, String datosExtras) {
+    public Evento(Integer eventID, String nombreEvento, String tema, LocalDateTime horaInicio, LocalDateTime horaFinal, boolean eventPreference
+            , boolean available, Integer userOwnerID, Integer userSummonerID, String coordenadas, String enlaceVideoMeeting) {
         this.nombreEvento = nombreEvento;
-        this.usuarioCitado = usuarioCitado;
         this.tema = tema;
         this.coordenadas = coordenadas;
         this.enlaceVideoMeeting = enlaceVideoMeeting;
@@ -25,8 +24,8 @@ public class Evento implements Serializable {
         this.eventID = eventID;
         this.userOwnerID = userOwnerID;
         this.userSummonerID = userSummonerID;
-        if (eventPreference) this.enlaceVideoMeeting=datosExtras;
-        else this.coordenadas=datosExtras;
+        this.enlaceVideoMeeting=enlaceVideoMeeting;
+        this.coordenadas=coordenadas;
     }
 
     public String getNombreEvento() {
@@ -51,14 +50,6 @@ public class Evento implements Serializable {
 
     public void setHoraFinal(LocalDateTime horaFinal) {
         this.horaFinal = horaFinal;
-    }
-
-    public String getUsuarioCitado() {
-        return usuarioCitado;
-    }
-
-    public void setUsuarioCitado(String usuarioCitado) {
-        this.usuarioCitado = usuarioCitado;
     }
 
     public String getTema() {

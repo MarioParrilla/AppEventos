@@ -34,9 +34,9 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<Evento> datos = new ArrayList<Evento>();
-        datos.add(new Evento("Prueba1", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin","Pruebas", true,true,0,0,0,"a"));
+        /*datos.add(new Evento("Prueba1", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin","Pruebas", true,true,0,0,0,"a"));
         datos.add(new Evento("Prueba2",LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin2","Pruebas2", false,true,0,0,0,"a"));
-        datos.add(new Evento("¡No tiene Eventos!", LocalDateTime.now(),LocalDateTime.now(),"null","", false,true,0,0,0,""));
+        datos.add(new Evento("¡No tiene Eventos!", LocalDateTime.now(),LocalDateTime.now(),"null","", false,true,0,0,0,""));*/
 
 
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
