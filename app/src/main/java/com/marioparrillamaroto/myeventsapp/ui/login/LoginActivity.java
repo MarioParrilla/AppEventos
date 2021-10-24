@@ -30,17 +30,27 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.txtUsername);
         password = (EditText) findViewById(R.id.txtPass);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        LoginModel lg = new LoginModel(getApplicationContext());
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usernameText = username.getText().toString();
-                passwordText = password.getText().toString();
+                try {
+                    usernameText = username.getText().toString();
+                    passwordText = password.getText().toString();
+                    boolean allRigth = false;
 
-                if (new LoginModel().userExists(getApplicationContext(),usernameText, passwordText)==1){
-                    Intent nuevaPantalla = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(nuevaPantalla);
-                }else Toast.makeText(getApplicationContext(), "Introduce un usuario/contraseña correctos!",Toast.LENGTH_LONG).show();
+                    if (lg.userExists(usernameText, passwordText)==1){
+                        allRigth = lg.registerUserLogin(usernameText);
+                        if (allRigth){
+                            Intent nuevaPantalla = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(nuevaPantalla);
+                        }else throw new Exception();
+                    }else Toast.makeText(getApplicationContext(), "Introduce un usuario/contraseña correctos!",Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "ERROR al sincronizar datos!",Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
             }
         });
 

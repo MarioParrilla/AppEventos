@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.marioparrillamaroto.myeventsapp.ui.chats.ChatsActivity;
+import com.marioparrillamaroto.myeventsapp.ui.home.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,11 +20,13 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration2;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BottomNavigationView navView =  findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration2 = new AppBarConfiguration.Builder(navController2.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController2, appBarConfiguration2);
 
-    }
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

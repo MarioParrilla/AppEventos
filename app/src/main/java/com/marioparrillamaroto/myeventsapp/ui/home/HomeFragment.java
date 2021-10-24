@@ -15,19 +15,15 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recView;
-    private HomeViewModel homeViewModel;
+    private HomeModel homeViewModel;
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -46,6 +42,8 @@ public class HomeFragment extends Fragment {
         recView.setHasFixedSize(true);
         recView.setLayoutManager(lym);
         recView.setAdapter(adapterData);
+
+
 
 
         return root;

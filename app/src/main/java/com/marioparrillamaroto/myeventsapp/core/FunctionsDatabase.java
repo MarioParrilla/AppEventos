@@ -49,6 +49,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_VIDEOMEETING = "'videomeeting'";
     private static final String COLUMN_USER_OWNER_USERID = "'user_owner_userid'";
     private static final String COLUMN_USER_SUMMONER_USERID = "'user_summoner_userid'";
+    private static final String LOGIN_TABLE = "'LoginInfo'";
 
     public FunctionsDatabase(@Nullable Context context) {
         super(context, "MyEventsApp.db", null, 1);
@@ -57,10 +58,9 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     //Se llama la primera vez que se accede a la base de datos, aqui crearemos tablas...
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableUserStatement = "";
-        String createTableEventStatement = "";
+        String createTableStatement = "";
 
-        createTableUserStatement = "CREATE TABLE " + USUARIO_TABLE + "(" +
+        createTableStatement = "CREATE TABLE " + USUARIO_TABLE + "(" +
                 COLUMN_USERID + "	INTEGER NOT NULL," +
                 COLUMN_USERNAME + "	TEXT NOT NULL," +
                 COLUMN_EMAIL + "	TEXT NOT NULL," +
@@ -70,9 +70,9 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                 COLUMN_ENABLED + "	BOOL NOT NULL," +
                 "PRIMARY KEY(" + COLUMN_USERID + "))";
 
-        db.execSQL(createTableUserStatement);
+        db.execSQL(createTableStatement);
 
-        createTableEventStatement = "CREATE TABLE " + EVENTO_TABLE + "(" +
+        createTableStatement = "CREATE TABLE " + EVENTO_TABLE + "(" +
                 COLUMN_EVENTID + "	INTEGER NOT NULL," +
                 COLUMN_EVENT_NAME + "	TEXT NOT NULL," +
                 COLUMN_TEMA + "	TEXT NOT NULL," +
@@ -88,14 +88,28 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + COLUMN_USER_OWNER_USERID + ") REFERENCES "+ USUARIO_TABLE +" ("+COLUMN_USERID+")," +
                 "FOREIGN KEY (" + COLUMN_USER_SUMMONER_USERID + ") REFERENCES "+ USUARIO_TABLE +" ("+COLUMN_USERID+"))";
 
-        db.execSQL(createTableEventStatement);
+        db.execSQL(createTableStatement);
+
+        createTableStatement = "CREATE TABLE " + LOGIN_TABLE + "(" +
+                COLUMN_USERID + "	INTEGER NOT NULL," +
+                COLUMN_USERNAME + "	TEXT NOT NULL," +
+                COLUMN_PASSWORD + "	TEXT NOT NULL)";
+
+        db.execSQL(createTableStatement);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+EVENTO_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+USUARIO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS "+LOGIN_TABLE);
         onCreate(db);
+    }
+
+    public static Boolean getValue(int x){
+        boolean bool = false;
+        if (x==1) bool = true;
+        return bool;
     }
 
     public void syncronizingData(Context context, String urlAPI){
@@ -235,5 +249,21 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             System.err.println("Error al sincronizar eventos: "+e.getMessage());
         }
         return ended;
+    }
+
+    public boolean checkIsLogin(Context context){
+        boolean isLogin = false;
+
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        Cursor mCursor = db.rawQuery("select count(*) from "+LOGIN_TABLE, null);
+
+        int exists = 0;
+        while(mCursor.moveToNext()){
+            exists = mCursor.getInt(0);
+        }
+
+        if (exists==1) isLogin = true;
+
+        return isLogin;
     }
 }

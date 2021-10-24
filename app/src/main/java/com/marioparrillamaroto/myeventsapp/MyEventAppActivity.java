@@ -40,7 +40,7 @@ public class MyEventAppActivity extends AppCompatActivity {
 
         fd.syncronizingData(getApplicationContext(),URLAPI);
 
-        isLogin = false;
+        isLogin = fd.checkIsLogin(getApplicationContext());
 
         if (isLogin){
             nuevaPantalla = new Intent(MyEventAppActivity.this, MainActivity.class);
