@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.Usuario;
-import com.marioparrillamaroto.myeventsapp.ui.perfil.AdaptadorEvento;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ExternalProfileActivity extends AppCompatActivity {
@@ -32,7 +30,7 @@ public class ExternalProfileActivity extends AppCompatActivity {
         u = (Usuario) getIntent().getExtras().getSerializable("infoUsuario");
 
         lblUsername = (TextView)findViewById(R.id.lblUsernameExternalProfile);
-        lblDescription = (TextView)findViewById(R.id.lblDescripcionExternalProfile);
+        lblDescription = (TextView)findViewById(R.id.lblPhoneNumberExternalProfile);
 
         lblUsername.setText(u.getUsername());
         lblDescription.setText(u.getPhonenumber());

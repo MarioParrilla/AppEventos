@@ -28,6 +28,7 @@ public class Usuario implements Serializable {
         this.enabled = enabled;
     }
 
+
     public Long getUserID() {
         return userID;
     }

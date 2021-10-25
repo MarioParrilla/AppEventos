@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,33 +17,41 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
+import com.marioparrillamaroto.myeventsapp.Usuario;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentPerfilBinding;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoPresencial;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PerfilFragment extends Fragment {
 
     private RecyclerView recView;
-    private PerfilViewModel PerfilViewModel;
+    private PerfilModel PerfilViewModel;
     private FragmentPerfilBinding binding;
     private FloatingActionButton fabAddEvent, fabAddPresencial, fabAddOnline;
+    private TextView lblUsername, lblPhonenumber;
     private boolean isOpen;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PerfilViewModel =
-                new ViewModelProvider(this).get(PerfilViewModel.class);
 
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         isOpen = false;
+        lblUsername = root.findViewById(R.id.lblUsernameProfile);
+        lblPhonenumber = root.findViewById(R.id.lblPhoneNumberProfile);
         fabAddEvent = root.findViewById(R.id.btn_new_add);
         fabAddPresencial = root.findViewById(R.id.btn_add_event_presencial);
         fabAddOnline = root.findViewById(R.id.btn_add_event_videomeeting);
+
+        PerfilModel pm = new PerfilModel();
+
+        Usuario usuario = pm.getLoginUser(root.getContext());
+
+        lblUsername.setText(usuario.getUsername());
+        lblPhonenumber.setText(usuario.getPhonenumber());
 
         ArrayList<Evento> datos = new ArrayList<Evento>();
 
