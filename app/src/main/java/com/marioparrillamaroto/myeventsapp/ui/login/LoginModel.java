@@ -13,6 +13,7 @@ public class LoginModel {
     private static final String COLUMN_USERID = "'userid'";
     private static final String COLUMN_USERNAME = "'username'";
     private static final String COLUMN_PASSWORD = "'password'";
+    private static final String COLUMN_SAVESESSION = "'saveSession'";
     private static final String LOGIN_TABLE = "'LoginInfo'";
 
 
@@ -33,7 +34,7 @@ public class LoginModel {
         return exists;
     }
 
-    public boolean registerUserLogin(String username){
+    public boolean registerUserLogin(String username, boolean guardarSesion){
         boolean allRigth = false;
         long isInserted = 0L, userid = 0;
         String password = "";
@@ -52,6 +53,8 @@ public class LoginModel {
             cv.put(COLUMN_USERID,userid);
             cv.put(COLUMN_USERNAME,username);
             cv.put(COLUMN_PASSWORD,password);
+            if (guardarSesion) cv.put(COLUMN_SAVESESSION, 1);
+            else cv.put(COLUMN_SAVESESSION, 0);
 
             isInserted = db.insert(LOGIN_TABLE, null, cv);
 

@@ -2,10 +2,10 @@ package com.marioparrillamaroto.myeventsapp.core;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -16,9 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
-import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.Usuario;
-import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +48,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_USER_OWNER_USERID = "'user_owner_userid'";
     private static final String COLUMN_USER_SUMMONER_USERID = "'user_summoner_userid'";
     private static final String LOGIN_TABLE = "'LoginInfo'";
+    private static final String COLUMN_SAVESESSION = "'saveSession'";
 
     public FunctionsDatabase(@Nullable Context context) {
         super(context, "MyEventsApp.db", null, 1);
@@ -93,7 +92,8 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         createTableStatement = "CREATE TABLE " + LOGIN_TABLE + "(" +
                 COLUMN_USERID + "	INTEGER NOT NULL," +
                 COLUMN_USERNAME + "	TEXT NOT NULL," +
-                COLUMN_PASSWORD + "	TEXT NOT NULL)";
+                COLUMN_PASSWORD + "	TEXT NOT NULL," +
+                COLUMN_SAVESESSION+" BOOL NOT NULL)";
 
         db.execSQL(createTableStatement);
     }
@@ -114,61 +114,71 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     public void syncronizingData(Context context, String urlAPI){
 
-        RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        try{
+            RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
 
-        JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/usuario",null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Usuario user;
-                try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject object = (JSONObject) response.get(i);
+            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/usuario",null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    Usuario user;
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject object = (JSONObject) response.get(i);
 
-                        user = new Usuario(object.getLong("userID"),object.getString("username"),object.getString("email"),object.getString("password"),
-                                object.getString("phonenumber"),object.getBoolean("cmsAdmin"),object.getBoolean("enabled"));
+                            user = new Usuario(object.getLong("userID"),object.getString("username"),object.getString("email"),object.getString("password"),
+                                    object.getString("phonenumber"),object.getBoolean("cmsAdmin"),object.getBoolean("enabled"));
 
-                        insertUserDatabase(user);
+                            insertUserDatabase(user);
+                        }
+
+                    } catch (JSONException e) {
+                        Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                    error.printStackTrace();
+                }
+            });
 
-        requestQueue.add(jAR);
+            requestQueue.add(jAR);
 
-        jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/evento",null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Evento event;
-                try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject object = (JSONObject) response.get(i);
+            jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/evento",null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    Evento event;
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject object = (JSONObject) response.get(i);
 
-                        event = new Evento(object.getInt("eventID"), object.getString("eventName"), object.getString("tema"), LocalDateTime.parse(object.getString("startTime")), LocalDateTime.parse(object.getString("endTime")),
-                                object.getBoolean("eventPreference"), object.getBoolean("available"), object.getJSONObject("userOwner").getInt("userID"), object.getJSONObject("userSummoner").getInt("userID"), object.getString("coordinates"), object.getString("videomeeting"));
+                            event = new Evento(object.getInt("eventID"), object.getString("eventName"), object.getString("tema"), LocalDateTime.parse(object.getString("startTime")), LocalDateTime.parse(object.getString("endTime")),
+                                    object.getBoolean("eventPreference"), object.getBoolean("available"), object.getJSONObject("userOwner").getInt("userID"), object.getJSONObject("userSummoner").getInt("userID"), object.getString("coordinates"), object.getString("videomeeting"));
 
-                        insertEventDatabase(event);
+                            insertEventDatabase(event);
+                        }
+
+                    } catch (JSONException e) {
+                        Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                    error.printStackTrace();
+                }
+            });
 
-        requestQueue.add(jAR);
+            requestQueue.add(jAR);
+        }catch (Exception e){
+            Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
     }
 
     public  boolean insertUserDatabase(Usuario user){
@@ -265,5 +275,40 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         if (exists==1) isLogin = true;
 
         return isLogin;
+    }
+
+    public boolean checkSession(Context context){
+        boolean closeSession = false;
+
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        Cursor mCursor = db.rawQuery("select saveSession from "+LOGIN_TABLE, null);
+
+        int saveSession = 0;
+        while(mCursor.moveToNext()){
+            saveSession = mCursor.getInt(0);
+        }
+        if (saveSession!=1) closeSession = true;
+
+        return closeSession;
+    }
+
+    public void closeSession(Context context){
+        try{
+            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getWritableDatabase();
+            db.execSQL("DELETE FROM "+LOGIN_TABLE);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void checkCloseSession(Context context){
+        try{
+            boolean cerrarSesion = checkSession(context);
+            if (cerrarSesion){
+                closeSession(context);
+            }
+        }catch (Exception  e){
+            e.printStackTrace();
+        }
     }
 }

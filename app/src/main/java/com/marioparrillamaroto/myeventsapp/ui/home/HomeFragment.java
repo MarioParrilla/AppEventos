@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recView;
     private HomeModel homeViewModel;
     private FragmentHomeBinding binding;
+    private static final String URLAPI = "http://192.168.90.66:8080/api/";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,8 +31,8 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         HomeModel hm = new HomeModel();
-
-
+        FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
+        fd.syncronizingData(root.getContext(),URLAPI);
 
         ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
 
