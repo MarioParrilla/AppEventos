@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -132,20 +133,20 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         }
 
                     } catch (JSONException e) {
-                        Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor !",Toast.LENGTH_LONG).show();
                     error.printStackTrace();
+                    requestQueue.stop();
                 }
             });
 
             requestQueue.add(jAR);
-
             jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/evento",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
@@ -161,21 +162,22 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         }
 
                     } catch (JSONException e) {
-                        Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                     error.printStackTrace();
+                    requestQueue.stop();
                 }
             });
 
             requestQueue.add(jAR);
         }catch (Exception e){
-            Toast.makeText(context.getApplicationContext(), "Error: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+            Toast.makeText(context.getApplicationContext(), "Error General: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 

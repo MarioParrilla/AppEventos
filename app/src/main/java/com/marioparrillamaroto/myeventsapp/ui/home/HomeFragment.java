@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recView;
     private HomeModel homeViewModel;
     private FragmentHomeBinding binding;
-    private static final String URLAPI = "http://192.168.90.66:8080/api/";
+    private static final String URLAPI = "http://192.168.1.62:8080/api/";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

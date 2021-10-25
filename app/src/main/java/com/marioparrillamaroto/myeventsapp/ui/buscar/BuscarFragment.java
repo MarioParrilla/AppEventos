@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.Usuario;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentBuscarBinding;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
     private BuscarModel buscarViewModel;
     private FragmentBuscarBinding binding;
     private AdaptadorBusqueda adapterData;
+    private static final String URLAPI = "http://192.168.1.62:8080/api/";
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +38,12 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
 
         barraBusqueda = (SearchView)root.findViewById(R.id.barraBusqueda);
 
+
+
         BuscarModel bm = new BuscarModel();
+        FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
+        fd.syncronizingData(root.getContext(),URLAPI);
+
         ArrayList<Usuario> datos = bm.usersToSearch(getContext());
 
         adapterData = new AdaptadorBusqueda(datos);
@@ -45,18 +53,6 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
         recView.setHasFixedSize(true);
         recView.setLayoutManager(lym);
         recView.setAdapter(adapterData);
-
-        /*datos.add(new Usuario("admin","Pruebas"));
-        datos.add(new Usuario("admin2","Pruebas2"));
-        datos.add(new Usuario("3admin","Pruebas"));
-        datos.add(new Usuario("4admin2","Pruebas2"));
-        datos.add(new Usuario("5admin","Pruebas"));
-        datos.add(new Usuario("6admin2","Pruebas2"));
-        datos.add(new Usuario("mario","Pruebas"));
-        datos.add(new Usuario("7admin2","Pruebas2"));
-        datos.add(new Usuario("pepe","Pruebas"));
-        datos.add(new Usuario("admin2","Pruebas2"));*/
-
 
         barraBusqueda.setOnQueryTextListener(this);
         return root;
