@@ -16,13 +16,12 @@ import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recView;
-    private HomeModel homeViewModel;
     private FragmentHomeBinding binding;
-    private static final String URLAPI = "http://192.168.1.62:8080/api/";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,10 +31,10 @@ public class HomeFragment extends Fragment {
 
         HomeModel hm = new HomeModel();
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
-        fd.syncronizingData(root.getContext(),URLAPI);
+        fd.syncronizingData();
 
         ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
-
+        if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos proximos", "null", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
         lym.setOrientation(LinearLayoutManager.VERTICAL);

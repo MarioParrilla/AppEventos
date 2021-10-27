@@ -1,5 +1,7 @@
 package com.marioparrillamaroto.myeventsapp;
 
+import android.widget.Button;
+
 import java.util.ArrayList;
 
 public class Chat {

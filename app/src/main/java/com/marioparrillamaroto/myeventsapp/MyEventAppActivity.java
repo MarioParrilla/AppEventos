@@ -22,11 +22,11 @@ public class MyEventAppActivity extends AppCompatActivity {
         FunctionsDatabase fd = new FunctionsDatabase(getApplicationContext());
 
 
-        fd.syncronizingData(getApplicationContext(),URLAPI);
+        fd.syncronizingData();
 
-        fd.checkCloseSession(getApplicationContext());
+        fd.checkCloseSession();
 
-        isLogin = fd.checkIsLogin(getApplicationContext());
+        isLogin = fd.checkIsLogin();
 
         if (isLogin){
             nuevaPantalla = new Intent(MyEventAppActivity.this, MainActivity.class);

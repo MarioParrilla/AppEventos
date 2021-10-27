@@ -13,6 +13,7 @@ import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoMeetin
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpInfoEventoPresencial;
 import com.marioparrillamaroto.myeventsapp.R;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProximoEvento.ProximoEventoViewHolder>{
@@ -56,6 +57,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
         private TextView txtHorario;
         private TextView txtNombreEvento;
         private TextView txtTipo;
+        private HomeModel hm = new HomeModel();
 
         public ProximoEventoViewHolder(View itemView) {
             super(itemView);
@@ -67,34 +69,38 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
         }
 
         public void bindProximoEvento(Evento e) {
-            txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraInicioParsed());
-            txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
-            txtNombreEvento.setText(e.getNombreEvento());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i;
-                    if (e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpInfoEventoMeeting.class);
-                        i.putExtra("infoEvento",e);
-                        itemView.getContext().startActivity(i);
-                    }
-                    else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) i = null;
-                    else if(!e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
-                        i.putExtra("infoEvento",e);
-                        itemView.getContext().startActivity(i);
-                    };
 
-                }
-            });
-            if (e.getEventPreference())txtTipo.setText("M");
-            else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) {
+            String userOwner = hm.getUsername(itemView.getContext(), e.getUserOwnerID());
+
+            if (!e.getTema().equals("null")){
+                txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraInicioParsed());
+                txtMensaje.setText("Cita con @"+userOwner+", hablarás sobre: \n #"+e.getTema());
+                txtNombreEvento.setText(e.getNombreEvento());
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i;
+                        if (e.getEventPreference()){
+                            i = new Intent(itemView.getContext(), PopUpInfoEventoMeeting.class);
+                            i.putExtra("infoEvento",e);
+                            itemView.getContext().startActivity(i);
+                        }
+                        else if(!e.getEventPreference()){
+                            i = new Intent(itemView.getContext(), PopUpInfoEventoPresencial.class);
+                            i.putExtra("infoEvento",e);
+                            itemView.getContext().startActivity(i);
+                        };
+
+                    }
+                });
+                if (e.getEventPreference())txtTipo.setText("M");
+                else if (!e.getEventPreference())txtTipo.setText("P");
+            }else{
+                txtNombreEvento.setText(LocalTime.now().toString().substring(0,5));
                 txtTipo.setText("");
                 txtHorario.setText("");
-                txtMensaje.setText("");
+                txtMensaje.setText(e.getNombreEvento());
             }
-            else if (!e.getEventPreference())txtTipo.setText("P");
 
         }
     }

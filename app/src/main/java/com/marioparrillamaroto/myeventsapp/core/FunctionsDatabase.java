@@ -51,8 +51,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
 
+    private static final String URLAPI = "http://192.168.1.62:8080/api/";
+
+
+    private Context contextRoot;
+
     public FunctionsDatabase(@Nullable Context context) {
         super(context, "MyEventsApp.db", null, 1);
+        this.contextRoot=context;
     }
 
     //Se llama la primera vez que se accede a la base de datos, aqui crearemos tablas...
@@ -113,12 +119,12 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         return bool;
     }
 
-    public void syncronizingData(Context context, String urlAPI){
+    public void syncronizingData(){
 
         try{
-            RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+            RequestQueue requestQueue = Volley.newRequestQueue(contextRoot.getApplicationContext());
 
-            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/usuario",null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/usuario",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     Usuario user;
@@ -133,21 +139,21 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         }
 
                     } catch (JSONException e) {
-                        Toast.makeText(context.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(contextRoot.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor !",Toast.LENGTH_LONG).show();
+                    Toast.makeText(contextRoot.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor !",Toast.LENGTH_LONG).show();
                     error.printStackTrace();
                     requestQueue.stop();
                 }
             });
 
             requestQueue.add(jAR);
-            jAR = new JsonArrayRequest(Request.Method.GET,urlAPI+"/evento",null, new Response.Listener<JSONArray>() {
+            jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/evento",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     Evento event;
@@ -162,14 +168,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         }
 
                     } catch (JSONException e) {
-                        Toast.makeText(context.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(contextRoot.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(contextRoot.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                     error.printStackTrace();
                     requestQueue.stop();
                 }
@@ -177,7 +183,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
             requestQueue.add(jAR);
         }catch (Exception e){
-            Toast.makeText(context.getApplicationContext(), "Error General: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
+            Toast.makeText(contextRoot.getApplicationContext(), "Error General: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
@@ -263,10 +269,10 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         return ended;
     }
 
-    public boolean checkIsLogin(Context context){
+    public boolean checkIsLogin(){
         boolean isLogin = false;
 
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select count(*) from "+LOGIN_TABLE, null);
 
         int exists = 0;
@@ -279,10 +285,10 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         return isLogin;
     }
 
-    public boolean checkSession(Context context){
+    public boolean checkSession(){
         boolean closeSession = false;
 
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select saveSession from "+LOGIN_TABLE, null);
 
         int saveSession = 0;
@@ -294,20 +300,20 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         return closeSession;
     }
 
-    public void closeSession(Context context){
+    public void closeSession(){
         try{
-            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getWritableDatabase();
+            SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getWritableDatabase();
             db.execSQL("DELETE FROM "+LOGIN_TABLE);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void checkCloseSession(Context context){
+    public void checkCloseSession(){
         try{
-            boolean cerrarSesion = checkSession(context);
+            boolean cerrarSesion = checkSession();
             if (cerrarSesion){
-                closeSession(context);
+                closeSession();
             }
         }catch (Exception  e){
             e.printStackTrace();

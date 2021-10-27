@@ -53,14 +53,18 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 FunctionsDatabase fd = new FunctionsDatabase(getApplicationContext());
-                fd.closeSession(getApplicationContext());
+                fd.closeSession();
 
                 Intent nuevaPantalla = new Intent(SettingsActivity.this, LoginActivity.class);
                 startActivity(nuevaPantalla);
-
             }
         });
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
+

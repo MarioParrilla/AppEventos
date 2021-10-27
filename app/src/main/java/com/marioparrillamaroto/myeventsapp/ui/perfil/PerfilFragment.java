@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class PerfilFragment extends Fragment {
 
     private RecyclerView recView;
-    private PerfilModel PerfilViewModel;
     private FragmentPerfilBinding binding;
     private FloatingActionButton fabAddEvent, fabAddPresencial, fabAddOnline;
     private TextView lblUsername, lblPhonenumber;

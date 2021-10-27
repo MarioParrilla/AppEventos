@@ -30,6 +30,7 @@ public class LoginModel {
         while(mCursor.moveToNext()){
             exists = mCursor.getInt(0);
         }
+        System.err.println(exists);
 
         return exists;
     }

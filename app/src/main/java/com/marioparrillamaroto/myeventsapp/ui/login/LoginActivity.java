@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.marioparrillamaroto.myeventsapp.MainActivity;
+import com.marioparrillamaroto.myeventsapp.MyEventAppActivity;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
@@ -68,12 +69,18 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode==event.KEYCODE_BACK){
-            Intent i = new Intent(Intent.ACTION_MAIN);
+            Intent i = new Intent(LoginActivity.this, LoginActivity.class);
+            startActivity(i);
+            i = new Intent(Intent.ACTION_MAIN);
             i.addCategory(Intent.CATEGORY_HOME);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

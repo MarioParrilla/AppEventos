@@ -48,7 +48,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.9),(int)(height*.8));
+        getWindow().setLayout((int)(width*.9),(int)(height*.7));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

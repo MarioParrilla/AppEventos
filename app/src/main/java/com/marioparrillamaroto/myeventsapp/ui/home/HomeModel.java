@@ -41,4 +41,18 @@ public class HomeModel {
         return username;
     }
 
+    public String getUsername(Context context, int userid){
+        String username = "";
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        Cursor mCursor = db.rawQuery("select username from usuario where userid = ?", new String[] {String.valueOf(userid)});
+
+        while(mCursor.moveToNext()){
+            username = mCursor.getString(0);
+        }
+
+        if (username.equals("")) username="null";
+
+        return username;
+    }
+
 }

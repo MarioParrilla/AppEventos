@@ -24,11 +24,8 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
     private RecyclerView recView;
     private SearchView barraBusqueda;
 
-    private BuscarModel buscarViewModel;
     private FragmentBuscarBinding binding;
     private AdaptadorBusqueda adapterData;
-    private static final String URLAPI = "http://192.168.1.62:8080/api/";
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
 
         BuscarModel bm = new BuscarModel();
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
-        fd.syncronizingData(root.getContext(),URLAPI);
+        fd.syncronizingData();
 
         ArrayList<Usuario> datos = bm.usersToSearch(getContext());
 

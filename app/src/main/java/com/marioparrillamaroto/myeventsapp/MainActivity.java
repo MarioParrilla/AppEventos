@@ -5,15 +5,11 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.ui.chats.ChatsActivity;
-import com.marioparrillamaroto.myeventsapp.ui.home.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;

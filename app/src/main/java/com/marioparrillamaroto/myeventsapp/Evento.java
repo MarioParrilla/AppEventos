@@ -7,9 +7,9 @@ public class Evento implements Serializable {
     private String nombreEvento, tema, coordenadas, enlaceVideoMeeting;
     private LocalDateTime horaInicio, horaFinal;
     private boolean eventPreference, available;
-    private int eventID;
-    private int userOwnerID;
-    private int userSummonerID;
+    private Integer eventID;
+    private Integer userOwnerID;
+    private Integer userSummonerID;
 
     public Evento(Integer eventID, String nombreEvento, String tema, LocalDateTime horaInicio, LocalDateTime horaFinal, boolean eventPreference
             , boolean available, Integer userOwnerID, Integer userSummonerID, String coordenadas, String enlaceVideoMeeting) {
