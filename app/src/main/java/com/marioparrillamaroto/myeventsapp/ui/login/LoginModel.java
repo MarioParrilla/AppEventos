@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 public class LoginModel {
 
     private Context context;
@@ -21,17 +23,25 @@ public class LoginModel {
         this.context = context;
     }
 
-    public int userExists(String username, String password){
+    public boolean userExists(String username, String passwordNoSecured){
+        boolean exists = false;
+        int count = 0;
+        String passwordDB = "";
+        try{
+            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+            Cursor mCursor = db.rawQuery("select count(*), password from usuario where username = ?", new String[]{username});
 
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
-        Cursor mCursor = db.rawQuery("select count(*) from usuario where username = ? and password = ?", new String[]{username, password});
 
-        int exists = 0;
-        while(mCursor.moveToNext()){
-            exists = mCursor.getInt(0);
+            while(mCursor.moveToNext()){
+                count = mCursor.getInt(0);
+                passwordDB = mCursor.getString(1);
+            }
+            if (count==1 && BCrypt.verifyer().verify(passwordNoSecured.toCharArray(), passwordDB).verified) exists = true;
+
+            return exists;
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        System.err.println(exists);
-
         return exists;
     }
 

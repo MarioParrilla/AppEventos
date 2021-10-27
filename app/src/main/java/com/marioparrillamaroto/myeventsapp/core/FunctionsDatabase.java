@@ -124,7 +124,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         try{
             RequestQueue requestQueue = Volley.newRequestQueue(contextRoot.getApplicationContext());
 
-            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/usuario",null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"usuario",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     Usuario user;
@@ -141,7 +141,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         }
 
                     } catch (JSONException e) {
-                        Toast.makeText(contextRoot.getApplicationContext(), "Error Usuarios: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }
@@ -155,7 +154,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             });
 
             requestQueue.add(jAR);
-            jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/evento",null, new Response.Listener<JSONArray>() {
+            jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"evento",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     Evento event;
@@ -172,7 +171,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         }
 
                     } catch (JSONException e) {
-                        Toast.makeText(contextRoot.getApplicationContext(), "Error Eventos: ¡No se puedo sincronizar los datos con el servidor!",Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }

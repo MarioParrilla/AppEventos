@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                     guardarSesion = swGuardarSesion.isChecked();
                     boolean allRigth = false;
 
-                    if (lg.userExists(usernameText, passwordText)==1){
+                    if (lg.userExists(usernameText, passwordText)){
                         allRigth = lg.registerUserLogin(usernameText, guardarSesion);
 
                         if (allRigth){

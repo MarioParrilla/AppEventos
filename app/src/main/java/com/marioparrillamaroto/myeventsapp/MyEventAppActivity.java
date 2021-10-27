@@ -8,6 +8,8 @@ import android.os.Bundle;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 public class MyEventAppActivity extends AppCompatActivity {
 
     private boolean isLogin;
