@@ -70,11 +70,9 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
 
         public void bindProximoEvento(Evento e) {
 
-            String userOwner = hm.getUsername(itemView.getContext(), e.getUserOwnerID());
-
             if (!e.getTema().equals("null")){
                 txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraInicioParsed());
-                txtMensaje.setText("Cita con @"+userOwner+", hablarás sobre: \n #"+e.getTema());
+                txtMensaje.setText("Cita con @"+hm.getUsername(itemView.getContext(), e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
                 txtNombreEvento.setText(e.getNombreEvento());
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

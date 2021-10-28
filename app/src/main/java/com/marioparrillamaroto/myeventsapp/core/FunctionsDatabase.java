@@ -51,7 +51,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
 
-    private static final String URLAPI = "http://192.168.1.62:8080/api/";
+    private static final String URLAPI = "http://192.168.1.62:8080/api";
 
 
     private Context contextRoot;
@@ -124,7 +124,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         try{
             RequestQueue requestQueue = Volley.newRequestQueue(contextRoot.getApplicationContext());
 
-            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"usuario",null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/usuario",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     Usuario user;
@@ -154,7 +154,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             });
 
             requestQueue.add(jAR);
-            jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"evento",null, new Response.Listener<JSONArray>() {
+            jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/evento",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     Evento event;

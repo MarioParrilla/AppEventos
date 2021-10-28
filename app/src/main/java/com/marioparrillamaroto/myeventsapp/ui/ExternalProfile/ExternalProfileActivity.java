@@ -50,13 +50,10 @@ public class ExternalProfileActivity extends AppCompatActivity {
 
         getWindow().setAttributes(params);
 
+        ExternalProfileModel epa = new ExternalProfileModel(getApplicationContext());
 
-        ArrayList<Evento> datos = new ArrayList<Evento>();
+        ArrayList<Evento> datos = epa.getEventsOfUser(u.getUserID());
 
-        /*datos.add(new Evento("Prueba8", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin5","Pruebas5", true,true,0,0,0,"Preuba"));
-        datos.add(new Evento("Prueba9", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin6","Pruebas6", false,true,0,0,0,"Preuba"));
-        datos.add(new Evento("Prueba7", LocalDateTime.now(),LocalDateTime.now().plusHours(1),"admin6","Pruebas6", true,true,0,0,0,"Preuba"));
-        datos.add(new Evento("¡No tiene Eventos!", LocalDateTime.now(),LocalDateTime.now(),"null","", false,true,0,0,0,""));*/
 
         AdaptadorEventoExternalProfile adapterData = new AdaptadorEventoExternalProfile(datos);
         LinearLayoutManager lym = new LinearLayoutManager(getApplicationContext());

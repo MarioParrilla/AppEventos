@@ -44,6 +44,10 @@ public class Evento implements Serializable {
         return horaInicio.toLocalTime().toString().substring(0,5);
     }
 
+    public String getFecha(){
+        return horaFinal.toLocalDate().toString();
+    }
+
     public void setHoraInicio(String LocalDateTime) {
         this.horaInicio = horaInicio;
     }

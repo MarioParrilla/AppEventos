@@ -14,7 +14,6 @@ public class MyEventAppActivity extends AppCompatActivity {
 
     private boolean isLogin;
     private Intent nuevaPantalla;
-    private static final String URLAPI = "http://192.168.1.62:8080/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

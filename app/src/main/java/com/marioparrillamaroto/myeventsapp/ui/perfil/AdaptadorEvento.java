@@ -57,6 +57,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
         private TextView txtHorario;
         private TextView txtNombreEvento;
         private TextView txtTipo;
+        PerfilModel pm = new PerfilModel(itemView.getContext());
 
         public EventoViewHolder(View itemView) {
             super(itemView);
@@ -68,8 +69,8 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
         }
 
         public void bindEvento(Evento e) {
-            txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
-            txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
+            txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
+            txtMensaje.setText("Cita con @"+pm.getUsername(e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
             txtNombreEvento.setText(e.getNombreEvento());
 
             itemView.setOnClickListener(new View.OnClickListener() {
