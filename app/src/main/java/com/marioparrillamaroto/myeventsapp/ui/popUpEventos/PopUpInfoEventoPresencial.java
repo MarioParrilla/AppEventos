@@ -21,7 +21,7 @@ import com.marioparrillamaroto.myeventsapp.R;
 public class PopUpInfoEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 
     private Evento e;
-    private TextView txtTitulo, txtInicio, txtFinal, txtTema;
+    private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtFecha;
     private MapView mapView;
 
     @Override
@@ -36,12 +36,13 @@ public class PopUpInfoEventoPresencial extends AppCompatActivity implements OnMa
         txtFinal = (TextView)findViewById(R.id.lblHoraFinalEventoInfoPE);
         txtTema = (TextView)findViewById(R.id.lblTemaEventoInfoPE);
         mapView = (MapView)findViewById(R.id.mapEventoInfoPE);
-
+        txtFecha = (TextView) findViewById(R.id.lblFechaEventoPresencial);
 
         txtTitulo.setText(e.getNombreEvento());
-        txtInicio.setText(e.getHoraInicio());
-        txtFinal.setText(e.getHoraFinal());
+        txtInicio.setText(e.getHoraInicioParsed());
+        txtFinal.setText(e.getHoraFinalParsed());
         txtTema.setText(e.getTema());
+        txtFecha.setText(e.getFecha());
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
@@ -51,7 +52,7 @@ public class PopUpInfoEventoPresencial extends AppCompatActivity implements OnMa
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.9),(int)(height*.75));
+        getWindow().setLayout((int)(width*.8),(int)(height*.8));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

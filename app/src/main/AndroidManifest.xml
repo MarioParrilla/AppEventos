@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.marioparrillamaroto.myeventsapp">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -12,6 +14,11 @@
         android:roundIcon="@mipmap/ic_myeventsapp_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEventsApp">
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDWUhiLt-GZfJ70TqNHkY-QKmAyV9iTrKg" />
+
         <activity
             android:name=".ui.chats.ChatsActivity"
             android:exported="true"
@@ -58,10 +65,6 @@
             android:label="Info Evento"
             android:theme="@style/Theme.MyEventsApp.PopMe"
             android:screenOrientation="portrait"/>
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBD_daCjAfoDPJMyu2wc7KLfU8MmjN30qs" />
 
         <activity
             android:name=".MyEventAppActivity"

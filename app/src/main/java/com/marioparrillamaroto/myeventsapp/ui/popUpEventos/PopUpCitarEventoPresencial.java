@@ -22,7 +22,7 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnM
 
 
     private Evento e;
-    private TextView txtTitulo, txtInicio, txtFinal, txtTema;
+    private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtFecha;
     private Button btnCitar;
     private MapView mapView;
 
@@ -39,11 +39,13 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnM
         txtTema = (TextView)findViewById(R.id.lblTemaEventoCitarP);
         mapView = (MapView)findViewById(R.id.mapEventoCitarP);
         btnCitar = (Button)findViewById(R.id.btnCitarPresencial);
+        txtFecha = (TextView)findViewById(R.id.lblFechaEventoCitarP);
 
         txtTitulo.setText(e.getNombreEvento());
-        txtInicio.setText(e.getHoraInicio());
-        txtFinal.setText(e.getHoraFinal());
+        txtInicio.setText(e.getHoraInicioParsed());
+        txtFinal.setText(e.getHoraFinalParsed());
         txtTema.setText(e.getTema());
+        txtFecha.setText(e.getFecha());
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
@@ -53,7 +55,7 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnM
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.9),(int)(height*.7));
+        getWindow().setLayout((int)(width*.8),(int)(height*.8));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

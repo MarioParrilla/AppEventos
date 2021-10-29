@@ -55,6 +55,7 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
         private TextView txtHorario;
         private TextView txtNombreEvento;
         private TextView txtTipo;
+        private TextView txtFecha;
 
         public EventoViewHolder(View itemView) {
             super(itemView);
@@ -63,39 +64,39 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
             txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotificationP);
             txtNombreEvento = (TextView)itemView.findViewById(R.id.lblNombreEventoP);
             txtTipo = (TextView)itemView.findViewById(R.id.lblTipoP);
+            txtFecha = (TextView) itemView.findViewById(R.id.fechaEventosPerfil);
         }
 
         public void bindEvento(Evento e) {
-            txtHorario.setText(e.getHoraInicio()+" - "+e.getHoraFinal());
-            txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
-            txtNombreEvento.setText(e.getNombreEvento());
+            if (!e.getTema().equals("null")){
+                txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
+                txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
+                txtNombreEvento.setText(e.getNombreEvento());
+                txtFecha.setText(e.getFecha());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i;
-                    if (e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpCitarEventoMeeting.class);
-                        i.putExtra("infoEvento",e);
-                        itemView.getContext().startActivity(i);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i;
+                        if (e.getEventPreference()){
+                            i = new Intent(itemView.getContext(), PopUpCitarEventoMeeting.class);
+                            i.putExtra("infoEvento",e);
+                            itemView.getContext().startActivity(i);
+                        }
+                        else if(!e.getEventPreference()){
+                            i = new Intent(itemView.getContext(), PopUpCitarEventoPresencial.class);
+                            i.putExtra("infoEvento",e);
+                            itemView.getContext().startActivity(i);
+                        };
                     }
-                    else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) i = null;
-                    else if(!e.getEventPreference()){
-                        i = new Intent(itemView.getContext(), PopUpCitarEventoPresencial.class);
-                        i.putExtra("infoEvento",e);
-                        itemView.getContext().startActivity(i);
-                    };
-                }
-            });
-
-            if (e.getEventPreference())txtTipo.setText("M");
-            else if (!e.getEventPreference() && e.getUserOwnerID().equals("null")) {
+                });
+                if (e.getEventPreference())txtTipo.setText("M");
+                else if (!e.getEventPreference())txtTipo.setText("P");
+            } else{
                 txtTipo.setText("");
                 txtHorario.setText("");
                 txtMensaje.setText("");
             }
-            else if (!e.getEventPreference())txtTipo.setText("P");
-
         }
     }
 }

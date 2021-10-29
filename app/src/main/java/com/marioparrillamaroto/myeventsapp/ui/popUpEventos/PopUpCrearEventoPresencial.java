@@ -2,10 +2,18 @@ package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.icu.util.Calendar;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.DisplayMetrics;
@@ -16,36 +24,49 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.gms.maps.MapView;
 import com.marioparrillamaroto.myeventsapp.R;
 
+import java.util.ArrayList;
+
 public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 
-    private MapView mapView;
+    private GoogleMap mapView;
     private FloatingActionButton fab;
-    private EditText horaInicio, horaFinal,tituloEvento, temaEvento, fechaInicio;
+    private EditText horaInicio, horaFinal, tituloEvento, temaEvento, fechaInicio;
+    private FusedLocationProviderClient clientLocation;
+    private ArrayList<Marker> listaMarcadores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_crear_evento_presencial);
 
-        fab = (FloatingActionButton)findViewById(R.id.fabEventoPresencial);
-        tituloEvento = (EditText)findViewById(R.id.txtTituloEventoPresencial);
-        temaEvento = (EditText)findViewById(R.id.txtTemaMeeting);
-        fechaInicio = (EditText)findViewById(R.id.dateInicioCrearEventoPresencial);
-        horaInicio = (EditText)findViewById(R.id.dateHoraInicioPresencial);
-        horaFinal = (EditText)findViewById(R.id.dateHoraFinalPresencial);
-        mapView = findViewById(R.id.mapViewPresencial);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
-
+        fab = (FloatingActionButton) findViewById(R.id.fabEventoPresencial);
+        tituloEvento = (EditText) findViewById(R.id.txtTituloEventoPresencial);
+        temaEvento = (EditText) findViewById(R.id.txtTemaMeeting);
+        fechaInicio = (EditText) findViewById(R.id.dateInicioCrearEventoPresencial);
+        horaInicio = (EditText) findViewById(R.id.dateHoraInicioPresencial);
+        horaFinal = (EditText) findViewById(R.id.dateHoraFinalPresencial);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapViewPresencial);
+        mapFragment.getMapAsync(this);
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -53,7 +74,7 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height*.7));
+        getWindow().setLayout((int)(width*.8),(int)(height*.8));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -65,7 +86,8 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                for (Marker x :listaMarcadores) System.out.println(tituloEvento.getText()+" - "+x.getPosition().toString());
+                //finish();
             }
         });
 
@@ -126,48 +148,75 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        Log.d("MapDebug", "onMapReady: map is showing on the screen");
+        clientLocation = LocationServices.getFusedLocationProviderClient(this);
+
+        /*if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+            clientLocation.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                                googleMap.addMarker(new MarkerOptions().position(latLng).title("Tu ubicación"));
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+                            }else{
+                                Toast.makeText(getApplicationContext(), "No se pudo obtener su ubicación",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+
+        }else{
+            ActivityCompat.requestPermissions(PopUpCrearEventoPresencial.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
+        }*/
+
+
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                for (Marker x :listaMarcadores) {
+                    x.remove();
+                }
+                listaMarcadores.add(googleMap.addMarker(new MarkerOptions().position(latLng).title("Ubicación evento")));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+            }
+        });
+
+
+
+        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDrag(@NonNull Marker marker) {
+            }
+
+            @Override
+            public void onMarkerDragEnd(@NonNull Marker marker) {
+                googleMap.addMarker(new MarkerOptions().position(marker.getPosition()).title("Ubicacón evento"));
+            }
+
+            @Override
+            public void onMarkerDragStart(@NonNull Marker marker) {
+            }
+        });
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                marker.remove();
+                return false;
+            }
+        });
+
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

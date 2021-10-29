@@ -16,7 +16,7 @@ import com.marioparrillamaroto.myeventsapp.R;
 public class PopUpInfoEventoMeeting extends AppCompatActivity {
 
     private Evento e;
-    private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtEnlace;
+    private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtEnlace, txtFecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +30,14 @@ public class PopUpInfoEventoMeeting extends AppCompatActivity {
         txtFinal = (TextView)findViewById(R.id.lblHoraFinalEventoInfoPEM);
         txtTema = (TextView)findViewById(R.id.lblTemaEventoInfoPEM);
         txtEnlace = (TextView)findViewById(R.id.lblEnlaceEventoInfoPEM);
+        txtFecha = (TextView)findViewById(R.id.lblFechaEventoMeeting);
 
         txtTitulo.setText(e.getNombreEvento());
-        txtInicio.setText(e.getHoraInicio());
-        txtFinal.setText(e.getHoraFinal());
+        txtInicio.setText(e.getHoraInicioParsed());
+        txtFinal.setText(e.getHoraFinalParsed());
         txtTema.setText(e.getTema());
         txtEnlace.setText(e.getEnlaceVideoMeeting());
+        txtFecha.setText(e.getFecha());
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -43,7 +45,7 @@ public class PopUpInfoEventoMeeting extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.9),(int)(height*.7));
+        getWindow().setLayout((int)(width*.8),(int)(height*.7));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

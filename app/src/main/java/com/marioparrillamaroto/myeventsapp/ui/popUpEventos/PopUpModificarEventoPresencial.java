@@ -62,7 +62,7 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.9),(int)(height*.7));
+        getWindow().setLayout((int)(width*.8),(int)(height*.8));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

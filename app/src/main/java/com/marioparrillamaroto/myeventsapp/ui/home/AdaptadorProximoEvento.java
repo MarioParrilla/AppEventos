@@ -57,6 +57,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
         private TextView txtHorario;
         private TextView txtNombreEvento;
         private TextView txtTipo;
+        private TextView txtFecha;
         private HomeModel hm = new HomeModel();
 
         public ProximoEventoViewHolder(View itemView) {
@@ -66,6 +67,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
             txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotification);
             txtNombreEvento = (TextView)itemView.findViewById(R.id.lblNombreEvento);
             txtTipo = (TextView)itemView.findViewById(R.id.lblTipo);
+            txtFecha = (TextView) itemView.findViewById(R.id.fechaProximoEventos);
         }
 
         public void bindProximoEvento(Evento e) {
@@ -74,6 +76,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
                 txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraInicioParsed());
                 txtMensaje.setText("Cita con @"+hm.getUsername(itemView.getContext(), e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
                 txtNombreEvento.setText(e.getNombreEvento());
+                txtFecha.setText(e.getFecha());
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
