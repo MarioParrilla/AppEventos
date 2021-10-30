@@ -2,10 +2,14 @@ package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.pm.PackageManager;
 import android.icu.util.Calendar;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.DisplayMetrics;
@@ -16,20 +20,36 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
+import java.util.ArrayList;
+
 public class PopUpModificarEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 
     private Evento e;
-    private MapView mapView;
     private FloatingActionButton fabModificar, fabBorrar;
     private EditText horaInicio, horaFinal,tituloEvento, temaEvento, fechaInicio;
+    private ArrayList<Marker> listaMarcadores = new ArrayList<>();
+    private Double latitud, longitud;
+    private String coordenadasEvento;
+    private LatLng coordenadas;
+    private boolean coordenadasCorrectas = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +58,20 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
 
         e = (Evento) getIntent().getExtras().getSerializable("infoEventoP");
 
+        coordenadasEvento = e.getCoordenadas();
+
+        try {
+            latitud = Double.parseDouble(coordenadasEvento.substring(0,(coordenadasEvento.indexOf("/"))));
+            longitud = Double.parseDouble(coordenadasEvento.substring((coordenadasEvento.indexOf("/")+1), coordenadasEvento.length()));
+
+            System.err.println("Latitud: "+latitud+" Longitud: "+longitud);
+
+            coordenadas = new LatLng(latitud, longitud);
+            coordenadasCorrectas = true;
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error al recibir las coordenadas", Toast.LENGTH_LONG).show();
+        }
+
         fabModificar = (FloatingActionButton)findViewById(R.id.fabEventoPresencialPM);
         fabBorrar = (FloatingActionButton)findViewById(R.id.fabEventoPresencialPME);
         tituloEvento = (EditText)findViewById(R.id.txtTituloEventoPresencialPM);
@@ -45,9 +79,9 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
         fechaInicio = (EditText)findViewById(R.id.dateFechaInicioPresencialPM);
         horaInicio = (EditText)findViewById(R.id.dateHoraInicioPresencialPM);
         horaFinal = (EditText)findViewById(R.id.dateHoraFinalPresencialPM);
-        mapView = findViewById(R.id.mapViewPresencialPM);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapViewPresencialPM);
+        mapFragment.getMapAsync(this);
 
         tituloEvento.setText(e.getNombreEvento());
         temaEvento.setText(e.getTema());
@@ -74,6 +108,7 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
         fabModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (Marker x :listaMarcadores) System.out.println(tituloEvento.getText()+" - Latitud: "+x.getPosition().latitude+" Longitud: "+x.getPosition().longitude);
                 finish();
             }
         });
@@ -81,6 +116,7 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
         fabBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (Marker x :listaMarcadores) System.out.println(tituloEvento.getText()+" - Latitud: "+x.getPosition().latitude+" Longitud: "+x.getPosition().longitude);
                 finish();
             }
         });
@@ -142,48 +178,46 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        Log.d("MapDebug", "onMapReady: map is showing on the screen");
-    }
+        if (coordenadasCorrectas){
+            listaMarcadores.add(googleMap.addMarker(new MarkerOptions().position(coordenadas).title("Ubicación evento")));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas,10));
+        }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                for (Marker x :listaMarcadores) {
+                    x.remove();
+                }
+                listaMarcadores.add(googleMap.addMarker(new MarkerOptions().position(latLng).title("Ubicación evento")));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+            }
+        });
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
+        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDrag(@NonNull Marker marker) {
+            }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+            @Override
+            public void onMarkerDragEnd(@NonNull Marker marker) {
+                googleMap.addMarker(new MarkerOptions().position(marker.getPosition()).title("Ubicacón evento"));
+            }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
+            @Override
+            public void onMarkerDragStart(@NonNull Marker marker) {
+            }
+        });
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                marker.remove();
+                return false;
+            }
+        });
+
     }
 }

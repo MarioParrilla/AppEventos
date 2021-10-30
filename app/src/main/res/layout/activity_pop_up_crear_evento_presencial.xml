@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardBackgroundColor="#E4D1F4"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="566dp"
-            android:background="#E4D1F4"
+            android:background="@color/white"
             tools:context=".ui.popUpEventos.PopUpCrearEventoPresencial">
 
             <EditText
@@ -95,12 +95,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapViewPresencial"
+                app:layout_constraintTop_toBottomOf="@+id/mapEventoInfoPE"
                 app:srcCompat="@drawable/ic_add_24"
                 tools:ignore="OnClick,SpeakableTextPresentCheck" />
 
             <fragment
-                android:id="@+id/mapViewPresencial"
+                android:id="@+id/mapEventoInfoPE"
 
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="214dp"

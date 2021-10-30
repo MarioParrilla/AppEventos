@@ -3,21 +3,19 @@ package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -31,28 +29,27 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import com.google.android.gms.maps.MapView;
 import com.marioparrillamaroto.myeventsapp.R;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mapView;
     private FloatingActionButton fab;
     private EditText horaInicio, horaFinal, tituloEvento, temaEvento, fechaInicio;
     private FusedLocationProviderClient clientLocation;
     private ArrayList<Marker> listaMarcadores = new ArrayList<>();
+    private boolean titulo = false, tema = false, fecha = false, hInicio = false, hFinal = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +57,13 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
         setContentView(R.layout.activity_pop_up_crear_evento_presencial);
 
         fab = (FloatingActionButton) findViewById(R.id.fabEventoPresencial);
+        fab.setEnabled(false);
         tituloEvento = (EditText) findViewById(R.id.txtTituloEventoPresencial);
-        temaEvento = (EditText) findViewById(R.id.txtTemaMeeting);
+        temaEvento = (EditText) findViewById(R.id.txtTemaPresencial);
         fechaInicio = (EditText) findViewById(R.id.dateInicioCrearEventoPresencial);
         horaInicio = (EditText) findViewById(R.id.dateHoraInicioPresencial);
         horaFinal = (EditText) findViewById(R.id.dateHoraFinalPresencial);
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapViewPresencial);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapEventoInfoPE);
         mapFragment.getMapAsync(this);
 
         DisplayMetrics dm=new DisplayMetrics();
@@ -83,11 +81,111 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
 
         getWindow().setAttributes(params);
 
+        tituloEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=15){
+                        tituloEvento.setTextColor(Color.BLACK);
+                        titulo=true;
+                        comprobarInputs();
+                    }
+                    else if(tituloEvento.getText().length()<4){
+                        tituloEvento.setTextColor(Color.RED);
+                        titulo=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un nombre mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        tituloEvento.setTextColor(Color.RED);
+                        titulo=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 15 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        temaEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=15){
+                        temaEvento.setTextColor(Color.BLACK);
+                        tema=true;
+                        comprobarInputs();
+                    }
+                    else if(temaEvento.getText().length()<4){
+                        temaEvento.setTextColor(Color.RED);
+                        tema=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un tema mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        temaEvento.setTextColor(Color.RED);
+                        tema=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un tema menor a 15 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        fechaInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()>0){
+                    if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+                        fechaInicio.setTextColor(Color.BLACK);
+                        fecha=true;
+                        comprobarInputs();
+                    }else{
+                        fechaInicio.setTextColor(Color.RED);
+                        tema=false;
+                        Toast.makeText(getApplicationContext(), "Introduce una fecha que ya haya pasado o que sea de hoy", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        horaFinal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()>0){
+                    if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
+                        horaFinal.setTextColor(Color.BLACK);
+                        hInicio=true;
+                        hFinal=true;
+                        comprobarInputs();
+                    }else{
+                        horaFinal.setTextColor(Color.RED);
+                        hInicio=false;
+                        hFinal=false;
+                        Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Marker x :listaMarcadores) System.out.println(tituloEvento.getText()+" - "+x.getPosition().toString());
-                //finish();
+                for (Marker x :listaMarcadores) System.out.println("@@@@@@@@ --> "+tituloEvento.getText()+" "+temaEvento.getText()+" "+fechaInicio.getText()+" "+horaInicio.getText()+" "+horaFinal.getText()+" "+tituloEvento.getText()+" - Latitud: "+x.getPosition().latitude+" Longitud: "+x.getPosition().longitude);
+                finish();
             }
         });
 
@@ -150,14 +248,14 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
     public void onMapReady(@NonNull GoogleMap googleMap) {
         clientLocation = LocationServices.getFusedLocationProviderClient(this);
 
-        /*if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
             clientLocation.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
                             if (location != null) {
                                 LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                                googleMap.addMarker(new MarkerOptions().position(latLng).title("Tu ubicación"));
+                                listaMarcadores.add(googleMap.addMarker(new MarkerOptions().position(latLng).title("Tu ubicación")));
                                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
                             }else{
                                 Toast.makeText(getApplicationContext(), "No se pudo obtener su ubicación",Toast.LENGTH_LONG).show();
@@ -173,7 +271,7 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
 
         }else{
             ActivityCompat.requestPermissions(PopUpCrearEventoPresencial.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
-        }*/
+        }
 
 
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -217,6 +315,13 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        if (grantResults[0] != PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(getApplicationContext(), "¡No se acepto los permisos necesarios!",Toast.LENGTH_LONG).show();
+        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void comprobarInputs(){
+        if (titulo&&tema&&fecha&&hInicio&&hFinal) fab.setEnabled(true);
     }
 }

@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,16 +20,21 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.gms.maps.MapView;
 import com.marioparrillamaroto.myeventsapp.R;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class PopUpCrearEventoMeeting extends AppCompatActivity{
 
     private FloatingActionButton fab;
-    private EditText horaInicio, horaFinal,tituloEvento, temaEvento, fechaInicio;
+    private EditText horaInicio, horaFinal,tituloEvento, temaEvento, fechaInicio, enlaceVideomeeting;
+    private boolean titulo = false, tema = false, fecha = false, hInicio = false, hFinal = false, enlace = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +47,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         fechaInicio = (EditText)findViewById(R.id.dateFechaInicioCrearEventoMeeting);
         horaInicio = (EditText)findViewById(R.id.dateHoraInicioMeeting);
         horaFinal = (EditText)findViewById(R.id.dateHoraFinalMeeting);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
+        enlaceVideomeeting = (EditText) findViewById(R.id.txtEnlaceMeeting);
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -63,6 +63,135 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         params.y=-20;
 
         getWindow().setAttributes(params);
+
+        tituloEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=15){
+                        tituloEvento.setTextColor(Color.BLACK);
+                        titulo=true;
+                    }
+                    else if(tituloEvento.getText().length()<4){
+                        tituloEvento.setTextColor(Color.RED);
+                        titulo=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un nombre mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        tituloEvento.setTextColor(Color.RED);
+                        titulo=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 15 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        temaEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=15){
+                        temaEvento.setTextColor(Color.BLACK);
+                        tema=true;
+                    }
+                    else if(temaEvento.getText().length()<4){
+                        temaEvento.setTextColor(Color.RED);
+                        tema=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un tema mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        temaEvento.setTextColor(Color.RED);
+                        tema=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un tema menor a 15 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        enlaceVideomeeting.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if (enlaceVideomeeting.getText().length()>9 && enlaceVideomeeting.getText().length()<=100){
+                        enlaceVideomeeting.setTextColor(Color.BLACK);
+                        enlace=true;
+                    }
+                    else if(enlaceVideomeeting.getText().length()<9){
+                        enlaceVideomeeting.setTextColor(Color.RED);
+                        enlace=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        enlaceVideomeeting.setTextColor(Color.RED);
+                        enlace=false;
+                        Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada menor a 15 digitos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        fechaInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()>0){
+                    if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+                        fechaInicio.setTextColor(Color.BLACK);
+                        fecha=true;
+                    }else{
+                        fechaInicio.setTextColor(Color.RED);
+                        tema=false;
+                        Toast.makeText(getApplicationContext(), "Introduce una fecha que ya haya pasado o que sea de hoy", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        horaFinal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()>0){
+                    if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
+                        horaFinal.setTextColor(Color.BLACK);
+                        hInicio=true;
+                        hFinal=true;
+                    }else{
+                        horaFinal.setTextColor(Color.RED);
+                        hInicio=false;
+                        hFinal=false;
+                        Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comprobarTodo();
+                if(comprobarInputs()){
+                    System.out.println("@@@@@@@@ --> "+tituloEvento.getText()+" "+temaEvento.getText()+" "+fechaInicio.getText()+" "+horaInicio.getText()+" "+horaFinal.getText());
+                    finish();
+                }
+            }
+        });
 
         fechaInicio.setInputType(InputType.TYPE_NULL);
         fechaInicio.setOnClickListener(new View.OnClickListener() {
@@ -110,12 +239,89 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
                         String horas = String.valueOf(hourOfDay), minutos = String.valueOf(minute);
                         if (hourOfDay<10) horas = "0"+hourOfDay;
                         if (minute<10) minutos = "0"+minute;
-
                         horaFinal.setText(horas+":"+minutos);
                     }
                 },Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);
                 x.show();
             }
         });
+
+    }
+
+    private void comprobarTodo(){
+        if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=15){
+            tituloEvento.setTextColor(Color.BLACK);
+            titulo=true;
+        }
+        else if(tituloEvento.getText().length()<4){
+            tituloEvento.setTextColor(Color.RED);
+            titulo=false;
+            Toast.makeText(getApplicationContext(), "Introduce un nombre mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            tituloEvento.setTextColor(Color.RED);
+            titulo=false;
+            Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 15 digitos", Toast.LENGTH_SHORT).show();
+        }
+
+        if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=15){
+            temaEvento.setTextColor(Color.BLACK);
+            tema=true;
+        }
+        else if(temaEvento.getText().length()<4){
+            temaEvento.setTextColor(Color.RED);
+            tema=false;
+            Toast.makeText(getApplicationContext(), "Introduce un tema mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            temaEvento.setTextColor(Color.RED);
+            tema=false;
+            Toast.makeText(getApplicationContext(), "Introduce un tema menor a 15 digitos", Toast.LENGTH_SHORT).show();
+        }
+
+        if (enlaceVideomeeting.getText().length()>9 && enlaceVideomeeting.getText().length()<=100){
+            enlaceVideomeeting.setTextColor(Color.BLACK);
+            enlace=true;
+        }
+        else if(enlaceVideomeeting.getText().length()<9){
+            enlaceVideomeeting.setTextColor(Color.RED);
+            enlace=false;
+            Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            enlaceVideomeeting.setTextColor(Color.RED);
+            enlace=false;
+            Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada menor a 15 digitos", Toast.LENGTH_SHORT).show();
+        }
+
+        if (fechaInicio.length()>0){
+            if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+                fechaInicio.setTextColor(Color.BLACK);
+                fecha=true;
+            }else{
+                fechaInicio.setTextColor(Color.RED);
+                tema=false;
+                Toast.makeText(getApplicationContext(), "Introduce una fecha que ya haya pasado o que sea de hoy", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (horaFinal.length()>0){
+            if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
+                horaFinal.setTextColor(Color.BLACK);
+                hInicio=true;
+                hFinal=true;
+            }else{
+                horaFinal.setTextColor(Color.RED);
+                hInicio=false;
+                hFinal=false;
+                Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private boolean comprobarInputs(){
+        boolean allRigth = false;
+        if (titulo&&tema&&fecha&&hInicio&&hFinal&&enlace) allRigth = true;
+        return allRigth;
     }
 }

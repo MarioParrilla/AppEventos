@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.marioparrillamaroto.myeventsapp">
+    package="com.marioparrillamaroto.myeventsapp" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_myeventsapp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_myeventsapp_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyEventsApp">
+        android:theme="@style/Theme.MyEventsApp"
+        android:usesCleartextTraffic="true" >
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -23,53 +23,59 @@
             android:name=".ui.chats.ChatsActivity"
             android:exported="true"
             android:label="Chats"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.popUpEventos.PopUpMostrarUbicacion"
+            android:exported="true"
+            android:label="Ubicacion"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe"/>
         <activity
             android:name=".ui.popUpEventos.PopUpModificarEventoMeeting"
             android:exported="true"
             android:label="Modificar Evento Meeting"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpModificarEventoPresencial"
             android:exported="true"
             android:label="Modificar Evento Presencial"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpCitarEventoMeeting"
             android:exported="true"
             android:label="Citar Evento"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpCitarEventoPresencial"
             android:exported="true"
             android:label="Citar Evento"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.ExternalProfile.ExternalProfileActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpInfoEventoMeeting"
             android:exported="true"
             android:label="Info Evento"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpInfoEventoPresencial"
             android:exported="true"
             android:label="Info Evento"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".MyEventAppActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,29 +86,29 @@
             android:name=".ui.popUpEventos.PopUpCrearEventoPresencial"
             android:exported="true"
             android:label="Añadir Evento Presencial"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".ui.popUpEventos.PopUpCrearEventoMeeting"
             android:exported="true"
             android:label="Añadir Evento Meeting"
-            android:theme="@style/Theme.MyEventsApp.PopMe"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyEventsApp.PopMe" />
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
             android:label="Ajustes"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="Login"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

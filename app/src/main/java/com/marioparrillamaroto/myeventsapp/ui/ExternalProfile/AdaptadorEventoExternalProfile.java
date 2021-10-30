@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.ui.perfil.PerfilModel;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCitarEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCitarEventoPresencial;
 
@@ -56,6 +57,7 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
         private TextView txtNombreEvento;
         private TextView txtTipo;
         private TextView txtFecha;
+        ExternalProfileModel epm = new ExternalProfileModel(itemView.getContext());
 
         public EventoViewHolder(View itemView) {
             super(itemView);
@@ -68,9 +70,10 @@ public class AdaptadorEventoExternalProfile extends RecyclerView.Adapter<Adaptad
         }
 
         public void bindEvento(Evento e) {
+
             if (!e.getTema().equals("null")){
                 txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
-                txtMensaje.setText("Cita con @"+e.getUserOwnerID()+", hablarás sobre: \n #"+e.getTema());
+                txtMensaje.setText("Cita con @"+epm.getUsername(e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
                 txtNombreEvento.setText(e.getNombreEvento());
                 txtFecha.setText(e.getFecha());
 

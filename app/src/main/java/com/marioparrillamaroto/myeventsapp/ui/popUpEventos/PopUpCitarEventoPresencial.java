@@ -3,6 +3,7 @@ package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,13 +19,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
-public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnMapReadyCallback {
+public class PopUpCitarEventoPresencial extends AppCompatActivity {
 
 
     private Evento e;
     private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtFecha;
-    private Button btnCitar;
-    private MapView mapView;
+    private Button btnCitar, btnMostrarMapa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnM
         txtInicio = (TextView)findViewById(R.id.lblHoraInicioEventoCitarP);
         txtFinal = (TextView)findViewById(R.id.lblHoraFinalEventoCitarP);
         txtTema = (TextView)findViewById(R.id.lblTemaEventoCitarP);
-        mapView = (MapView)findViewById(R.id.mapEventoCitarP);
         btnCitar = (Button)findViewById(R.id.btnCitarPresencial);
+        btnMostrarMapa = (Button)findViewById(R.id.btnVerMapaCitar);
         txtFecha = (TextView)findViewById(R.id.lblFechaEventoCitarP);
 
         txtTitulo.setText(e.getNombreEvento());
@@ -46,8 +46,6 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnM
         txtFinal.setText(e.getHoraFinalParsed());
         txtTema.setText(e.getTema());
         txtFecha.setText(e.getFecha());
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -64,56 +62,25 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity implements OnM
 
         getWindow().setAttributes(params);
 
+        btnMostrarMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PopUpMostrarUbicacion.class);
+                i.putExtra("coordenadas",e.getCoordenadas());
+                startActivity(i);
+            }
+        });
+        btnCitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     public void cerrar(View view){
         finish();
     }
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        Log.d("MapDebug", "onMapReady: map is showing on the screen");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
 }

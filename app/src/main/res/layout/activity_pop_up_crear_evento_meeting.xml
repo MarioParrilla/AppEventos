@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardBackgroundColor="#E4D1F4"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="520dp"
-                    android:background="#E4D1F4"
+                    android:background="@color/white"
                     tools:context=".ui.popUpEventos.PopUpCrearEventoPresencial">
 
                     <EditText
@@ -88,8 +88,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:ems="10"
-                        android:hint="Hora Final"
                         android:focusable="false"
+                        android:hint="Hora Final"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.149"
                         app:layout_constraintStart_toStartOf="parent"

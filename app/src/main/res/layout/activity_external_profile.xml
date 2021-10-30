@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E4D1F4"
+    android:background="@color/white"
     tools:context=".ui.perfil.PerfilFragment">
 
     <androidx.cardview.widget.CardView

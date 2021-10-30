@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardBackgroundColor="#E4D1F4"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,19 +29,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="502dp"
-                    android:background="#E4D1F4"
+                    android:background="@color/white"
                     tools:context=".ui.popUpEventos.PopUpInfoEventoPresencial">
-
-                    <com.google.android.gms.maps.MapView
-                        android:id="@+id/mapEventoInfoPE"
-                        android:layout_width="412dp"
-                        android:layout_height="135dp"
-                        android:layout_marginTop="4dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.227"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView29"
-                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <TextView
                         android:id="@+id/textView20"
@@ -175,6 +164,17 @@
                         app:layout_constraintHorizontal_bias="0.12"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <Button
+                        android:id="@+id/btnVerMapaInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Ver Mapa"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
