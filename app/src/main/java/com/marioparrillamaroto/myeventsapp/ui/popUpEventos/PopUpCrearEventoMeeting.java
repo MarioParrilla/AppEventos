@@ -68,20 +68,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
-                    if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=15){
-                        tituloEvento.setTextColor(Color.BLACK);
-                        titulo=true;
-                    }
-                    else if(tituloEvento.getText().length()<4){
-                        tituloEvento.setTextColor(Color.RED);
-                        titulo=false;
-                        Toast.makeText(getApplicationContext(), "Introduce un nombre mayor a 4 digitos", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        tituloEvento.setTextColor(Color.RED);
-                        titulo=false;
-                        Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 15 digitos", Toast.LENGTH_SHORT).show();
-                    }
+                    checkTitulo();
                 }
             }
         });
@@ -90,20 +77,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
-                    if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=15){
-                        temaEvento.setTextColor(Color.BLACK);
-                        tema=true;
-                    }
-                    else if(temaEvento.getText().length()<4){
-                        temaEvento.setTextColor(Color.RED);
-                        tema=false;
-                        Toast.makeText(getApplicationContext(), "Introduce un tema mayor a 4 digitos", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        temaEvento.setTextColor(Color.RED);
-                        tema=false;
-                        Toast.makeText(getApplicationContext(), "Introduce un tema menor a 15 digitos", Toast.LENGTH_SHORT).show();
-                    }
+                    checkTema();
                 }
             }
         });
@@ -112,20 +86,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
-                    if (enlaceVideomeeting.getText().length()>9 && enlaceVideomeeting.getText().length()<=100){
-                        enlaceVideomeeting.setTextColor(Color.BLACK);
-                        enlace=true;
-                    }
-                    else if(enlaceVideomeeting.getText().length()<9){
-                        enlaceVideomeeting.setTextColor(Color.RED);
-                        enlace=false;
-                        Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada mayor a 4 digitos", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        enlaceVideomeeting.setTextColor(Color.RED);
-                        enlace=false;
-                        Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada menor a 15 digitos", Toast.LENGTH_SHORT).show();
-                    }
+                    checkEnlace();
                 }
             }
         });
@@ -138,14 +99,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length()>0){
-                    if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
-                        fechaInicio.setTextColor(Color.BLACK);
-                        fecha=true;
-                    }else{
-                        fechaInicio.setTextColor(Color.RED);
-                        tema=false;
-                        Toast.makeText(getApplicationContext(), "Introduce una fecha que ya haya pasado o que sea de hoy", Toast.LENGTH_SHORT).show();
-                    }
+                    checkFecha();
                 }
             }
 
@@ -163,16 +117,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length()>0){
-                    if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
-                        horaFinal.setTextColor(Color.BLACK);
-                        hInicio=true;
-                        hFinal=true;
-                    }else{
-                        horaFinal.setTextColor(Color.RED);
-                        hInicio=false;
-                        hFinal=false;
-                        Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
-                    }
+                    checkHoraFin();
                 }
             }
 
@@ -249,6 +194,34 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void comprobarTodo(){
+        checkTitulo();
+        checkTema();
+        checkEnlace();
+
+        if (fechaInicio.length()>0){
+            checkFecha();
+        }else{
+            Toast.makeText(getApplicationContext(), "Introduce una fecha", Toast.LENGTH_SHORT).show();
+        }
+
+        if (horaInicio.length()==0){
+            Toast.makeText(getApplicationContext(), "Introduce una hora de inicio", Toast.LENGTH_SHORT).show();
+        }
+
+        if (horaFinal.length()>0){
+            checkHoraFin();
+        }else{
+            Toast.makeText(getApplicationContext(), "Introduce una hora de fin", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean comprobarInputs(){
+        boolean allRigth = false;
+        if (titulo&&tema&&fecha&&hInicio&&hFinal&&enlace) allRigth = true;
+        return allRigth;
+    }
+
+    private void checkTitulo(){
         if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=15){
             tituloEvento.setTextColor(Color.BLACK);
             titulo=true;
@@ -263,7 +236,9 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             titulo=false;
             Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 15 digitos", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    private void checkTema(){
         if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=15){
             temaEvento.setTextColor(Color.BLACK);
             tema=true;
@@ -278,7 +253,9 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             tema=false;
             Toast.makeText(getApplicationContext(), "Introduce un tema menor a 15 digitos", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    private void checkEnlace(){
         if (enlaceVideomeeting.getText().length()>9 && enlaceVideomeeting.getText().length()<=100){
             enlaceVideomeeting.setTextColor(Color.BLACK);
             enlace=true;
@@ -293,35 +270,29 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             enlace=false;
             Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada menor a 15 digitos", Toast.LENGTH_SHORT).show();
         }
+    }
 
-        if (fechaInicio.length()>0){
-            if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
-                fechaInicio.setTextColor(Color.BLACK);
-                fecha=true;
-            }else{
-                fechaInicio.setTextColor(Color.RED);
-                tema=false;
-                Toast.makeText(getApplicationContext(), "Introduce una fecha que ya haya pasado o que sea de hoy", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        if (horaFinal.length()>0){
-            if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
-                horaFinal.setTextColor(Color.BLACK);
-                hInicio=true;
-                hFinal=true;
-            }else{
-                horaFinal.setTextColor(Color.RED);
-                hInicio=false;
-                hFinal=false;
-                Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
-            }
+    private void checkFecha(){
+        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+            fechaInicio.setTextColor(Color.BLACK);
+            fecha=true;
+        }else{
+            fechaInicio.setTextColor(Color.RED);
+            tema=false;
+            Toast.makeText(getApplicationContext(), "Introduce una fecha que ya haya pasado o que sea de hoy", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private boolean comprobarInputs(){
-        boolean allRigth = false;
-        if (titulo&&tema&&fecha&&hInicio&&hFinal&&enlace) allRigth = true;
-        return allRigth;
+    private void checkHoraFin(){
+        if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
+            horaFinal.setTextColor(Color.BLACK);
+            hInicio=true;
+            hFinal=true;
+        }else{
+            horaFinal.setTextColor(Color.RED);
+            hInicio=false;
+            hFinal=false;
+            Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+        }
     }
 }
