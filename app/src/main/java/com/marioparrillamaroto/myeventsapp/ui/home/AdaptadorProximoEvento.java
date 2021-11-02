@@ -72,7 +72,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
 
         public void bindProximoEvento(Evento e) {
             if (!(e.getCoordenadas().equals("") && e.getEnlaceVideoMeeting().equals(""))){
-                txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraInicioParsed());
+                txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
                 txtMensaje.setText("Cita con @"+hm.getUsername(itemView.getContext(), e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
                 txtNombreEvento.setText(e.getNombreEvento());
                 txtFecha.setText(e.getFecha());

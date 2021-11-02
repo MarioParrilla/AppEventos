@@ -17,6 +17,7 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 
 import com.marioparrillamaroto.myeventsapp.Usuario;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentPerfilBinding;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoPresencial;
@@ -49,6 +50,9 @@ public class PerfilFragment extends Fragment {
         fabAddOnline = root.findViewById(R.id.btn_add_event_videomeeting);
 
         pm = new PerfilModel(root.getContext());
+
+        FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
+        fd.syncronizingData();
 
         usuario = pm.getLoginUser();
 
