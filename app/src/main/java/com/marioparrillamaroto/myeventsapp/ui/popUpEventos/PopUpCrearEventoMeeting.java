@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.gms.maps.MapView;
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
@@ -138,8 +140,10 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
                 comprobarTodo();
                 if(comprobarInputs()){
                     fd.createEvent(new Evento(null, tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
-                            false, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
+                            true, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
                     finish();
+                    Intent i = new Intent(PopUpCrearEventoMeeting.this, MainActivity.class);
+                    startActivity(i);
                 }
             }
         });
@@ -290,7 +294,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void checkHoraFin(){
-        if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
+        if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
             horaFinal.setTextColor(Color.BLACK);
             hInicio=true;
             hFinal=true;

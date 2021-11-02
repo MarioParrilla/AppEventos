@@ -1,5 +1,6 @@
 package com.marioparrillamaroto.myeventsapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -7,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.marioparrillamaroto.myeventsapp.R.layout;
 import com.marioparrillamaroto.myeventsapp.ui.chats.ChatsActivity;
+import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -20,14 +23,14 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration2;
     String username;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navView =  findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.icon_home, R.id.icon_buscar, R.id.icon_perfil)
                 .build();
@@ -39,16 +42,18 @@ public class MainActivity extends AppCompatActivity {
         NavController navController2 = Navigation.findNavController(this, R.id.navContainer);
         appBarConfiguration2 = new AppBarConfiguration.Builder(navController2.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController2, appBarConfiguration2);
-
 }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode==event.KEYCODE_BACK){
-            Intent i = new Intent(Intent.ACTION_MAIN);
+            Intent i = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(i);
+            i = new Intent(Intent.ACTION_MAIN);
             i.addCategory(Intent.CATEGORY_HOME);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             startActivity(i);
         }
 

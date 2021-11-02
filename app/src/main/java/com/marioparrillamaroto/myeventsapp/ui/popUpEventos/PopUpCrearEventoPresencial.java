@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.util.Calendar;
@@ -38,6 +39,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
@@ -147,8 +149,10 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
                 if(comprobarInputs()){
                     LatLng coord = listaMarcadores.get(0).getPosition();
                     fd.createEvent(new Evento(null, tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
-                            true, true, fd.getIDLoginUser().intValue(), null, coord.latitude+"/"+coord.longitude,""));
+                            false, true, fd.getIDLoginUser().intValue(), null, coord.latitude+"/"+coord.longitude,""));
                     finish();
+                    Intent i = new Intent(PopUpCrearEventoPresencial.this, MainActivity.class);
+                    startActivity(i);
                 }
             }
         });
@@ -363,7 +367,7 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
     }
 
     private void checkHoraFin(){
-        if (LocalTime.now().isBefore(LocalTime.parse(horaFinal.getText()))){
+        if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
             horaFinal.setTextColor(Color.BLACK);
             hInicio=true;
             hFinal=true;

@@ -1,7 +1,9 @@
 package com.marioparrillamaroto.myeventsapp.core;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -19,7 +21,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.Usuario;
+import com.marioparrillamaroto.myeventsapp.ui.perfil.PerfilFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,7 +59,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
 
-    private static final String URLAPI = "http://192.168.90.66:8080/api";
+    private static final String URLAPI = "http://192.168.1.62:8080/api";
 
 
     private Context contextRoot;
@@ -303,12 +307,109 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URLAPI+"/evento", postData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                System.out.println("@@@@@@@: "+response);
+                Toast.makeText(contextRoot.getApplicationContext(), "Evento Agregado",Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);
+    }
+
+    public void modifyEvent(Evento event){
+        JSONObject postData = new JSONObject();
+        JSONObject userOJSON = new JSONObject();
+
+        try {
+
+            Usuario userO = getUserByID(Long.valueOf(event.getUserOwnerID()));
+
+            userOJSON.put("userID", userO.getUserID());
+
+            postData.put("eventID", event.getEventID());
+            postData.put("eventName", event.getNombreEvento());
+            postData.put("tema", event.getTema());
+            postData.put("startTime", event.getHoraInicio());
+            postData.put("endTime", event.getHoraFinal());
+            postData.put("available", event.getAvailable());
+            postData.put("eventPreference", event.getEventPreference());
+            postData.put("coordinates", event.getCoordenadas());
+            postData.put("videomeeting", event.getEnlaceVideoMeeting());
+            postData.put("userOwner", userOJSON);
+            postData.put("userSummoner", null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, URLAPI+"/evento/"+event.getEventID(), postData, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(contextRoot.getApplicationContext(), "Evento Modificado",Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);
+    }
+
+    public void deleteEvent(Long eventID){
+        StringRequest jsontRequest = new StringRequest(Request.Method.DELETE, URLAPI + "/evento/" + eventID, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(contextRoot.getApplicationContext(), "Evento Eliminado",Toast.LENGTH_SHORT).show();
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
+            }
+        });
+        Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsontRequest);
+    }
+
+    public void citeEvent(Evento event){
+        JSONObject postData = new JSONObject();
+        JSONObject userOJSON = new JSONObject();
+        JSONObject userSJSON = new JSONObject();
+
+        try {
+
+            Usuario userO = getUserByID(Long.valueOf(event.getUserOwnerID()));
+            Usuario userS = getUserByID(Long.valueOf(event.getUserSummonerID()));
+
+            userOJSON.put("userID", userO.getUserID());
+            userSJSON.put("userID", userS.getUserID());
+
+            postData.put("eventID", event.getEventID());
+            postData.put("eventName", event.getNombreEvento());
+            postData.put("tema", event.getTema());
+            postData.put("startTime", event.getHoraInicio());
+            postData.put("endTime", event.getHoraFinal());
+            postData.put("available", event.getAvailable());
+            postData.put("eventPreference", event.getEventPreference());
+            postData.put("coordinates", event.getCoordenadas());
+            postData.put("videomeeting", event.getEnlaceVideoMeeting());
+            postData.put("userOwner", userOJSON);
+            postData.put("userSummoner", userSJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, URLAPI+"/evento/"+event.getEventID(), postData, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(contextRoot.getApplicationContext(), "Evento Citado",Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
             }
         });
         Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);

@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.util.Calendar;
@@ -41,9 +42,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -58,12 +62,13 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
     private LatLng coordenadas;
     private boolean coordenadasCorrectas = false;
     private boolean titulo = false, tema = false, fecha = false, hInicio = false, hFinal = false, coordenadasB = false;
-
+    private FunctionsDatabase fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_modificar_evento_presencial);
+        fd = new FunctionsDatabase(getApplicationContext());
 
         e = (Evento) getIntent().getExtras().getSerializable("infoEventoP");
 
@@ -213,7 +218,12 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
                         .setPositiveButton("Sí, eliminar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "ELIMINADO", Toast.LENGTH_SHORT).show();
+                                LatLng coord = listaMarcadores.get(0).getPosition();
+                                fd.modifyEvent(new Evento(e.getEventID(), tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
+                                        true, true, fd.getIDLoginUser().intValue(), null, coord.latitude+"/"+coord.longitude,""));
+                                finish();
+                                Intent i = new Intent(PopUpModificarEventoPresencial.this, MainActivity.class);
+                                startActivity(i);
                             }
                         })
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

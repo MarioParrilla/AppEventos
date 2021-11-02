@@ -17,7 +17,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.marioparrillamaroto.myeventsapp.Evento;
+import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 public class PopUpCitarEventoPresencial extends AppCompatActivity {
 
@@ -25,12 +27,14 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity {
     private Evento e;
     private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtFecha;
     private Button btnCitar, btnMostrarMapa;
+    private FunctionsDatabase fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_citar_evento_presencial);
 
+        fd = new FunctionsDatabase(getApplicationContext());
         e = (Evento) getIntent().getExtras().getSerializable("infoEvento");
 
         txtTitulo = (TextView)findViewById(R.id.lblTituloEventoCitarP);
@@ -73,7 +77,13 @@ public class PopUpCitarEventoPresencial extends AppCompatActivity {
         btnCitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Evento ev = e;
+                ev.setUserSummonerID(fd.getIDLoginUser().intValue());
+                ev.setAvailable(false);
+                fd.citeEvent(ev);
                 finish();
+                Intent i = new Intent(PopUpCitarEventoPresencial.this, MainActivity.class);
+                startActivity(i);
             }
         });
 

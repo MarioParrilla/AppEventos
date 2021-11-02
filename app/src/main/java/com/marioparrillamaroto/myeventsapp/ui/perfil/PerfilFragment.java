@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +30,9 @@ public class PerfilFragment extends Fragment {
     private FloatingActionButton fabAddEvent, fabAddPresencial, fabAddOnline;
     private TextView lblUsername, lblPhonenumber;
     private boolean isOpen;
+    private AdaptadorEvento adapterData;
+    private PerfilModel pm;
+    private Usuario usuario;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,16 +47,16 @@ public class PerfilFragment extends Fragment {
         fabAddPresencial = root.findViewById(R.id.btn_add_event_presencial);
         fabAddOnline = root.findViewById(R.id.btn_add_event_videomeeting);
 
-        PerfilModel pm = new PerfilModel(root.getContext());
+        pm = new PerfilModel(root.getContext());
 
-        Usuario usuario = pm.getLoginUser();
+        usuario = pm.getLoginUser();
 
         lblUsername.setText(usuario.getUsername());
         lblPhonenumber.setText(usuario.getPhonenumber());
 
         ArrayList<Evento> datos = pm.getEventsOfUser(usuario.getUserID());
 
-        AdaptadorEvento adapterData = new AdaptadorEvento(datos);
+        adapterData = new AdaptadorEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
         lym.setOrientation(LinearLayoutManager.VERTICAL);
         recView = (RecyclerView) root.findViewById(R.id.recViewEventosP);
