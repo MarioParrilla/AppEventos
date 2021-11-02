@@ -51,9 +51,12 @@ public class AdaptadorBusqueda extends RecyclerView.Adapter<AdaptadorBusqueda.Bu
     public void filtrado(String usuarioABuscar){
         int longitud = usuarioABuscar.length();
         if (longitud==0){
+            datos.clear();
             datos.addAll(datosOriginales);
         }else{
-            ArrayList<Usuario> collection = (ArrayList<Usuario>) datos.stream().filter(usuario -> usuario.getUsername().toLowerCase().contains(usuarioABuscar.toLowerCase())).collect(Collectors.toList());
+            datos.clear();
+            datos.addAll(datosOriginales.stream().filter(usuario -> usuario.getUsername().toLowerCase().startsWith(usuarioABuscar.toLowerCase())).collect(Collectors.toList()));
+            ArrayList<Usuario> collection = (ArrayList<Usuario>) datos.stream().filter(usuario -> usuario.getUsername().toLowerCase().startsWith(usuarioABuscar.toLowerCase())).collect(Collectors.toList());
             datos.clear();
             datos.addAll(collection);
         }

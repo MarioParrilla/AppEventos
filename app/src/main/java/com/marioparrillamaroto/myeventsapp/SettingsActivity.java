@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         soporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri _link = Uri.parse("https://192.168.1.62:8080/soporte");
+                Uri _link = Uri.parse("http://192.168.1.62:8080/soporte");
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(_link);
                 startActivity(i);

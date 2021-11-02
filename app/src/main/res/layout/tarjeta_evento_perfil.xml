@@ -68,8 +68,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.65999997" />
+            app:layout_constraintTop_toBottomOf="@+id/lblNombreEventoP"
+            app:layout_constraintVertical_bias="0.050000012" />
 
         <TextView
             android:id="@+id/lblNombreEventoP"
@@ -83,8 +83,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35000002" />
+            app:layout_constraintTop_toBottomOf="@+id/lblUsernameNotificationP"
+            app:layout_constraintVertical_bias="0.050000012" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
