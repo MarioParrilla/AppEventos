@@ -15,6 +15,7 @@ import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpModificarEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpModificarEventoPresencial;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.EventoViewHolder>{
@@ -71,7 +72,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
         }
 
         public void bindEvento(Evento e) {
-            if (!e.getTema().equals("null")){
+            if (!(e.getCoordenadas().equals("") && e.getEnlaceVideoMeeting().equals(""))){
                 txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
                 txtMensaje.setText("Cita con @"+pm.getUsername(e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
                 txtFecha.setText(e.getFecha());
@@ -96,9 +97,11 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
                 if (e.getEventPreference())txtTipo.setText("M");
                 else if (!e.getEventPreference())txtTipo.setText("P");
             } else{
+                txtNombreEvento.setText(LocalTime.now().toString().substring(0,5));
                 txtTipo.setText("");
                 txtHorario.setText("");
-                txtMensaje.setText("");
+                txtMensaje.setText(e.getNombreEvento());
+                txtFecha.setText("");
             }
         }
     }

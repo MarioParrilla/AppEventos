@@ -70,6 +70,16 @@ public class PopUpModificarEventoMeeting extends AppCompatActivity {
         horaFinal.setText(e.getHoraFinalParsed());
         enlaceVideomeeting.setText(e.getEnlaceVideoMeeting());
 
+        if (!e.getAvailable()){
+            fabModificar.setEnabled(false);
+            tituloEvento.setEnabled(false);
+            temaEvento.setEnabled(false);
+            fechaInicio.setEnabled(false);
+            horaInicio.setEnabled(false);
+            horaFinal.setEnabled(false);
+            enlaceVideomeeting.setEnabled(false);
+        }
+
 
         tituloEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

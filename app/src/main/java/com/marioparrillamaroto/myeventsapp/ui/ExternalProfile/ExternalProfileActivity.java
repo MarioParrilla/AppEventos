@@ -14,6 +14,7 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.Usuario;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ExternalProfileActivity extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class ExternalProfileActivity extends AppCompatActivity {
         ExternalProfileModel epa = new ExternalProfileModel(getApplicationContext());
 
         ArrayList<Evento> datos = epa.getEventsOfUser(u.getUserID());
-
+        if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos", "null", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
 
         AdaptadorEventoExternalProfile adapterData = new AdaptadorEventoExternalProfile(datos);
         LinearLayoutManager lym = new LinearLayoutManager(getApplicationContext());

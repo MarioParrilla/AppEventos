@@ -21,6 +21,7 @@ import com.marioparrillamaroto.myeventsapp.databinding.FragmentPerfilBinding;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoMeeting;
 import com.marioparrillamaroto.myeventsapp.ui.popUpEventos.PopUpCrearEventoPresencial;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PerfilFragment extends Fragment {
@@ -55,6 +56,7 @@ public class PerfilFragment extends Fragment {
         lblPhonenumber.setText(usuario.getPhonenumber());
 
         ArrayList<Evento> datos = pm.getEventsOfUser(usuario.getUserID());
+        if (datos.size()==0) datos.add(new Evento(1, "No tienes eventos", "", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
 
         adapterData = new AdaptadorEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());

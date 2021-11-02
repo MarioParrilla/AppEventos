@@ -103,6 +103,15 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
         horaInicio.setText(e.getHoraInicioParsed());
         horaFinal.setText(e.getHoraFinalParsed());
 
+        if (!e.getAvailable()){
+            fabModificar.setEnabled(false);
+            tituloEvento.setEnabled(false);
+            temaEvento.setEnabled(false);
+            fechaInicio.setEnabled(false);
+            horaInicio.setEnabled(false);
+            horaFinal.setEnabled(false);
+        }
+
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

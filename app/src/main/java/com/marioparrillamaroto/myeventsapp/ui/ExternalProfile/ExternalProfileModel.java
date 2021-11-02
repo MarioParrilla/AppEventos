@@ -21,7 +21,7 @@ public class ExternalProfileModel {
     public ArrayList<Evento> getEventsOfUser(Long userID){
         ArrayList<Evento> list = new ArrayList<>();
         SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
-        Cursor mCursor = db.rawQuery("select * from evento where user_owner_userid = ?", new String[]{userID.toString()});
+        Cursor mCursor = db.rawQuery("select * from evento where user_owner_userid = ? and available = 1", new String[]{userID.toString()});
 
         while(mCursor.moveToNext()){
             list.add(new Evento(mCursor.getInt(0), mCursor.getString(1), mCursor.getString(2), LocalDateTime.parse(mCursor.getString(3)),

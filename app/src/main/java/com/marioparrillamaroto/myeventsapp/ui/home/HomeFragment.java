@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
         fd.syncronizingData();
 
         ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
-        if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos proximos", "null", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
+        if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos proximos", "", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
         AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
         LinearLayoutManager lym = new LinearLayoutManager(root.getContext());
         lym.setOrientation(LinearLayoutManager.VERTICAL);

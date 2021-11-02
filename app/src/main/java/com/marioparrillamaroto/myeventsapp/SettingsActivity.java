@@ -7,6 +7,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         btnVolver = (Button) findViewById(R.id.btnVolverSettings);
         acercaDe = (TextView) findViewById(R.id.lblAcerdaDe);
+        soporte = (TextView) findViewById(R.id.lblSoporte);
         cerrarSesion = (TextView) findViewById(R.id.lblCerrarSesion);
 
         btnVolver.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +40,16 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent nuevaPantalla = new Intent(SettingsActivity.this, MainActivity.class);
                 startActivity(nuevaPantalla);
+            }
+        });
+
+        soporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri _link = Uri.parse("https://192.168.1.62:8080/soporte");
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(_link);
+                startActivity(i);
             }
         });
 
