@@ -25,9 +25,12 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.gms.maps.MapView;
+import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class PopUpCrearEventoMeeting extends AppCompatActivity{
@@ -35,11 +38,13 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     private FloatingActionButton fab;
     private EditText horaInicio, horaFinal,tituloEvento, temaEvento, fechaInicio, enlaceVideomeeting;
     private boolean titulo = false, tema = false, fecha = false, hInicio = false, hFinal = false, enlace = false;
+    private FunctionsDatabase fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_crear_evento_meeting);
+        fd = new FunctionsDatabase(getApplicationContext());
 
         fab = (FloatingActionButton)findViewById(R.id.fabEventoMeeting);
         tituloEvento = (EditText)findViewById(R.id.txtTituloEventoMeeting);
@@ -132,7 +137,8 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             public void onClick(View v) {
                 comprobarTodo();
                 if(comprobarInputs()){
-                    System.out.println("@@@@@@@@ --> "+tituloEvento.getText()+" "+temaEvento.getText()+" "+fechaInicio.getText()+" "+horaInicio.getText()+" "+horaFinal.getText());
+                    fd.createEvent(new Evento(null, tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
+                            false, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
                     finish();
                 }
             }

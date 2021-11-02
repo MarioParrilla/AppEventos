@@ -37,9 +37,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -50,11 +53,14 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
     private FusedLocationProviderClient clientLocation;
     private ArrayList<Marker> listaMarcadores = new ArrayList<>();
     private boolean titulo = false, tema = false, fecha = false, hInicio = false, hFinal = false, coordenadas = false;
+    private FunctionsDatabase fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_crear_evento_presencial);
+
+        fd = new FunctionsDatabase(getApplicationContext());
 
         fab = (FloatingActionButton) findViewById(R.id.fabEventoPresencial);
         tituloEvento = (EditText) findViewById(R.id.txtTituloEventoPresencial);
@@ -139,7 +145,9 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
             public void onClick(View v) {
                 comprobarTodo();
                 if(comprobarInputs()){
-                    System.out.println("@@@@@@@@ --> "+tituloEvento.getText()+" "+temaEvento.getText()+" "+fechaInicio.getText()+" "+horaInicio.getText()+" "+horaFinal.getText());
+                    LatLng coord = listaMarcadores.get(0).getPosition();
+                    fd.createEvent(new Evento(null, tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
+                            true, true, fd.getIDLoginUser().intValue(), null, coord.latitude+"/"+coord.longitude,""));
                     finish();
                 }
             }

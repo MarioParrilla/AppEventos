@@ -15,6 +15,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.Usuario;
@@ -24,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FunctionsDatabase extends SQLiteOpenHelper {
 
@@ -51,7 +55,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
 
-    private static final String URLAPI = "http://192.168.1.62:8080/api";
+    private static final String URLAPI = "http://192.168.90.66:8080/api";
 
 
     private Context contextRoot;
@@ -252,6 +256,69 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             System.err.println("Error al sincronizar eventos: "+e.getMessage());
         }
         return ended;
+    }
+
+    private Usuario getUserByID(Long userid){
+        Usuario user = null;
+        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
+
+        Cursor mCursor = db.rawQuery("select * from Usuario where userid = ?", new String[]{userid.toString()});
+
+        while(mCursor.moveToNext()){
+            user = new Usuario(mCursor.getLong(0),mCursor.getString(1),mCursor.getString(2),mCursor.getString(3),mCursor.getString(4),FunctionsDatabase.getValue(mCursor.getInt(5)), FunctionsDatabase.getValue(mCursor.getInt(6)));
+        }
+
+        return user;
+    }
+
+    public void createEvent(Evento event){
+        JSONObject postData = new JSONObject();
+        JSONObject userOJSON = new JSONObject();
+
+        try {
+
+            Usuario userO = getUserByID(Long.valueOf(event.getUserOwnerID()));
+
+            userOJSON.put("userID", userO.getUserID());
+
+            postData.put("eventName", event.getNombreEvento());
+            postData.put("tema", event.getTema());
+            postData.put("startTime", event.getHoraInicio());
+            postData.put("endTime", event.getHoraFinal());
+            postData.put("available", event.getAvailable());
+            postData.put("eventPreference", event.getEventPreference());
+            postData.put("coordinates", event.getCoordenadas());
+            postData.put("videomeeting", event.getEnlaceVideoMeeting());
+            postData.put("userOwner", userOJSON);
+            postData.put("userSummoner", null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URLAPI+"/evento", postData, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println("@@@@@@@: "+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);
+    }
+
+    public Long getIDLoginUser(){
+        Long userid = 0L;
+        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
+        Cursor mCursor = db.rawQuery("select userid from "+LOGIN_TABLE, null);
+
+        while(mCursor.moveToNext()){
+            userid = mCursor.getLong(0);
+        }
+
+        return userid;
     }
 
     public boolean checkIsLogin(){
