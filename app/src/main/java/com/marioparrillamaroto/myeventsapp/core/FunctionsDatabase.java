@@ -1,5 +1,7 @@
 package com.marioparrillamaroto.myeventsapp.core;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -22,7 +24,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.MainActivity;
+import com.marioparrillamaroto.myeventsapp.MyEventAppActivity;
 import com.marioparrillamaroto.myeventsapp.Usuario;
+import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 import com.marioparrillamaroto.myeventsapp.ui.perfil.PerfilFragment;
 
 import org.json.JSONArray;
@@ -59,7 +63,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
 
-    private static final String URLAPI = "http://192.168.1.62:8080/api";
+    private static final String URLAPI = "http://192.168.90.66:8080/api";
 
 
     private Context contextRoot;
@@ -430,8 +434,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         return userid;
     }
 
-    private boolean checkUserLoginExists(){
-        boolean existsUser = false;
+    public void checkUserLoginExists(){
 
         SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select count(*) from usuario where userid = ?", new String[]{getIDLoginUser().toString()});
@@ -441,8 +444,10 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             exists = mCursor.getInt(0);
         }
 
-        if (exists>0) existsUser = true;
-        return  existsUser;
+        if (exists==0){
+            closeSession();
+            Toast.makeText(contextRoot.getApplicationContext(), "¡El usuario dejó de existir en el servidor!",Toast.LENGTH_LONG).show();
+        }
     }
 
     public boolean checkIsLogin(){
@@ -480,6 +485,9 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         try{
             SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getWritableDatabase();
             db.execSQL("DELETE FROM "+LOGIN_TABLE);
+            Intent nuevaPantalla = new Intent(contextRoot.getApplicationContext(), LoginActivity.class);
+            nuevaPantalla.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            contextRoot.getApplicationContext().startActivity(nuevaPantalla);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -487,7 +495,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     public void checkCloseSession(){
         try{
-            if (checkUserLoginExists()&&checkSession()){
+            if (checkSession()){
                 closeSession();
             }
         }catch (Exception  e){

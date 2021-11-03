@@ -53,6 +53,7 @@ public class PerfilFragment extends Fragment {
 
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
         fd.syncronizingData();
+        fd.checkUserLoginExists();
 
         usuario = pm.getLoginUser();
 

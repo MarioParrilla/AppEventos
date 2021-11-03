@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
         HomeModel hm = new HomeModel();
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
         fd.syncronizingData();
+        fd.checkUserLoginExists();
 
         ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
         if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos proximos", "", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));

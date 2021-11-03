@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (lg.userExists(usernameText, passwordText)){
                         allRigth = lg.registerUserLogin(usernameText, guardarSesion);
-
+                        System.out.println("@@@@Usuario registrado en local:"+allRigth);
                         if (allRigth){
                             Intent nuevaPantalla = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(nuevaPantalla);

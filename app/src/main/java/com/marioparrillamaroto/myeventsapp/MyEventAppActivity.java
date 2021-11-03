@@ -33,9 +33,5 @@ public class MyEventAppActivity extends AppCompatActivity {
             nuevaPantalla = new Intent(MyEventAppActivity.this, MainActivity.class);
             startActivity(nuevaPantalla);
         }
-        else {
-            nuevaPantalla = new Intent(MyEventAppActivity.this, LoginActivity.class);
-            startActivity(nuevaPantalla);
-        }
     }
 }

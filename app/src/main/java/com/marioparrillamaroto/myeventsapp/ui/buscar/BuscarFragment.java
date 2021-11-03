@@ -40,6 +40,7 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
         BuscarModel bm = new BuscarModel();
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
         fd.syncronizingData();
+        fd.checkUserLoginExists();
 
         ArrayList<Usuario> datos = bm.usersToSearch(getContext());
 
