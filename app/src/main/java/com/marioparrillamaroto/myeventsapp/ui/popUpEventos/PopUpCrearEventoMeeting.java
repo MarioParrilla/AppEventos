@@ -140,7 +140,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
                 comprobarTodo();
                 if(comprobarInputs()){
                     fd.createEvent(new Evento(null, tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
-                            true, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
+                            false, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
                     finish();
                     Intent i = new Intent(PopUpCrearEventoMeeting.this, MainActivity.class);
                     startActivity(i);
@@ -273,7 +273,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         else if(enlaceVideomeeting.getText().length()<9){
             enlaceVideomeeting.setTextColor(Color.RED);
             enlace=false;
-            Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada mayor a 9 digitos", Toast.LENGTH_SHORT).show();
         }
         else{
             enlaceVideomeeting.setTextColor(Color.RED);

@@ -176,7 +176,7 @@ public class PopUpModificarEventoMeeting extends AppCompatActivity {
                 comprobarTodo();
                 if(comprobarInputs()){
                     fd.modifyEvent(new Evento(e.getEventID(), tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
-                            false, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
+                            true, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
                     finish();
                     Intent i = new Intent(PopUpModificarEventoMeeting.this, MainActivity.class);
                     startActivity(i);

@@ -367,15 +367,17 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
     }
 
     private void checkHoraFin(){
-        if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
-            horaFinal.setTextColor(Color.BLACK);
-            hInicio=true;
-            hFinal=true;
-        }else{
-            horaFinal.setTextColor(Color.RED);
-            hInicio=false;
-            hFinal=false;
-            Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+        if (fechaInicio.length()>0){
+            if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
+                horaFinal.setTextColor(Color.BLACK);
+                hInicio=true;
+                hFinal=true;
+            }else{
+                horaFinal.setTextColor(Color.RED);
+                hInicio=false;
+                hFinal=false;
+                Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
