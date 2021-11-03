@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -35,6 +38,13 @@ public class ExternalProfileActivity extends AppCompatActivity {
 
         lblUsername.setText(u.getUsername());
         lblDescription.setText(u.getPhonenumber());
+
+        lblDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+u.getPhonenumber())));
+            }
+        });
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
