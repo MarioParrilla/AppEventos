@@ -2,7 +2,7 @@ package com.marioparrillamaroto.myeventsapp.ui.home;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
@@ -17,7 +17,7 @@ public class HomeModel {
     public ArrayList<Evento> eventsOfUser(Context context, String username){
         ArrayList<Evento> events = new ArrayList<>();
 
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select evento.* from evento, usuario where usuario.username = ? and usuario.userid=evento.user_summoner_userid", new String[]{username});
 
         while(mCursor.moveToNext()){
@@ -31,7 +31,7 @@ public class HomeModel {
 
     public String getLoginUser(Context context){
         String username = "";
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select username from "+LOGIN_TABLE, null);
 
         while(mCursor.moveToNext()){
@@ -43,7 +43,7 @@ public class HomeModel {
 
     public String getUsername(Context context, int userid){
         String username = "";
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select username from usuario where userid = ?", new String[] {String.valueOf(userid)});
 
         while(mCursor.moveToNext()){

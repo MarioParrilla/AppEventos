@@ -2,7 +2,7 @@ package com.marioparrillamaroto.myeventsapp.ui.buscar;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -22,7 +22,7 @@ public class BuscarModel{
     public ArrayList<Usuario> usersToSearch(Context context){
         ArrayList<Usuario> users = new ArrayList<>();
 
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select * from usuario", null);
 
         while(mCursor.moveToNext()){
@@ -35,7 +35,7 @@ public class BuscarModel{
 
     public String getLoginUser(Context context){
         String username = "";
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select username from "+LOGIN_TABLE, null);
 
         while(mCursor.moveToNext()){

@@ -1,19 +1,14 @@
 package com.marioparrillamaroto.myeventsapp.core;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import net.sqlcipher.Cursor;
+import net.sqlcipher.database.SQLiteDatabase;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,19 +18,18 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
-import com.marioparrillamaroto.myeventsapp.MainActivity;
-import com.marioparrillamaroto.myeventsapp.MyEventAppActivity;
+
 import com.marioparrillamaroto.myeventsapp.Usuario;
 import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
-import com.marioparrillamaroto.myeventsapp.ui.perfil.PerfilFragment;
+
+import net.sqlcipher.database.SQLiteOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class FunctionsDatabase extends SQLiteOpenHelper {
 
@@ -62,22 +56,32 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_USER_SUMMONER_USERID = "'user_summoner_userid'";
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
-
+    private SQLiteDatabase db;
     private static final String URLAPI = "http://192.168.90.66:8080/api";
-
-
     private Context contextRoot;
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
+    public void setDb(SQLiteDatabase db) {
+        this.db = db;
+    }
+
+
 
     public FunctionsDatabase(@Nullable Context context) {
         super(context, "MyEventsApp.db", null, 1);
         this.contextRoot=context;
+        SQLiteDatabase.loadLibs(context.getApplicationContext());
+        this.db = getWritableDatabase("admin*");
+        db.rawExecSQL("PRAGMA cipher_memory_security = OFF");
     }
 
     //Se llama la primera vez que se accede a la base de datos, aqui crearemos tablas...
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "";
-
         createTableStatement = "CREATE TABLE " + USUARIO_TABLE + "(" +
                 COLUMN_USERID + "	INTEGER NOT NULL," +
                 COLUMN_USERNAME + "	TEXT NOT NULL," +
@@ -141,7 +145,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                     @Override
                     public void onResponse(JSONArray response) {
                         Usuario user;
-                        SQLiteDatabase db = getWritableDatabase();
+                        SQLiteDatabase db = getWritableDatabase("admin*");
                         try {
                             db.execSQL("DELETE FROM "+USUARIO_TABLE);
                             for (int i = 0; i < response.length(); i++) {
@@ -171,7 +175,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                     @Override
                     public void onResponse(JSONArray response) {
                         Evento event;
-                        SQLiteDatabase db = getWritableDatabase();
+                        SQLiteDatabase db = getWritableDatabase("admin*");
                         try {
                             db.execSQL("DELETE FROM "+EVENTO_TABLE);
                             for (int i = 0; i < response.length(); i++) {
@@ -214,7 +218,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     public  boolean insertUserDatabase(Usuario user){
 
         boolean ended = false;
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         long isInserted = 0L;
 
@@ -244,7 +247,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     public  boolean insertEventDatabase(Evento event){
 
         boolean ended = false;
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         long isInserted = 0L;
 
@@ -276,8 +278,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     private Usuario getUserByID(Long userid){
         Usuario user = null;
-        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
-
         Cursor mCursor = db.rawQuery("select * from Usuario where userid = ?", new String[]{userid.toString()});
 
         while(mCursor.moveToNext()){
@@ -424,7 +424,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     public Long getIDLoginUser(){
         Long userid = 0L;
-        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select userid from "+LOGIN_TABLE, null);
 
         while(mCursor.moveToNext()){
@@ -435,8 +434,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     }
 
     public void checkUserLoginExists(){
-
-        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select count(*) from usuario where userid = ?", new String[]{getIDLoginUser().toString()});
 
         int exists = 0;
@@ -452,8 +449,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     public boolean checkIsLogin(){
         boolean isLogin = false;
-
-        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select count(*) from "+LOGIN_TABLE, null);
 
         int exists = 0;
@@ -468,8 +463,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     public boolean checkSession(){
         boolean closeSession = false;
-
-        SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getReadableDatabase();
         Cursor mCursor = db.rawQuery("select saveSession from "+LOGIN_TABLE, null);
 
         int saveSession = 0;
@@ -483,7 +476,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
     public void closeSession(){
         try{
-            SQLiteDatabase db = new FunctionsDatabase(contextRoot.getApplicationContext()).getWritableDatabase();
             db.execSQL("DELETE FROM "+LOGIN_TABLE);
             Intent nuevaPantalla = new Intent(contextRoot.getApplicationContext(), LoginActivity.class);
             nuevaPantalla.addFlags(FLAG_ACTIVITY_NEW_TASK);
@@ -502,6 +494,4 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
-
-
 }

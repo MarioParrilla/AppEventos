@@ -2,7 +2,7 @@ package com.marioparrillamaroto.myeventsapp.ui.ExternalProfile;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
@@ -20,7 +20,7 @@ public class ExternalProfileModel {
 
     public ArrayList<Evento> getEventsOfUser(Long userID){
         ArrayList<Evento> list = new ArrayList<>();
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select * from evento where user_owner_userid = ? and available = 1", new String[]{userID.toString()});
 
         while(mCursor.moveToNext()){
@@ -34,7 +34,7 @@ public class ExternalProfileModel {
 
     public String getUsername(int userid){
         String username = "";
-        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+        SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
         Cursor mCursor = db.rawQuery("select username from usuario where userid = ?", new String[] {String.valueOf(userid)});
 
         while(mCursor.moveToNext()){

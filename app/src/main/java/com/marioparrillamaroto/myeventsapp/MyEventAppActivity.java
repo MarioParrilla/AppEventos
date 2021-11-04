@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.marioparrillamaroto.myeventsapp.core.CoreFuntions;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
@@ -22,9 +23,8 @@ public class MyEventAppActivity extends AppCompatActivity {
 
         FunctionsDatabase fd = new FunctionsDatabase(getApplicationContext());
 
-
         fd.syncronizingData();
-
+        CoreFuntions.checkIsRooted(getApplicationContext());
         fd.checkCloseSession();
 
         isLogin = fd.checkIsLogin();

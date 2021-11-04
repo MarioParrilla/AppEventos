@@ -3,7 +3,7 @@ package com.marioparrillamaroto.myeventsapp.ui.login;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
@@ -28,7 +28,7 @@ public class LoginModel {
         int count = 0;
         String passwordDB = "";
         try{
-            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase();
+            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase("admin*");
             Cursor mCursor = db.rawQuery("select count(*), password from usuario where username = ?", new String[]{username});
 
 
@@ -51,7 +51,7 @@ public class LoginModel {
         String password = "";
 
         try{
-            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getWritableDatabase();
+            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
             ContentValues cv = new ContentValues();
 
             Cursor mCursor = db.rawQuery("select userid, password from usuario where username = ?", new String[]{username});
