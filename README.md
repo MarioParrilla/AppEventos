@@ -62,6 +62,8 @@ Procesador: Minimo se necesitará un procesador con Quad Core a 1.2GHz.
 
 Almacenamiento: se necesitará minimo de un 1Gb de almacenamiento.
 
+Version de Android: El dispositivo necesitará una versión minima de android 8.0 Oreo
+
 ## Wireframe
 
 LOGIN:
