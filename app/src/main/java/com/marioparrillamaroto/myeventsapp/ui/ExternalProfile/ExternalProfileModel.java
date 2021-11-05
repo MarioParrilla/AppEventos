@@ -1,8 +1,12 @@
 package com.marioparrillamaroto.myeventsapp.ui.ExternalProfile;
 
 import android.content.Context;
+
 import android.database.Cursor;
-import net.sqlcipher.database.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase;
+
+//import net.sqlcipher.Cursor;
+//import net.sqlcipher.database.SQLiteDatabase;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;

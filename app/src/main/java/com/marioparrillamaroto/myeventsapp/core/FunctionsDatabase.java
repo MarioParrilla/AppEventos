@@ -4,8 +4,14 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import net.sqlcipher.Cursor;
-import net.sqlcipher.database.SQLiteDatabase;
+
+//import net.sqlcipher.Cursor;
+//import net.sqlcipher.database.SQLiteDatabase;
+//import net.sqlcipher.database.SQLiteOpenHelper;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import android.os.Build;
 import android.widget.Toast;
@@ -26,7 +32,6 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.Usuario;
 import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
-import net.sqlcipher.database.SQLiteOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,9 +82,11 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     public FunctionsDatabase(@Nullable Context context) {
         super(context, "MyEventsApp.db", null, 1);
         this.contextRoot=context;
-        SQLiteDatabase.loadLibs(context.getApplicationContext());
-        this.db = getWritableDatabase("admin*");
-        db.rawExecSQL("PRAGMA cipher_memory_security = OFF");
+        this.db = getWritableDatabase();
+
+        //SQLiteDatabase.loadLibs(context.getApplicationContext());
+        //this.db = getWritableDatabase("admin*");
+        //db.rawExecSQL("PRAGMA cipher_memory_security = OFF");
     }
 
     //Se llama la primera vez que se accede a la base de datos, aqui crearemos tablas...
@@ -149,7 +156,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                     @Override
                     public void onResponse(JSONArray response) {
                         Usuario user;
-                        SQLiteDatabase db = getWritableDatabase("admin*");
                         try {
                             db.execSQL("DELETE FROM "+USUARIO_TABLE);
                             for (int i = 0; i < response.length(); i++) {
@@ -180,7 +186,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                     @Override
                     public void onResponse(JSONArray response) {
                         Evento event;
-                        SQLiteDatabase db = getWritableDatabase("admin*");
                         try {
                             db.execSQL("DELETE FROM "+EVENTO_TABLE);
                             for (int i = 0; i < response.length(); i++) {

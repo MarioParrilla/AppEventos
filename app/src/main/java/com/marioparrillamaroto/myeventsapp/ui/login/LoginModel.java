@@ -2,8 +2,12 @@ package com.marioparrillamaroto.myeventsapp.ui.login;
 
 import android.content.ContentValues;
 import android.content.Context;
+
 import android.database.Cursor;
-import net.sqlcipher.database.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase;
+
+//import net.sqlcipher.Cursor;
+//import net.sqlcipher.database.SQLiteDatabase;
 
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
@@ -28,7 +32,7 @@ public class LoginModel {
         int count = 0;
         String passwordDB = "";
         try{
-            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getReadableDatabase("admin*");
+            SQLiteDatabase db = new FunctionsDatabase(context.getApplicationContext()).getDb();
             Cursor mCursor = db.rawQuery("select count(*), password from usuario where username = ?", new String[]{username});
 
 

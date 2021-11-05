@@ -1,18 +1,16 @@
 package com.marioparrillamaroto.myeventsapp.ui.buscar;
 
 import android.content.Context;
+
 import android.database.Cursor;
-import net.sqlcipher.database.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+//import net.sqlcipher.Cursor;
+//import net.sqlcipher.database.SQLiteDatabase;
 
-import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.Usuario;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class BuscarModel{
