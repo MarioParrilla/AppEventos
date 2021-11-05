@@ -116,6 +116,24 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             }
         });
 
+        horaInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()>0){
+                    checkHoraInicio();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         horaFinal.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -214,8 +232,8 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             Toast.makeText(getApplicationContext(), "Introduce una fecha", Toast.LENGTH_SHORT).show();
         }
 
-        if (horaInicio.length()==0){
-            Toast.makeText(getApplicationContext(), "Introduce una hora de inicio", Toast.LENGTH_SHORT).show();
+        if (horaInicio.length()>0){
+            checkHoraInicio();
         }
 
         if (horaFinal.length()>0){
@@ -283,7 +301,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void checkFecha(){
-        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText() )) || LocalDate.now().isEqual(LocalDate.parse(fechaInicio.getText()))){
             fechaInicio.setTextColor(Color.BLACK);
             fecha=true;
         }else{
@@ -293,14 +311,23 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         }
     }
 
+    private void checkHoraInicio(){
+        if (LocalTime.parse(horaInicio.getText()).isAfter(LocalTime.now())){
+            horaInicio.setTextColor(Color.BLACK);
+            hInicio=true;
+        }else{
+            horaInicio.setTextColor(Color.RED);
+            hInicio=false;
+            Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora actual", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void checkHoraFin(){
         if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
             horaFinal.setTextColor(Color.BLACK);
-            hInicio=true;
             hFinal=true;
         }else{
             horaFinal.setTextColor(Color.RED);
-            hInicio=false;
             hFinal=false;
             Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
         }

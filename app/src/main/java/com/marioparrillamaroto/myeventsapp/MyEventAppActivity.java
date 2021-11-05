@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.marioparrillamaroto.myeventsapp.core.CoreFuntions;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
@@ -23,15 +24,17 @@ public class MyEventAppActivity extends AppCompatActivity {
 
         FunctionsDatabase fd = new FunctionsDatabase(getApplicationContext());
 
-        fd.syncronizingData();
-        CoreFuntions.checkIsRooted(getApplicationContext());
-        fd.checkCloseSession();
-
-        isLogin = fd.checkIsLogin();
-
-        if (isLogin){
-            nuevaPantalla = new Intent(MyEventAppActivity.this, MainActivity.class);
-            startActivity(nuevaPantalla);
+        if (CoreFuntions.checkIsRooted(getApplicationContext())){
+            Toast.makeText(getApplicationContext(),"¡Tienes el movil rooteado, no puedes utilizar la app!", Toast.LENGTH_SHORT).show();
+        }else{
+            fd.syncronizingData();
+            fd.checkCloseSession();
+            isLogin = fd.checkIsLogin();
+            if (isLogin){
+                nuevaPantalla = new Intent(MyEventAppActivity.this, MainActivity.class);
+                startActivity(nuevaPantalla);
+            }
         }
+
     }
 }

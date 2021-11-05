@@ -42,6 +42,7 @@ import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
+import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -115,6 +116,24 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length()>0){
                     checkFecha();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        horaInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()>0){
+                    checkHoraInicio();
                 }
             }
 
@@ -288,6 +307,12 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
 
         if (grantResults[0] != PackageManager.PERMISSION_GRANTED){
             Toast.makeText(getApplicationContext(), "¡No se acepto los permisos necesarios!",Toast.LENGTH_LONG).show();
+            Intent i = new Intent(PopUpCrearEventoPresencial.this, MainActivity.class);
+            startActivity(i);
+        }else{
+            Intent i = new Intent(PopUpCrearEventoPresencial.this, PopUpCrearEventoPresencial.class);
+            startActivity(i);
+            finish();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -356,7 +381,7 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
     }
 
     private void checkFecha(){
-        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText())) || LocalDate.now().isEqual(LocalDate.parse(fechaInicio.getText()))){
             fechaInicio.setTextColor(Color.BLACK);
             fecha=true;
         }else{
@@ -366,15 +391,24 @@ public class PopUpCrearEventoPresencial extends AppCompatActivity implements OnM
         }
     }
 
+    private void checkHoraInicio(){
+        if (LocalTime.parse(horaInicio.getText()).isAfter(LocalTime.now())){
+            horaInicio.setTextColor(Color.BLACK);
+            hInicio=true;
+        }else{
+            horaInicio.setTextColor(Color.RED);
+            hInicio=false;
+            Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora actual", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void checkHoraFin(){
         if (fechaInicio.length()>0){
             if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
                 horaFinal.setTextColor(Color.BLACK);
-                hInicio=true;
                 hFinal=true;
             }else{
                 horaFinal.setTextColor(Color.RED);
-                hInicio=false;
                 hFinal=false;
                 Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
             }

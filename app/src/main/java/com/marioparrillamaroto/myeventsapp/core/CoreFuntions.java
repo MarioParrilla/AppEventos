@@ -43,10 +43,12 @@ public class CoreFuntions {
         return haveInternet;
     }
 
-    public static void checkIsRooted(Context context){
+    public static boolean checkIsRooted(Context context){
+        boolean rooted = true;
         RootBeer rootBeer = new RootBeer(context);
-        if (rootBeer.isRooted()) Toast.makeText(context.getApplicationContext(),"¡Tienes el movil rooteado!", Toast.LENGTH_SHORT).show();
-
+        if (rootBeer.isRooted()) rooted = true;
+        else rooted = false;
+        return rooted;
     }
 
     public static void checkGatcha(Context context, CheckBox cbx){

@@ -420,7 +420,7 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
     }
 
     private void checkFecha(){
-        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText()))){
+        if (LocalDate.now().isBefore(LocalDate.parse(fechaInicio.getText())) || LocalDate.now().isEqual(LocalDate.parse(fechaInicio.getText()))){
             fechaInicio.setTextColor(Color.BLACK);
             fecha=true;
         }else{

@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
+
+import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -172,6 +176,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
 
                 requestQueue.add(jAR);
                 jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/evento",null, new Response.Listener<JSONArray>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onResponse(JSONArray response) {
                         Evento event;
