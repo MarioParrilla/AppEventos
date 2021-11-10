@@ -22,4 +22,17 @@
         android:name="com.marioparrillamaroto.myeventsapp.ui.perfil.PerfilFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/icon_chats"
+        android:name="com.marioparrillamaroto.myeventsapp.ui.chats.ChatsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_chats" />
+
+    <fragment
+        android:id="@+id/icon_settings"
+        android:name="com.marioparrillamaroto.myeventsapp.SettingsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>

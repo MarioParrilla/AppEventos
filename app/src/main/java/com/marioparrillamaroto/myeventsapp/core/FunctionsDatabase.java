@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.marioparrillamaroto.myeventsapp.Evento;
@@ -154,7 +155,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         if (CoreFuntions.checkConnetionToInternet(contextRoot)){
             try{
                 RequestQueue requestQueue = Volley.newRequestQueue(contextRoot.getApplicationContext());
-
                 JsonArrayRequest jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/usuario",null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -348,7 +348,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer "+ CoreFuntions.createJWT());
+                return params;
+            }
+        };
         Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);
     }
 

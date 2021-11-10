@@ -16,4 +16,14 @@
         android:icon="@drawable/ic_account_circle_24"
         android:title="@string/title_perfil" />
 
+    <item
+        android:id="@+id/icon_chats"
+        android:icon="@drawable/ic_send_24"
+        android:title="@string/title_chats" />
+
+    <item
+        android:id="@+id/icon_settings"
+        android:icon="@drawable/icon_settings_24"
+        android:title="@string/Ajustes" />
+
 </menu>

@@ -4,21 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context="SettingsFragment">
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_viewp"
+        android:id="@+id/nav_viewb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/bottom_nav_menu" />
 
     <TextView
         android:id="@+id/lblAcerdaDe"
@@ -29,12 +26,12 @@
         android:onClick="infoAcercaDe"
         android:text="Acerca De"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_viewp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_viewb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.17000002" />
 
     <TextView
         android:id="@+id/lblCerrarSesion"
@@ -44,12 +41,12 @@
         android:minHeight="48dp"
         android:text="Cerrar Sesion"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_viewp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_viewb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintTop_toBottomOf="@+id/lblAcerdaDe"
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <TextView
         android:id="@+id/lblSoporte"
@@ -59,11 +56,11 @@
         android:minHeight="48dp"
         android:text="Soporte"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_viewp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_viewb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255" />
+        app:layout_constraintTop_toBottomOf="@+id/lblCerrarSesion"
+        app:layout_constraintVertical_bias="0.050000012" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

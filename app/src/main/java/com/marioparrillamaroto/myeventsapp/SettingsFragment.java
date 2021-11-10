@@ -17,16 +17,18 @@ import android.widget.Toast;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
+import com.marioparrillamaroto.myeventsapp.databinding.FragmentPerfilBinding;
+import com.marioparrillamaroto.myeventsapp.databinding.FragmentSettingsBinding;
 import com.marioparrillamaroto.myeventsapp.ui.login.LoginActivity;
 
 
 public class SettingsFragment extends Fragment {
-    private FragmentHomeBinding binding;
+    private @NonNull FragmentSettingsBinding binding;
     TextView acercaDe, soporte, cerrarSesion;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         acercaDe = (TextView) root.findViewById(R.id.lblAcerdaDe);
@@ -36,7 +38,7 @@ public class SettingsFragment extends Fragment {
         soporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri _link = Uri.parse("http://192.168.90.66:8080/soporte");
+                Uri _link = Uri.parse("http://192.168.1.62:8080/soporte");
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(_link);
                 startActivity(i);
@@ -46,7 +48,7 @@ public class SettingsFragment extends Fragment {
         acercaDe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(root.getContext().getApplicationContext(),"App Creada por: Mario Parrilla Maroto | 2021",Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"App Creada por: Mario Parrilla Maroto | 2021",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -57,7 +59,7 @@ public class SettingsFragment extends Fragment {
                 FunctionsDatabase fd = new FunctionsDatabase(root.getContext().getApplicationContext());
                 fd.closeSession();
 
-                Intent nuevaPantalla = new Intent(SettingsFragment.this, LoginActivity.class);
+                Intent nuevaPantalla = new Intent(root.getContext(), LoginActivity.class);
                 startActivity(nuevaPantalla);
             }
         });
