@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     private RecyclerView recView;
     private FragmentHomeBinding binding;
+    private SwipeRefreshLayout sw;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,8 +46,21 @@ public class HomeFragment extends Fragment {
         recView.setLayoutManager(lym);
         recView.setAdapter(adapterData);
 
-
-
+        sw = root.findViewById(R.id.swipeHome);
+        sw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fd.syncronizingData();
+                fd.checkUserLoginExists();
+                ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
+                if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos proximos", "", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
+                System.err.println("@@@@@@@@@"+datos.size());
+                AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
+                recView.setAdapter(adapterData);
+                adapterData.notifyDataSetChanged();
+                sw.setRefreshing(false);
+            }
+        });
 
         return root;
     }

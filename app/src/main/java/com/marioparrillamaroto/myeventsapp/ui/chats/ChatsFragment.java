@@ -13,31 +13,13 @@ import com.marioparrillamaroto.myeventsapp.Chat;
 import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.MensajeChat;
 import com.marioparrillamaroto.myeventsapp.R;
-import com.marioparrillamaroto.myeventsapp.SettingsActivity;
 
 import java.util.ArrayList;
 
-public class ChatsActivity extends AppCompatActivity {
-
-    private RecyclerView recView;
-    private Button btnVolver;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chats);
+                setContentView(R.layout.activity_chats);
 
-        btnVolver = findViewById(R.id.btnVolverChat);
-
-        btnVolver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nuevaPantalla = new Intent(ChatsActivity.this, MainActivity.class);
-                startActivity(nuevaPantalla);
-            }
-        });
-
-        ArrayList<Chat> datos = new ArrayList<Chat>();
+                ArrayList<Chat> datos = new ArrayList<Chat>();
         datos.add(new Chat("Admin","admin2",new ArrayList< MensajeChat >()));
         datos.add(new Chat("Admin","pepe",new ArrayList< MensajeChat >()));
         datos.add(new Chat("Admin","pruebe",new ArrayList< MensajeChat >()));
@@ -49,5 +31,3 @@ public class ChatsActivity extends AppCompatActivity {
         recView.setHasFixedSize(true);
         recView.setLayoutManager(lym);
         recView.setAdapter(adapterData);
-    }
-}
