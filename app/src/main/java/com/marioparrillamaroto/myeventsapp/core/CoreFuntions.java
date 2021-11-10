@@ -25,12 +25,38 @@ import com.scottyab.rootbeer.RootBeer;
 
 import org.json.JSONObject;
 
+import java.security.Key;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.crypto.spec.SecretKeySpec;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 public class CoreFuntions {
-    private static String SiteKey = "6LfdeBMdAAAAAPk5TRWlW-ySQn1qaprU187xsq1r";
-    private static String SecretKey = "6LfdeBMdAAAAAAEnLQKF4X9fOjBuFcoTB7Q_Vkcu";
+    private final static String SiteKey = "6LfdeBMdAAAAAPk5TRWlW-ySQn1qaprU187xsq1r";
+    private final static String SecretKey = "6LfdeBMdAAAAAAEnLQKF4X9fOjBuFcoTB7Q_Vkcu";
+    private final static String SECRET = "MyEventsApp";
+
+    public static String createJWT(){
+        Key key = new SecretKeySpec(SECRET.getBytes(), SignatureAlgorithm.HS256.getJcaName());
+
+        Date exp = new Date(new Date().getTime() + 20000L);
+
+        Map<String,Object> header = new HashMap();
+        header.put("typ", "JWT");
+
+        String jws = Jwts.builder()
+                .setHeaderParams(header)
+                .setExpiration(exp)
+                .signWith(SignatureAlgorithm.HS256, key)
+                .compact();
+        return jws;
+    }
+
     public static boolean checkConnetionToInternet(Context context){
         boolean haveInternet = false;
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);

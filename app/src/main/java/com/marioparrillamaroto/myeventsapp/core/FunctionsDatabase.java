@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -38,6 +39,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FunctionsDatabase extends SQLiteOpenHelper {
@@ -66,7 +69,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
     private SQLiteDatabase db;
-    private static final String URLAPI = "http://192.168.90.66:8080/api";
+    private static final String URLAPI = "http://192.168.1.62:8080/api";
     private Context contextRoot;
 
     public SQLiteDatabase getDb() {
@@ -178,7 +181,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         error.printStackTrace();
                         requestQueue.stop();
                     }
-                });
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("Authorization", "Bearer "+ CoreFuntions.createJWT());
+                        return params;
+                    }
+                };
 
                 requestQueue.add(jAR);
                 jAR = new JsonArrayRequest(Request.Method.GET,URLAPI+"/evento",null, new Response.Listener<JSONArray>() {
@@ -213,7 +223,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                         error.printStackTrace();
                         requestQueue.stop();
                     }
-                });
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("Authorization", "Bearer "+ CoreFuntions.createJWT());
+                        return params;
+                    }
+                };
 
                 requestQueue.add(jAR);
             }catch (Exception e){
@@ -370,7 +387,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer "+ CoreFuntions.createJWT());
+                return params;
+            }
+        };
         Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);
     }
 
@@ -386,7 +410,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
                 Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer "+ CoreFuntions.createJWT());
+                return params;
+            }
+        };
         Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsontRequest);
     }
 
@@ -428,7 +459,14 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(contextRoot.getApplicationContext(), "No se pudo contactar con el servidor",Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer "+ CoreFuntions.createJWT());
+                return params;
+            }
+        };
         Volley.newRequestQueue(contextRoot.getApplicationContext()).add(jsonObjectRequest);
     }
 
