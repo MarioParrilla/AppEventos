@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,8 +58,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
         private TextView txtMensaje;
         private TextView txtHorario;
         private TextView txtNombreEvento;
-        private TextView txtTipo;
-        private TextView txtFecha;
+        private ImageView icono;
         PerfilModel pm = new PerfilModel(itemView.getContext());
 
         public EventoViewHolder(View itemView) {
@@ -67,17 +67,16 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
             txtHorario = (TextView)itemView.findViewById(R.id.lblUsernameNotificationP);
             txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotificationP);
             txtNombreEvento = (TextView)itemView.findViewById(R.id.lblNombreEventoP);
-            txtTipo = (TextView)itemView.findViewById(R.id.lblTipoP);
-            txtFecha = (TextView) itemView.findViewById(R.id.fechaEventosPerfil);
+            icono = (ImageView) itemView.findViewById(R.id.iconEventP);
         }
 
         public void bindEvento(Evento e) {
             if (!(e.getCoordenadas().equals("") && e.getEnlaceVideoMeeting().equals(""))){
-                txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
+                txtHorario.setText(e.getFecha()+": "+e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
                 txtMensaje.setText("Cita con @"+pm.getUsername(e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
-                txtFecha.setText(e.getFecha());
                 txtNombreEvento.setText(e.getNombreEvento());
-
+                if (e.getEventPreference()) icono.setImageResource(R.drawable.ic_meeting_24);
+                else icono.setImageResource(R.drawable.ic_presencial_24);
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -94,14 +93,10 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Evento
                         };
                     }
                 });
-                if (e.getEventPreference())txtTipo.setText("M");
-                else if (!e.getEventPreference())txtTipo.setText("P");
             } else{
                 txtNombreEvento.setText(LocalTime.now().toString().substring(0,5));
-                txtTipo.setText("");
                 txtHorario.setText("");
                 txtMensaje.setText(e.getNombreEvento());
-                txtFecha.setText("");
             }
         }
     }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marioparrillamaroto.myeventsapp.Evento;
@@ -56,8 +57,7 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
         private TextView txtMensaje;
         private TextView txtHorario;
         private TextView txtNombreEvento;
-        private TextView txtTipo;
-        private TextView txtFecha;
+        private ImageView icono;
         private HomeModel hm = new HomeModel();
 
         public ProximoEventoViewHolder(View itemView) {
@@ -66,16 +66,16 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
             txtHorario = (TextView)itemView.findViewById(R.id.lblUsernameNotification);
             txtMensaje = (TextView)itemView.findViewById(R.id.lblMessageNotification);
             txtNombreEvento = (TextView)itemView.findViewById(R.id.lblNombreEvento);
-            txtTipo = (TextView)itemView.findViewById(R.id.lblTipo);
-            txtFecha = (TextView) itemView.findViewById(R.id.fechaProximoEventos);
+            icono = (ImageView) itemView.findViewById(R.id.iconEvent);
         }
 
         public void bindProximoEvento(Evento e) {
             if (!(e.getCoordenadas().equals("") && e.getEnlaceVideoMeeting().equals(""))){
-                txtHorario.setText(e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
+                txtHorario.setText(e.getFecha()+": "+e.getHoraInicioParsed()+" - "+e.getHoraFinalParsed());
                 txtMensaje.setText("Cita con @"+hm.getUsername(itemView.getContext(), e.getUserOwnerID())+", hablarás sobre: \n #"+e.getTema());
                 txtNombreEvento.setText(e.getNombreEvento());
-                txtFecha.setText(e.getFecha());
+                if (e.getEventPreference()) icono.setImageResource(R.drawable.ic_meeting_24);
+                else icono.setImageResource(R.drawable.ic_presencial_24);
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -90,17 +90,12 @@ public class AdaptadorProximoEvento extends RecyclerView.Adapter<AdaptadorProxim
                             i.putExtra("infoEvento",e);
                             itemView.getContext().startActivity(i);
                         };
-
                     }
                 });
-                if (e.getEventPreference())txtTipo.setText("M");
-                else if (!e.getEventPreference())txtTipo.setText("P");
             }else{
                 txtNombreEvento.setText(LocalTime.now().toString().substring(0,5));
-                txtTipo.setText("");
                 txtHorario.setText("");
                 txtMensaje.setText(e.getNombreEvento());
-                txtFecha.setText("");
             }
 
         }

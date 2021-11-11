@@ -70,7 +70,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
     private SQLiteDatabase db;
-    private static final String URLAPI = "http://192.168.1.62:8080/api";
+    private static final String URLAPI = "http://192.168.90.66:8080/api";
     private Context contextRoot;
 
     public SQLiteDatabase getDb() {

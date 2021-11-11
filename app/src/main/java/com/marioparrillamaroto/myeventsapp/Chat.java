@@ -5,10 +5,11 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 public class Chat {
-    private String user1, user2;
+    private String user1;
+    private DispositivoBluetooth user2;
     private ArrayList<MensajeChat> mensajes = new ArrayList<MensajeChat> ();
 
-    public Chat(String user1, String user2, ArrayList<MensajeChat> mensajes) {
+    public Chat(String user1, DispositivoBluetooth user2, ArrayList<MensajeChat> mensajes) {
         this.user1 = user1;
         this.user2 = user2;
         this.mensajes = mensajes;
@@ -22,11 +23,11 @@ public class Chat {
         this.user1 = user1;
     }
 
-    public String getUser2() {
+    public DispositivoBluetooth getUser2() {
         return user2;
     }
 
-    public void setUser2(String user2) {
+    public void setUser2(DispositivoBluetooth user2) {
         this.user2 = user2;
     }
 

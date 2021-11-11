@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment {
                 fd.checkUserLoginExists();
                 ArrayList<Evento> datos = hm.eventsOfUser(root.getContext(), hm.getLoginUser(root.getContext()));
                 if (datos.size()==0) datos.add(new Evento(1, "No tiene eventos proximos", "", LocalDateTime.now(),LocalDateTime.now(),false,true,1,1,"",""));
-                System.err.println("@@@@@@@@@"+datos.size());
                 AdaptadorProximoEvento adapterData = new AdaptadorProximoEvento(datos);
                 recView.setAdapter(adapterData);
                 adapterData.notifyDataSetChanged();

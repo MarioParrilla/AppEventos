@@ -41,4 +41,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="Ajustes">Ajustes</string>
     <string name="title_chats">Chats</string>
+    <string name="ActivarB">Activar</string>
+    <string name="DesactivarB">Desactivar</string>
+    <string name="BuscarB">Buscar Bluetooth</string>
 </resources>
