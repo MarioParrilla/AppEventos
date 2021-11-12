@@ -116,7 +116,8 @@ public class AdaptadorChats extends RecyclerView.Adapter<AdaptadorChats.ChatsVie
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent i = new Intent(itemView.getContext(), ChatActivity.class);
+                    itemView.getContext().startActivity(i);
                 }
             });
 

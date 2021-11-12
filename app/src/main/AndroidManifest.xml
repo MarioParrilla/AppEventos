@@ -97,6 +97,11 @@
             android:label="Login"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.chats.ChatActivity"
+            android:exported="false"
+            android:label="MyEventsApp"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/app_name"

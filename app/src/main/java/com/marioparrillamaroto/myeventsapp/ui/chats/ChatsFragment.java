@@ -156,7 +156,6 @@ public class ChatsFragment extends Fragment {
                 Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
                 if (pairedDevices.size() > 0) {
                         for (BluetoothDevice device : pairedDevices) {
-                                System.out.println("--> "+device.getName()+" type: "+device.getBluetoothClass().getDeviceClass()+" - "+device.getBluetoothClass().getMajorDeviceClass());
                                 dispositivosConocidos.add(new Chat("Admin", new DispositivoBluetooth(device.getName(), device.getAddress(), device.getBluetoothClass().getDeviceClass(),device.getBluetoothClass().getMajorDeviceClass() ), null));
                         }
                         setApater(dispositivosConocidos);
@@ -203,8 +202,6 @@ public class ChatsFragment extends Fragment {
                                       if (device.getName() != null && device.getAddress() != null) {
                                               boolean encontrado = false;
                                               Chat c = new Chat("Admin", new DispositivoBluetooth(device.getName(), device.getAddress(), device.getBluetoothClass().getDeviceClass(), device.getBluetoothClass().getMajorDeviceClass()), null);
-
-                                              System.out.println("--> "+device.getName()+" type: "+device.getBluetoothClass().getDeviceClass()+" - "+device.getBluetoothClass().getMajorDeviceClass());
 
                                               for (Chat d : dispositivosConocidos) {
                                                 if (d.getUser2().getAddressDispositivo().equals(c.getUser2().getAddressDispositivo()))encontrado = true;

@@ -3,118 +3,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
     tools:context=".ui.popUpEventos.PopUpCrearEventoPresencial">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.popUpEventos.PopUpCrearEventoPresencial">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:background="@color/white"
-            tools:context=".ui.popUpEventos.PopUpCrearEventoPresencial">
+        <EditText
+            android:id="@+id/txtTituloEventoPresencialPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nombre del evento"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="30dp" />
 
-            <EditText
-                android:id="@+id/txtTituloEventoPresencialPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Nombre del evento"
-                android:inputType="textPersonName"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="30dp" />
+        <EditText
+            android:id="@+id/dateHoraFinalPresencialPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Hora Final"
+            app:layout_constraintTop_toBottomOf="@+id/dateHoraInicioPresencialPM"
+            tools:layout_editor_absoluteX="30dp" />
 
-            <EditText
-                android:id="@+id/dateHoraFinalPresencialPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="Hora Final"
-                app:layout_constraintTop_toBottomOf="@+id/dateHoraInicioPresencialPM"
-                tools:layout_editor_absoluteX="30dp" />
+        <EditText
+            android:id="@+id/dateHoraInicioPresencialPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Hora Inicio"
+            app:layout_constraintTop_toBottomOf="@+id/dateFechaInicioPresencialPM"
+            tools:layout_editor_absoluteX="30dp" />
 
-            <EditText
-                android:id="@+id/dateHoraInicioPresencialPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="Hora Inicio"
-                app:layout_constraintTop_toBottomOf="@+id/dateFechaInicioPresencialPM"
-                tools:layout_editor_absoluteX="30dp" />
+        <EditText
+            android:id="@+id/dateFechaInicioPresencialPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Fecha"
+            app:layout_constraintTop_toBottomOf="@+id/txtTituloEventoPresencialPM"
+            tools:layout_editor_absoluteX="30dp" />
 
-            <EditText
-                android:id="@+id/dateFechaInicioPresencialPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="Fecha"
-                app:layout_constraintTop_toBottomOf="@+id/txtTituloEventoPresencialPM"
-                tools:layout_editor_absoluteX="30dp" />
+        <EditText
+            android:id="@+id/txtTemaPresencialPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Tema"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/dateHoraFinalPresencialPM"
+            tools:layout_editor_absoluteX="30dp" />
 
-            <EditText
-                android:id="@+id/txtTemaPresencialPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ems="10"
-                android:hint="Tema"
-                android:inputType="textPersonName"
-                app:layout_constraintTop_toBottomOf="@+id/dateHoraFinalPresencialPM"
-                tools:layout_editor_absoluteX="30dp" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEventoPresencialPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toStartOf="@+id/fabEventoPresencialPME"
+            app:layout_constraintHorizontal_bias="0.72"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapViewPresencialPM"
+            app:srcCompat="@drawable/ic_edit_24"
+            tools:ignore="OnClick" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabEventoPresencialPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:clickable="true"
-                app:layout_constraintEnd_toStartOf="@+id/fabEventoPresencialPME"
-                app:layout_constraintHorizontal_bias="0.72"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapViewPresencialPM"
-                app:srcCompat="@drawable/ic_edit_24"
-                tools:ignore="OnClick" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEventoPresencialPME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapViewPresencialPM"
+            app:srcCompat="@drawable/ic_delete_24"
+            tools:ignore="OnClick" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabEventoPresencialPME"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:clickable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.33"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapViewPresencialPM"
-                app:srcCompat="@drawable/ic_delete_24"
-                tools:ignore="OnClick" />
-
-            <fragment
-                android:id="@+id/mapViewPresencialPM"
-                android:name="com.google.android.gms.maps.MapFragment"
-                android:layout_width="214dp"
-                android:layout_height="143dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.131"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtTemaPresencialPM" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+        <fragment
+            android:id="@+id/mapViewPresencialPM"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="214dp"
+            android:layout_height="143dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.131"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemaPresencialPM" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
