@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/infoItemsB"
+        android:title="Opciones:"
+        app:showAsAction="always"
+        />
+
+    <item
         android:id="@+id/searchBluetooth"
         android:icon="@drawable/ic_bluetooth_searching_24"
         android:title="@string/BuscarB"

@@ -9,7 +9,7 @@ public class Chat {
     private DispositivoBluetooth user2;
     private ArrayList<MensajeChat> mensajes = new ArrayList<MensajeChat> ();
 
-    public Chat(String user1, DispositivoBluetooth user2, ArrayList<MensajeChat> mensajes) {
+    public Chat(String user1, DispositivoBluetooth user2) {
         this.user1 = user1;
         this.user2 = user2;
         this.mensajes = mensajes;
@@ -31,11 +31,4 @@ public class Chat {
         this.user2 = user2;
     }
 
-    public ArrayList<MensajeChat> getMensajes() {
-        return mensajes;
-    }
-
-    public void setMensajes(ArrayList<MensajeChat> mensajes) {
-        this.mensajes = mensajes;
-    }
 }

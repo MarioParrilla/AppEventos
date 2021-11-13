@@ -18,6 +18,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ public class ChatsFragment extends Fragment {
         private ArrayList<Chat> dispositivosConocidos, temp;
         private LinearLayoutManager lym;
         private Toolbar toolbar;
-        private ActionMenuItemView enable, disable, search;
+        private ActionMenuItemView enable, disable, search, info;
         private BluetoothAdapter bluetoothAdapter;
 
         private final int DISCOVERABLE_DURATION = 300;
@@ -64,6 +65,10 @@ public class ChatsFragment extends Fragment {
                 enable = (ActionMenuItemView) toolbar.findViewById(R.id.enableBluetooth);
                 disable = (ActionMenuItemView) toolbar.findViewById(R.id.disableBluetooth);
                 search = (ActionMenuItemView)toolbar.findViewById(R.id.searchBluetooth);
+                info = (ActionMenuItemView)toolbar.findViewById(R.id.infoItemsB);
+
+                info.setEnabled(false);
+                info.setTextColor(Color.WHITE);
 
                 bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                 bluetoothAdapter.cancelDiscovery();
@@ -104,7 +109,7 @@ public class ChatsFragment extends Fragment {
 
                 if (bluetoothAdapter == null) {
                         datos = new ArrayList<Chat>();
-                        datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("❌Tu movil no tiene bluetooth❌",null,0,0), null));
+                        datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("❌Tu movil no tiene bluetooth❌",null,0,0)));
                         setApater(datos);
                         enable.setVisibility(View.INVISIBLE);
                         search.setVisibility(View.INVISIBLE);
@@ -134,14 +139,14 @@ public class ChatsFragment extends Fragment {
 
         private void setBluetoothToOn(){
                 datos = new ArrayList<Chat>();
-                datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("🔎 Debes buscar dispositivos 🔍",null,0,0), null));
+                datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("🔎 Debes buscar dispositivos 🔍",null,0,0)));
                 setApater(datos);
                 itemBluetoothOn();
         }
 
         private void setBluetoothToOff(){
                 datos = new ArrayList<Chat>();
-                datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("❌Debes activar el bluetooth para funcionar❌",null, 0, 0), null));
+                datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("❌Debes activar el bluetooth para funcionar❌",null, 0, 0)));
                 setApater(datos);
                 itemBluetoothOff();
         }
@@ -156,7 +161,7 @@ public class ChatsFragment extends Fragment {
                 Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
                 if (pairedDevices.size() > 0) {
                         for (BluetoothDevice device : pairedDevices) {
-                                dispositivosConocidos.add(new Chat("Admin", new DispositivoBluetooth(device.getName(), device.getAddress(), device.getBluetoothClass().getDeviceClass(),device.getBluetoothClass().getMajorDeviceClass() ), null));
+                                dispositivosConocidos.add(new Chat("Admin", new DispositivoBluetooth(device.getName(), device.getAddress(), device.getBluetoothClass().getDeviceClass(),device.getBluetoothClass().getMajorDeviceClass())));
                         }
                         setApater(dispositivosConocidos);
                 }
@@ -201,7 +206,7 @@ public class ChatsFragment extends Fragment {
                               if (device.getBondState()!=BluetoothDevice.BOND_BONDED) {
                                       if (device.getName() != null && device.getAddress() != null) {
                                               boolean encontrado = false;
-                                              Chat c = new Chat("Admin", new DispositivoBluetooth(device.getName(), device.getAddress(), device.getBluetoothClass().getDeviceClass(), device.getBluetoothClass().getMajorDeviceClass()), null);
+                                              Chat c = new Chat("Admin", new DispositivoBluetooth(device.getName(), device.getAddress(), device.getBluetoothClass().getDeviceClass(), device.getBluetoothClass().getMajorDeviceClass()));
 
                                               for (Chat d : dispositivosConocidos) {
                                                 if (d.getUser2().getAddressDispositivo().equals(c.getUser2().getAddressDispositivo()))encontrado = true;
@@ -216,7 +221,7 @@ public class ChatsFragment extends Fragment {
                                 if (dispositivosConocidos!=null){
                                         if (dispositivosConocidos.size() == 0){
                                                 datos.clear();
-                                                datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("❌No se ha encontrado nada❌",null,0,0), null));
+                                                datos.add(new Chat("MyEventsApp", new DispositivoBluetooth("❌No se ha encontrado nada❌",null,0,0)));
                                                 setApater(datos);
                                         }
                                         Toast.makeText(getContext(), "Busqueda terminada", Toast.LENGTH_SHORT).show();

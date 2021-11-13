@@ -488,6 +488,17 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         return userid;
     }
 
+    public String getUsernameLoginUser(){
+        String username = "null";
+        Cursor mCursor = db.rawQuery("select username from "+LOGIN_TABLE, null);
+
+        while(mCursor.moveToNext()){
+            username = mCursor.getString(0);
+        }
+
+        return username;
+    }
+
     public void checkUserLoginExists(){
         Cursor mCursor = db.rawQuery("select count(*) from usuario where userid = ?", new String[]{getIDLoginUser().toString()});
 

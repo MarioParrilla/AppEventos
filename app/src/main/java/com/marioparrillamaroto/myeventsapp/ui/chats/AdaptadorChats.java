@@ -111,16 +111,15 @@ public class AdaptadorChats extends RecyclerView.Adapter<AdaptadorChats.ChatsVie
                         }
                         break;
                 }
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(itemView.getContext(), ChatActivity.class);
+                        i.putExtra("infoDispositivo", c.getUser2());
+                        itemView.getContext().startActivity(i);
+                    }
+                });
             }
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(itemView.getContext(), ChatActivity.class);
-                    itemView.getContext().startActivity(i);
-                }
-            });
-
         }
     }
 }

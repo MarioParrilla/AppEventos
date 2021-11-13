@@ -1,6 +1,8 @@
 package com.marioparrillamaroto.myeventsapp;
 
-public class DispositivoBluetooth {
+import java.io.Serializable;
+
+public class DispositivoBluetooth implements Serializable {
     private String nombreDispositivo;
     private String addressDispositivo;
     private int typeOfDevice;
