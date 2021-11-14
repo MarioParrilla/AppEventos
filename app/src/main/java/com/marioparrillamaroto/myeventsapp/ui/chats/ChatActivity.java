@@ -5,8 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothServerSocket;
-import android.bluetooth.BluetoothSocket;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,23 +31,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.marioparrillamaroto.myeventsapp.DispositivoBluetooth;
 import com.marioparrillamaroto.myeventsapp.MensajeChat;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class ChatActivity  extends AppCompatActivity{
     private BluetoothDevice d;
     private Toolbar toolbar;
     private static ActionMenuItemView volver, switchConectar, infoConexion, infoConectar;
-    private boolean conexionRealizada, puedeConectarse;
+    public static boolean conexionRealizada, puedeConectarse;
     private Button btnEnviar;
     private TextInputLayout textoMensaje;
     private RecyclerView recView;
@@ -104,11 +98,18 @@ public class ChatActivity  extends AppCompatActivity{
                             case ChatUtils.ESCUCHANDO:
                                 infoConexion.setTitle("ESCUCHANDO");
                                 infoConexion.setTextColor(Color.CYAN);
+                                desactivarChat();
                                 break;
 
                             case ChatUtils.CONECTANDO:
                                 infoConexion.setTitle("CONECTANDO");
                                 infoConexion.setTextColor(Color.YELLOW);
+                                break;
+
+                            case ChatUtils.NADA:
+                                infoConexion.setTitle("NO CONECTADO");
+                                infoConexion.setTextColor(Color.RED);
+                                desactivarChat();
                                 break;
 
                             case ChatUtils.CONECTADO:
@@ -118,9 +119,9 @@ public class ChatActivity  extends AppCompatActivity{
                                 break;
 
                             case ChatUtils.CONEXIONFALLADA:
-                                infoConexion.setTitle("CONEXION FALLIDA");
+                                infoConexion.setTitle("NO CONECTADO");
                                 infoConexion.setTextColor(Color.RED);
-                                conexionRealizada = false;
+                                //conexionRealizada = false;
                                 break;
                         }
                     case MENSAJEESCRITO:
@@ -153,19 +154,18 @@ public class ChatActivity  extends AppCompatActivity{
                     finish();
                     return true;
                 case R.id.bluetoothConnected:
-                        if (conexionRealizada){
-                            conexionRealizada = false;
-                            infoConexion.setTitle("NO CONECTADO");
-                            infoConexion.setTextColor(Color.RED);
-                            if (chatUtils!=null) chatUtils.stop();
-                        }else {
+                    System.out.println("@@@@@"+conexionRealizada);
+                    if (conexionRealizada){
+                            Toast.makeText(getApplicationContext(), "Ya estas conectado o estas en ello", Toast.LENGTH_SHORT).show();
+                    }else {
                             if (puedeConectarse){
-                                chatUtils.connect(d);
                                 conexionRealizada = true;
+                                System.out.println("@@@@@Conexion Realizada cambiada "+conexionRealizada);
+                                if (conexionRealizada) chatUtils.connect(d);
                             }else{
                                 activarBluetooth();
                             }
-                        }
+                    }
                     return true;
                 default:
                     return false;
@@ -199,6 +199,7 @@ public class ChatActivity  extends AppCompatActivity{
         recView.setHasFixedSize(true);
         recView.setLayoutManager(lym);
         recView.setAdapter(adapterData);
+        recView.getLayoutManager().scrollToPosition(datos.size()-1);
         adapterData.notifyDataSetChanged();
     }
 
@@ -264,7 +265,7 @@ public class ChatActivity  extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         unregisterReceiver(bReceiver);
-        if (chatUtils!=null) chatUtils.stop();
+        chatUtils.stop();
         super.onDestroy();
     }
 }
