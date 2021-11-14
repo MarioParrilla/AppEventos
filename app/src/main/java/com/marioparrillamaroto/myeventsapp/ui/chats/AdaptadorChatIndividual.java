@@ -38,7 +38,7 @@ public class AdaptadorChatIndividual extends RecyclerView.Adapter<RecyclerView.V
     public int getItemViewType(int position) {
         db = new FunctionsDatabase(context);
         String username = db.getUsernameLoginUser();
-        System.out.println("@@@@@@@@@"+ username);
+        
         if (datos.get(position).getUsuarioSender().equalsIgnoreCase(username)){
             return 0;
         }else{

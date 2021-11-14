@@ -65,13 +65,13 @@ public class AdaptadorChats extends RecyclerView.Adapter<AdaptadorChats.ChatsVie
         }
 
         public void bindChats(Chat c) {
-            if (c.getUser1().equals("MyEventsApp")) {
-                lblUsernameChat.setText("\t\t"+c.getUser1()+"\n\t"+c.getUser2().getNombreDispositivo());
+            if (c.getUser2()==null) {
+                lblUsernameChat.setText("\t\t"+c.getUser1());
                 lblUsernameChat.setTextSize(TypedValue.COMPLEX_UNIT_SP,16f);
             }else{
-                lblUsernameChat.setText(c.getUser2().getNombreDispositivo()+" - "+c.getUser2().getAddressDispositivo());
+                lblUsernameChat.setText(c.getUser2().getName()+" - "+c.getUser2().getName());
                 lblUsernameChat.setTextSize(TypedValue.COMPLEX_UNIT_SP,16f);
-                switch (c.getUser2().getTypeOfDevice()){
+                switch (c.getUser2().getBluetoothClass().getDeviceClass()){
                     case 1028://Cascos
                         iconDevice.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_bheadphones_24));
                         break;
@@ -96,15 +96,15 @@ public class AdaptadorChats extends RecyclerView.Adapter<AdaptadorChats.ChatsVie
                         iconDevice.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_bdesktop_mac_24));
                         break;
                     default:
-                        switch (c.getUser2().getMayorType()){
+                        switch (c.getUser2().getBluetoothClass().getMajorDeviceClass()){
                             case 1080://Periferico
                                 iconDevice.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_bkeyboard_24));
                                 break;
 
                             case 7936://Band
-                                if (c.getUser2().getNombreDispositivo().contains("Band") || c.getUser2().getNombreDispositivo().contains("band")){
+                                if (c.getUser2().getName().contains("Band") || c.getUser2().getName().contains("band")){
                                     iconDevice.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_bband_24));
-                                }else if (c.getUser2().getNombreDispositivo().contains("pencil") || c.getUser2().getNombreDispositivo().contains("Pencil")) {
+                                }else if (c.getUser2().getName().contains("pencil") || c.getUser2().getName().contains("Pencil")) {
                                     iconDevice.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_bpencil_24));
                                 }else iconDevice.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_bother_24));
                                 break;
