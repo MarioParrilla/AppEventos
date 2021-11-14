@@ -95,7 +95,7 @@ public class AdaptadorChatIndividual extends RecyclerView.Adapter<RecyclerView.V
         public void bindChats(MensajeChat c) {
             ownerMessage.setText(c.getUsuarioSender());
             messageCI.setText(c.getMensaje());
-            dateTimeMessage.setText(c.getFechaMensaje().toString().substring(0,c.getFechaMensaje().toString().length()-7).replace("T"," : "));
+            dateTimeMessage.setText(c.getFechaMensaje());
         }
     }
 
@@ -114,9 +114,9 @@ public class AdaptadorChatIndividual extends RecyclerView.Adapter<RecyclerView.V
         }
 
         public void bindChats(MensajeChat c) {
-            ownerMessage.setText(c.getUsuarioReceptor());
+            ownerMessage.setText(c.getUsuarioSender());
             messageCI.setText(c.getMensaje());
-            dateTimeMessage.setText(c.getFechaMensaje().toString().substring(0,c.getFechaMensaje().toString().length()-7).replace("T"," : "));
+            dateTimeMessage.setText(c.getFechaMensaje());
         }
     }
 }

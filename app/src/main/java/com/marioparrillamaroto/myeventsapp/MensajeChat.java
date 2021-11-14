@@ -8,15 +8,16 @@ public class MensajeChat {
     private String usuarioSender, usuarioReceptor;
     private LocalDateTime fechaMensaje;
 
-    public MensajeChat(String mensaje, String usuarioApp, String usuarioReceptor, LocalDateTime fechaMensaje) {
+    public MensajeChat(String mensaje, String usuarioSender, String usuarioReceptor, LocalDateTime fechaMensaje) {
         this.mensaje = mensaje;
         this.fechaMensaje = fechaMensaje;
-        this.usuarioSender = usuarioApp;
+        this.usuarioSender = usuarioSender;
         this.usuarioReceptor = usuarioReceptor;
     }
 
-    public LocalDateTime getFechaMensaje() {
-        return fechaMensaje;
+    public String getFechaMensaje() {
+        if (fechaMensaje.toString().length()>=19) return fechaMensaje.toString().substring(0,fechaMensaje.toString().length()-7).replace("T"," : ");
+        else return fechaMensaje.toString().substring(0,fechaMensaje.toString().length()).replace("T"," : ");
     }
 
     public void setFechaMensaje(LocalDateTime fechaMensaje) {

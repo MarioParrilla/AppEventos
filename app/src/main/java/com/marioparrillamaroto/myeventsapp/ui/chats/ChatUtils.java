@@ -182,7 +182,7 @@ public class ChatUtils {
         public AcceptThread() {
             BluetoothServerSocket tmp = null;
             try {
-                tmp = bluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord(APP_NAME, APP_UUID);
+                tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord(APP_NAME, APP_UUID);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

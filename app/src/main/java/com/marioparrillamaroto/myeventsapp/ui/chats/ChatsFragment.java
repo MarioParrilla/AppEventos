@@ -202,12 +202,11 @@ public class ChatsFragment extends Fragment {
                 public void onReceive(Context context, Intent intent) {
                         final String action = intent.getAction();
                         if(BluetoothDevice.ACTION_FOUND.equals(action)){
-                              BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                              if (device.getBondState()!=BluetoothDevice.BOND_BONDED) {
+                                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                                if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                                       if (device.getName() != null && device.getAddress() != null) {
                                               boolean encontrado = false;
                                               Chat c = new Chat("Admin", device);
-
                                               for (Chat d : dispositivosConocidos) {
                                                 if (d.getUser2().getAddress().equals(c.getUser2().getAddress()))encontrado = true;
                                               }
@@ -215,7 +214,7 @@ public class ChatsFragment extends Fragment {
 
                                               setApater(dispositivosConocidos);
                                       }
-                              }
+                                }
                         }
                         else if (bluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
                                 if (dispositivosConocidos!=null){

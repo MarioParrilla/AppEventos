@@ -3,6 +3,7 @@ package com.marioparrillamaroto.myeventsapp.core;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -21,12 +22,21 @@ import com.google.android.gms.safetynet.SafetyNet;
 import com.google.android.gms.safetynet.SafetyNetApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.marioparrillamaroto.myeventsapp.MensajeChat;
 import com.scottyab.rootbeer.RootBeer;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,6 +106,64 @@ public class CoreFuntions {
                         Toast.makeText(context.getApplicationContext(), "Error al realizar el Captcha", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public static void makeBackupChat(String usuarioSender, String usuarioReceptor, ArrayList<MensajeChat> data, Context context){
+        try{
+
+            String backupName = "backup_"+usuarioSender+"-"+usuarioReceptor.replace(":","_")+".txt";
+            OutputStreamWriter osw = new OutputStreamWriter(context.openFileOutput(backupName, Context.MODE_PRIVATE));
+
+            for (MensajeChat msg: data) {
+                String line = "usuarioSender:"+msg.getUsuarioSender()+"/usuarioReceptor:"+msg.getUsuarioReceptor()+"/fecha:"+msg.getFechaMensaje()+"/msg:"+msg.getMensaje()+"\n";
+                osw.write(line);
+            }
+            osw.flush();
+            osw.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<MensajeChat> readBackupChat(String usuarioSender, String usuarioReceptor, Context context){
+        ArrayList<MensajeChat> data = new ArrayList<>();
+        try{
+            String backupName = "backup_"+usuarioSender+"-"+usuarioReceptor.replace(":","_")+".txt";
+
+            InputStreamReader isr = new InputStreamReader( context.openFileInput(backupName));
+            BufferedReader br = new BufferedReader(isr);
+            String linea = br.readLine();
+
+            while (linea!=null){
+                System.out.println("@@@@@@@@ DATOS: "+linea);
+                String msg = linea.substring(linea.indexOf("/msg")+5, linea.length());
+                System.out.println(msg);
+
+                String usuario1 = linea.substring(linea.indexOf("usuarioSender:")+14, linea.indexOf("/usuarioReceptor:"));
+                System.out.println(usuario1);
+
+                String usuario2 = linea.substring(linea.indexOf("/usuarioReceptor:")+17, linea.indexOf("/fecha:"));
+                System.out.println(usuario2);
+
+                String fecha = linea.substring(linea.indexOf("/fecha:")+7, linea.indexOf("/msg:"));
+                System.out.println(fecha.replace(" : ","T")+":00");
+
+                System.out.println(LocalDateTime.parse(fecha.replace(" : ","T")+":00").toString());
+
+                data.add(new MensajeChat(msg, usuario1
+                        , usuario2, LocalDateTime.parse(fecha.replace(" : ","T")+":00")));
+                linea= br.readLine();
+            }
+            br.close();
+            isr.close();
+
+            return  data;
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(context.getApplicationContext(), "No has hablado nunca con esta persona", Toast.LENGTH_SHORT).show();
+            return  data;
+        }
     }
 
     public static void handleCaptchaResult(Context context, final String responseToken, CheckBox cbx) {

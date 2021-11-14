@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.marioparrillamaroto.myeventsapp.MensajeChat;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.CoreFuntions;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 import java.time.LocalDateTime;
@@ -55,6 +56,7 @@ public class ChatActivity  extends AppCompatActivity{
     public static final int MESSAGE_STATE_CHANGED = 7;
     public static final int MENSAJELEIDO = 1;
     public static final int MENSAJEESCRITO = 2;
+    private int c = 0;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -99,6 +101,12 @@ public class ChatActivity  extends AppCompatActivity{
                                 infoConexion.setTitle("ESCUCHANDO");
                                 infoConexion.setTextColor(Color.CYAN);
                                 desactivarChat();
+                                if (c != 0){
+                                    chatUtils.stop();
+                                    conexionRealizada = false;
+                                }
+                                else c++;
+
                                 break;
 
                             case ChatUtils.CONECTANDO:
@@ -113,6 +121,7 @@ public class ChatActivity  extends AppCompatActivity{
                                 break;
 
                             case ChatUtils.CONECTADO:
+                                c = 0;
                                 infoConexion.setTitle("CONECTADO");
                                 infoConexion.setTextColor(Color.GREEN);
                                 activarChat();
@@ -130,6 +139,7 @@ public class ChatActivity  extends AppCompatActivity{
                             String tmpMessage = new String(writeBuffer);
                             datos.add(new MensajeChat(tmpMessage, username, d.getName(), LocalDateTime.now()));
                             updateAdapter(datos);
+                            CoreFuntions.makeBackupChat(username, d.getAddress(), datos, getApplicationContext());
                         }
                         break;
 
@@ -137,8 +147,9 @@ public class ChatActivity  extends AppCompatActivity{
                         byte[] readBuffer = (byte[]) msg.obj;
                         if (readBuffer!=null){
                             String readMessage = new String(readBuffer, 0, msg.arg1);
-                            datos.add(new MensajeChat(readMessage,d.getName(),username, LocalDateTime.now()));
+                            datos.add(new MensajeChat(readMessage, d.getName(), username, LocalDateTime.now()));
                             updateAdapter(datos);
+                            CoreFuntions.makeBackupChat( username, d.getAddress(), datos, getApplicationContext());
                         }
                         break;
                 }
@@ -154,14 +165,16 @@ public class ChatActivity  extends AppCompatActivity{
                     finish();
                     return true;
                 case R.id.bluetoothConnected:
-                    System.out.println("@@@@@"+conexionRealizada);
                     if (conexionRealizada){
                         Toast.makeText(getApplicationContext(), "Ya estas conectado o estas en ello", Toast.LENGTH_SHORT).show();
                     }else {
                         if (puedeConectarse){
                             conexionRealizada = true;
                             System.out.println("@@@@@Conexion Realizada cambiada "+conexionRealizada);
-                            if (conexionRealizada) chatUtils.connect(d);
+                            if (conexionRealizada){
+                                chatUtils.connect(d);
+                                c = 0;
+                            }
                         }else{
                             activarBluetooth();
                         }
@@ -175,6 +188,9 @@ public class ChatActivity  extends AppCompatActivity{
         datos = new ArrayList<>();
         recView = (RecyclerView) findViewById(R.id.recViewChatIndividual);
         lym = new LinearLayoutManager(getApplicationContext());
+
+        datos = CoreFuntions.readBackupChat(username,d.getAddress(),getApplicationContext());
+        updateAdapter(datos);
 
         btnEnviar = (Button) findViewById(R.id.btnEnviarB);
         textoMensaje = (TextInputLayout) findViewById(R.id.mensajeChat);
