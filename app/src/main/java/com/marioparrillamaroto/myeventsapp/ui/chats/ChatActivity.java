@@ -156,15 +156,15 @@ public class ChatActivity  extends AppCompatActivity{
                 case R.id.bluetoothConnected:
                     System.out.println("@@@@@"+conexionRealizada);
                     if (conexionRealizada){
-                            Toast.makeText(getApplicationContext(), "Ya estas conectado o estas en ello", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Ya estas conectado o estas en ello", Toast.LENGTH_SHORT).show();
                     }else {
-                            if (puedeConectarse){
-                                conexionRealizada = true;
-                                System.out.println("@@@@@Conexion Realizada cambiada "+conexionRealizada);
-                                if (conexionRealizada) chatUtils.connect(d);
-                            }else{
-                                activarBluetooth();
-                            }
+                        if (puedeConectarse){
+                            conexionRealizada = true;
+                            System.out.println("@@@@@Conexion Realizada cambiada "+conexionRealizada);
+                            if (conexionRealizada) chatUtils.connect(d);
+                        }else{
+                            activarBluetooth();
+                        }
                     }
                     return true;
                 default:
