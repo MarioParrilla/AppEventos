@@ -216,6 +216,7 @@ public class PopUpModificarEventoPresencial extends AppCompatActivity implements
                     LatLng coord = listaMarcadores.get(0).getPosition();
                     fd.modifyEvent(new Evento(e.getEventID(), tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
                             false, true, fd.getIDLoginUser().intValue(), null, coord.latitude+"/"+coord.longitude,""));
+                    Toast.makeText(getApplicationContext(), "Evento Modificado", Toast.LENGTH_SHORT).show();
                     finish();
                     Intent i = new Intent(PopUpModificarEventoPresencial.this, MainActivity.class);
                     startActivity(i);

@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 public class PopUpInfoEventoPresencial extends AppCompatActivity{
 
     private Evento e;
     private TextView txtTitulo, txtInicio, txtFinal, txtTema, txtFecha;
     private Button btnMostrarMapa;
+    private Button btnCancelarCita;
+    private FunctionsDatabase fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,7 @@ public class PopUpInfoEventoPresencial extends AppCompatActivity{
         setContentView(R.layout.activity_pop_up_info_evento_presencial);
 
         e = (Evento) getIntent().getExtras().getSerializable("infoEvento");
+        fd = new FunctionsDatabase(getApplicationContext());
 
         txtTitulo = (TextView)findViewById(R.id.lblTituloEventoInfoPE);
         txtInicio = (TextView)findViewById(R.id.lblHoraInicioEventoInfoPE);
@@ -31,6 +37,7 @@ public class PopUpInfoEventoPresencial extends AppCompatActivity{
         txtTema = (TextView)findViewById(R.id.lblTemaEventoInfoPE);
         txtFecha = (TextView) findViewById(R.id.lblFechaEventoPresencial);
         btnMostrarMapa = (Button) findViewById(R.id.btnVerMapaInfo);
+        btnCancelarCita = (Button) findViewById(R.id.btnCancelarCitaP);
 
         txtTitulo.setText(e.getNombreEvento());
         txtInicio.setText(e.getHoraInicioParsed());
@@ -59,6 +66,17 @@ public class PopUpInfoEventoPresencial extends AppCompatActivity{
                 Intent i = new Intent(getApplicationContext(), PopUpMostrarUbicacion.class);
                 i.putExtra("coordenadas",e.getCoordenadas());
                 startActivity(i);
+            }
+        });
+
+        btnCancelarCita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                e.setAvailable(true);
+                e.setUserSummonerID(null);
+                fd.modifyEvent(e);
+                Toast.makeText(getApplicationContext(), "Cita Cancelada", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

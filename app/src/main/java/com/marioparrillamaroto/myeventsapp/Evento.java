@@ -1,6 +1,7 @@
 package com.marioparrillamaroto.myeventsapp;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Evento implements Serializable {
@@ -40,12 +41,20 @@ public class Evento implements Serializable {
         return horaInicio.toString();
     }
 
+    public LocalDateTime getHoraInicioSource() {
+        return horaInicio;
+    }
+
     public String getHoraInicioParsed() {
         return horaInicio.toLocalTime().toString().substring(0,5);
     }
 
+    public LocalDate getFechaSource() {
+        return horaFinal.toLocalDate();
+    }
+
     public String getFecha(){
-        return horaFinal.toLocalDate().toString();
+        return horaInicio.toLocalDate().toString();
     }
 
     public void setHoraInicio(String LocalDateTime) {
@@ -54,6 +63,10 @@ public class Evento implements Serializable {
 
     public String getHoraFinal() {
         return horaFinal.toString();
+    }
+
+    public LocalDateTime getHoraFinalSource() {
+        return horaFinal;
     }
 
     public String getHoraFinalParsed() {

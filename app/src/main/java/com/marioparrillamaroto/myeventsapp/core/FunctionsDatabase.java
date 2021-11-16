@@ -70,7 +70,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
     private SQLiteDatabase db;
-    private static final String URLAPI = "http://192.168.1.62:8080/api";
+    private static final String URLAPI = "http://192.168.90.66:8080/api";
     private Context contextRoot;
 
     public SQLiteDatabase getDb() {
@@ -387,7 +387,6 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, URLAPI+"/evento/"+event.getEventID(), postData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(contextRoot.getApplicationContext(), "Evento Modificado",Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

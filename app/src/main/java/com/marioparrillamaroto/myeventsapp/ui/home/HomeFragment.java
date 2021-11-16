@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
         recView.setHasFixedSize(true);
         recView.setLayoutManager(lym);
         recView.setAdapter(adapterData);
+        adapterData.notifyDataSetChanged();
 
         sw = root.findViewById(R.id.swipeHome);
         sw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
