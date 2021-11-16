@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.onesignal.OneSignal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -16,6 +18,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String ONESIGNAL_APP_ID = "e721f41b-321d-4965-a581-aaec0a045aaf";
 
     @SuppressLint("ResourceType")
     @Override
@@ -32,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        try {
+            OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+            OneSignal.initWithContext(this);
+            OneSignal.setAppId(ONESIGNAL_APP_ID);
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error con OneSignal", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
 }
 
     @Override

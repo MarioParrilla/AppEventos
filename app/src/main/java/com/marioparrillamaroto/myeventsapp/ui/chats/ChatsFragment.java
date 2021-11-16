@@ -254,7 +254,6 @@ public class ChatsFragment extends Fragment {
         public void onDestroyView() {
                 super.onDestroyView();
                 getActivity().unregisterReceiver(bReceiver);
-                bluetoothAdapter.cancelDiscovery();
                 binding = null;
         }
 

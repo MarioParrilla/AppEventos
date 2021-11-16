@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnEnviarB"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recViewChats">
+        app:layout_constraintTop_toBottomOf="@+id/recViewChatIndividual">
 
         <EditText
             android:layout_width="match_parent"
@@ -59,6 +59,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/mensajeChat"
-        app:layout_constraintTop_toBottomOf="@+id/recViewChats" />
+        app:layout_constraintTop_toBottomOf="@+id/recViewChatIndividual" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
