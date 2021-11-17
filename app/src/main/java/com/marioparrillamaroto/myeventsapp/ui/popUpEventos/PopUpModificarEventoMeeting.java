@@ -115,7 +115,7 @@ public class PopUpModificarEventoMeeting extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()>0){
+                if (s.length()>0 && e.getAvailable()){
                     checkFecha();
                 }
             }
@@ -134,7 +134,7 @@ public class PopUpModificarEventoMeeting extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()>0){
+                if (s.length()>0 && e.getAvailable()){
                     checkHoraInicio();
                     checkHoraFin();
                 }else{
@@ -155,7 +155,7 @@ public class PopUpModificarEventoMeeting extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()>0){
+                if (s.length()>0 && e.getAvailable()){
                     if (horaInicio.length()>0){
                         checkHoraFin();
                     }else{

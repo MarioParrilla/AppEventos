@@ -1,6 +1,7 @@
 package com.marioparrillamaroto.myeventsapp.ui.popUpEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.TextViewCompat;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;

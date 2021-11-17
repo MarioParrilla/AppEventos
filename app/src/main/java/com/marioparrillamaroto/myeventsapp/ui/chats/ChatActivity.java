@@ -139,7 +139,8 @@ public class ChatActivity  extends AppCompatActivity{
                             String tmpMessage = new String(writeBuffer);
                             datos.add(new MensajeChat(tmpMessage, username, d.getName(), LocalDateTime.now()));
                             updateAdapter(datos);
-                            CoreFuntions.makeBackupChat(username, d.getAddress(), datos, getApplicationContext());
+                            //CoreFuntions.makeBackupChat(username, d.getAddress(), datos, getApplicationContext());
+                            CoreFuntions.makeBackupChatCypto(username, d.getAddress(), datos, getApplicationContext());
                         }
                         break;
 
@@ -149,7 +150,8 @@ public class ChatActivity  extends AppCompatActivity{
                             String readMessage = new String(readBuffer, 0, msg.arg1);
                             datos.add(new MensajeChat(readMessage, d.getName(), username, LocalDateTime.now()));
                             updateAdapter(datos);
-                            CoreFuntions.makeBackupChat( username, d.getAddress(), datos, getApplicationContext());
+                            //CoreFuntions.makeBackupChat( username, d.getAddress(), datos, getApplicationContext());
+                            CoreFuntions.makeBackupChatCypto(username, d.getAddress(), datos, getApplicationContext());
                         }
                         break;
                 }
@@ -189,7 +191,9 @@ public class ChatActivity  extends AppCompatActivity{
         recView = (RecyclerView) findViewById(R.id.recViewChatIndividual);
         lym = new LinearLayoutManager(getApplicationContext());
 
-        datos = CoreFuntions.readBackupChat(username,d.getAddress(),getApplicationContext());
+        //datos = CoreFuntions.readBackupChat(username,d.getAddress(),getApplicationContext());
+        datos = CoreFuntions.readBackupChatCypto(username,d.getAddress(),getApplicationContext());
+
         updateAdapter(datos);
 
         btnEnviar = (Button) findViewById(R.id.btnEnviarB);

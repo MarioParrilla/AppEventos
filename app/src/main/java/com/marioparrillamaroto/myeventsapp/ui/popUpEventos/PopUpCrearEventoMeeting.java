@@ -250,7 +250,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void checkTitulo(){
-        if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=15){
+        if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=30){
             tituloEvento.setTextColor(Color.BLACK);
             titulo=true;
         }
@@ -262,12 +262,12 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         else{
             tituloEvento.setTextColor(Color.RED);
             titulo=false;
-            Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 15 digitos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Introduce un nombre menor a 31 digitos", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void checkTema(){
-        if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=15){
+        if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=30){
             temaEvento.setTextColor(Color.BLACK);
             tema=true;
         }
@@ -279,7 +279,7 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
         else{
             temaEvento.setTextColor(Color.RED);
             tema=false;
-            Toast.makeText(getApplicationContext(), "Introduce un tema menor a 15 digitos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Introduce un tema menor a 31 digitos", Toast.LENGTH_SHORT).show();
         }
     }
 
