@@ -29,6 +29,7 @@ import com.google.android.gms.maps.MapView;
 import com.marioparrillamaroto.myeventsapp.Evento;
 import com.marioparrillamaroto.myeventsapp.MainActivity;
 import com.marioparrillamaroto.myeventsapp.R;
+import com.marioparrillamaroto.myeventsapp.core.CoreFuntions;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 
 import java.time.LocalDate;
@@ -157,8 +158,8 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
             public void onClick(View v) {
                 comprobarTodo();
                 if(comprobarInputs()){
-                    fd.createEvent(new Evento(null, tituloEvento.getText().toString(), temaEvento.getText().toString(), LocalDateTime.parse(fechaInicio.getText()+"T"+horaInicio.getText()),LocalDateTime.parse(fechaInicio.getText()+"T"+horaFinal.getText()),
-                            true, true, fd.getIDLoginUser().intValue(), null, "",enlaceVideomeeting.getText().toString()));
+                    fd.createEvent(new Evento(null, CoreFuntions.antiSQL(tituloEvento.getText().toString()), CoreFuntions.antiSQL(temaEvento.getText().toString()), LocalDateTime.parse(CoreFuntions.antiSQL(fechaInicio.getText().toString())+"T"+CoreFuntions.antiSQL(horaInicio.getText().toString())),LocalDateTime.parse(CoreFuntions.antiSQL(fechaInicio.getText().toString())+"T"+CoreFuntions.antiSQL(horaFinal.getText().toString())),
+                            true, true, fd.getIDLoginUser().intValue(), null, "",CoreFuntions.antiSQL(enlaceVideomeeting.getText().toString())));
                     finish();
                     Intent i = new Intent(PopUpCrearEventoMeeting.this, MainActivity.class);
                     startActivity(i);
@@ -246,15 +247,16 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     private boolean comprobarInputs(){
         boolean allRigth = false;
         if (titulo&&tema&&fecha&&hInicio&&hFinal&&enlace) allRigth = true;
+        System.out.println("@@@"+allRigth);
         return allRigth;
     }
 
     private void checkTitulo(){
-        if (tituloEvento.getText().length()>4 && tituloEvento.getText().length()<=30){
+        if (CoreFuntions.antiSQL(tituloEvento.getText().toString()).length()>4 && CoreFuntions.antiSQL(tituloEvento.getText().toString()).length()<=30){
             tituloEvento.setTextColor(Color.BLACK);
             titulo=true;
         }
-        else if(tituloEvento.getText().length()<4){
+        else if(CoreFuntions.antiSQL(tituloEvento.getText().toString()).length()<4){
             tituloEvento.setTextColor(Color.RED);
             titulo=false;
             Toast.makeText(getApplicationContext(), "Introduce un nombre mayor a 4 digitos", Toast.LENGTH_SHORT).show();
@@ -267,14 +269,14 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void checkTema(){
-        if (temaEvento.getText().length()>4 && temaEvento.getText().length()<=30){
+        if (CoreFuntions.antiSQL(temaEvento.getText().toString()).length()>4 && temaEvento.getText().length()<=30){
             temaEvento.setTextColor(Color.BLACK);
             tema=true;
         }
-        else if(temaEvento.getText().length()<4){
+        else if(CoreFuntions.antiSQL(temaEvento.getText().toString()).length()<=4){
             temaEvento.setTextColor(Color.RED);
             tema=false;
-            Toast.makeText(getApplicationContext(), "Introduce un tema mayor a 4 digitos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Introduce un tema mayor a 5 digitos", Toast.LENGTH_SHORT).show();
         }
         else{
             temaEvento.setTextColor(Color.RED);
@@ -284,11 +286,11 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void checkEnlace(){
-        if (enlaceVideomeeting.getText().length()>9 && enlaceVideomeeting.getText().length()<=100){
+        if (CoreFuntions.antiSQL(enlaceVideomeeting.getText().toString()).length()>9 && enlaceVideomeeting.getText().length()<=100){
             enlaceVideomeeting.setTextColor(Color.BLACK);
             enlace=true;
         }
-        else if(enlaceVideomeeting.getText().length()<9){
+        else if(CoreFuntions.antiSQL(enlaceVideomeeting.getText().toString()).length()<9){
             enlaceVideomeeting.setTextColor(Color.RED);
             enlace=false;
             Toast.makeText(getApplicationContext(), "Introduce un enlace de videollamada mayor a 9 digitos", Toast.LENGTH_SHORT).show();
@@ -312,27 +314,49 @@ public class PopUpCrearEventoMeeting extends AppCompatActivity{
     }
 
     private void checkHoraInicio(){
-        if(!LocalDate.parse(fechaInicio.getText()).isAfter(LocalDate.now())){
-            if (LocalTime.parse(horaInicio.getText()).isAfter(LocalTime.now())){
-                horaInicio.setTextColor(Color.BLACK);
-                hInicio=true;
+        if (horaInicio.getText().length()>0){
+            if (fechaInicio.getText().length()>0){
+                if(!LocalDate.parse(fechaInicio.getText()).isAfter(LocalDate.now())){
+                    if (LocalTime.parse(horaInicio.getText()).isAfter(LocalTime.now())){
+                        horaInicio.setTextColor(Color.BLACK);
+                        hInicio=true;
+                    }
+                    else{
+                        horaInicio.setTextColor(Color.RED);
+                        hInicio=false;
+                        Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora actual", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }else{
+                fechaInicio.setTextColor(Color.RED);
+                tema=false;
+                Toast.makeText(getApplicationContext(), "Introduce una fecha!", Toast.LENGTH_SHORT).show();
             }
-            else{
-                horaInicio.setTextColor(Color.RED);
-                hInicio=false;
-                Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora actual", Toast.LENGTH_SHORT).show();
-            }
+        }else{
+            horaInicio.setTextColor(Color.RED);
+            hInicio=false;
+            Toast.makeText(getApplicationContext(), "Introduce una hora de inicio", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void checkHoraFin(){
-        if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
-            horaFinal.setTextColor(Color.BLACK);
-            hFinal=true;
-        }else{
-            horaFinal.setTextColor(Color.RED);
-            hFinal=false;
-            Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+        if (fechaInicio.length()>0){
+            if (horaInicio.getText().length()>0){
+                if (LocalTime.parse(horaInicio.getText()).isBefore(LocalTime.parse(horaFinal.getText()))){
+                    horaFinal.setTextColor(Color.BLACK);
+                    hFinal=true;
+                    horaInicio.setTextColor(Color.BLACK);
+                    hInicio=true;
+                }else{
+                    horaFinal.setTextColor(Color.RED);
+                    hFinal=false;
+                    Toast.makeText(getApplicationContext(), "Introduce una hora que sea despues de la hora de inicio", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                horaInicio.setTextColor(Color.RED);
+                hInicio=false;
+                Toast.makeText(getApplicationContext(), "Introduce una hora de inicio", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

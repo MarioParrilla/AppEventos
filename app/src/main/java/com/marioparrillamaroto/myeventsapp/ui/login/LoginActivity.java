@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usernameText = username.getText().toString();
+                usernameText = username.getText().toString().trim();
                 passwordText = password.getText().toString();
                 if (usernameText.length()>0 && passwordText.length()>0){
                     if (captcha.isChecked()){

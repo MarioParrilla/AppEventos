@@ -77,6 +77,12 @@ public class CoreFuntions {
         return jws;
     }
 
+    public static String antiSQL(String line){
+        String lineWithOut = line;
+        lineWithOut = lineWithOut.replace("\"","").replace("'","");
+        return lineWithOut;
+    }
+
     public static boolean checkConnetionToInternet(Context context){
         boolean haveInternet = false;
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
