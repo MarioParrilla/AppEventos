@@ -26,6 +26,7 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
 
     private FragmentBuscarBinding binding;
     private AdaptadorBusqueda adapterData;
+    private BuscarModel bm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class BuscarFragment extends Fragment implements SearchView.OnQueryTextLi
 
 
 
-        BuscarModel bm = new BuscarModel();
+        bm = new BuscarModel();
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
         fd.syncronizingData();
         fd.checkUserLoginExists();

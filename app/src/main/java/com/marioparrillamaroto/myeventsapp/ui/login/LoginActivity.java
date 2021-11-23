@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private Switch swGuardarSesion;
     private boolean guardarSesion;
     private CheckBox captcha;
+    private LoginModel lg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.txtPass);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         swGuardarSesion = (Switch) findViewById(R.id.SwGuardarSesion);
-        LoginModel lg = new LoginModel(getApplicationContext());
+        lg = new LoginModel(getApplicationContext());
         captcha = (CheckBox)findViewById(R.id.Chbcaptcha);
 
         captcha.setOnClickListener(new View.OnClickListener() {

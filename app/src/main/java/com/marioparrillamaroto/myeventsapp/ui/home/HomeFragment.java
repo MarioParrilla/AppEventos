@@ -23,6 +23,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recView;
     private FragmentHomeBinding binding;
     private SwipeRefreshLayout sw;
+    private HomeModel hm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        HomeModel hm = new HomeModel();
+        hm = new HomeModel();
         FunctionsDatabase fd = new FunctionsDatabase(root.getContext());
         fd.syncronizingData();
         fd.checkUserLoginExists();
