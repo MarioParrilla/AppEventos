@@ -28,7 +28,6 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import com.marioparrillamaroto.myeventsapp.Chat;
-import com.marioparrillamaroto.myeventsapp.DispositivoBluetooth;
 import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentChatsBinding;
 

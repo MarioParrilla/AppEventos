@@ -210,7 +210,91 @@ Modificar/Borrar Evento Presencial:
 
 ## Diagrama de clases
 
-![diagramaClases](./readmeAssets/Diagramas/clases.png)
+![diagramaPaqueteMain](./readmeAssets/Diagramas/diagramaPaqueteMain.png)
+
+Clase Evento: En esta clase se usará para trabajar con los eventos de la aplicación.
+
+Clase Usuario: En esta clase se usará para trabajar con los usuarios de la aplicación.
+
+Clase Chat: Esta clase se usa para trabajar con la información de los chats en la aplicación.
+
+Clase MensajeChat: Esta clase se utiliza para trabajar con la información de cada mensaje de los diferentes chats de la aplicación.
+
+Clase SettingsFragment: Esta clase trabaja con la vista de ajustes de la aplicación.
+
+Clase MainActivity: Esta clase es la clase donde se maneja los fragmentos en la primera carga de la aplicación.
+
+Clase MyEventAppActivity: Esta es la clase principal de la aplicación donde se manejarán la primeras cargas de datos desde el servidor cms y se realizarán varias comprobaciones como comprobar si hay un usuario logueado actualmente.
+
+
+![diagramaPaqueteLogin](./readmeAssets/Diagramas/diagramaPaqueteLogin.png)
+
+Clase LoginActivity: Esta clase se encarga de realizar las comprobaciones relacionadas con el logueo en la aplicación de los usuarios.
+
+Clase LoginModel: Esta clase se encarga de recuperar datos para pasarselos al LoginActivity para que pueda realizar sus operaciones correctamente.
+
+![diagramaPaqueteHome](./readmeAssets/Diagramas/diagramaPaqueteHome.png)
+
+Clase Homefragment: Esta clase se encarga de cargar los eventos los cuales el usuario logeado tiene citados.
+
+Clase Homemodel: Esta clase se encarga de recuperar los datos para homefragment para que trabaje correctamente.
+
+Clase Adaptadorproximoevento: Esta clase se encarga de cargar el layaout y los datos de los eventos en la vista.
+
+![diagramaPaqueteBuscar](./readmeAssets/Diagramas/diagramaPaqueteBuscar.png)
+
+Clase Buscarfragment: Esta clase se encarga de buscar los usuarios de la plataforma para poder ver sus perfiles para citar sus eventos.
+
+Clase Buscarmodel: Esta clase proporciona los datos a buscarfragment.
+
+Clase Adaptadorbusqueda: Esta clase se encarga de cargar el layaout y los datos lo de los usuarios en la vista.
+
+![diagramaPaqueteExternalProfile](./readmeAssets/Diagramas/diagramaPaqueteExternalProfile.png)
+
+Clase ExternalProfileActivity: Esta clase se encarga de mostrar los datos y eventos disponibles del perfil del usuario buscado en el fragmento de buscar .
+
+Clase ExternalProfileModel: Esta clase se encarga de pasar los datos del usuario buscado a la clase ExternalProfileActivity para su correcta funcionalidad.
+
+Clase AdaptadorEventoExternalProfile: Esta clase se encarga de cargar el layaout y los datos del usuario y de sus eventos disponibles.
+
+![diagramaPaquetePerfil](./readmeAssets/Diagramas/diagramaPaquetePerfil.png)
+
+Clase Perfilfragment: Esta clase se encarga de cargar el perfil del usuario el cual esta logeado en la aplicacion y poder llamar a los popups para agregar, modificar y eliminar sus propios eventos.
+
+Clase Perfilmodel: Esta clase proporciona los datos del usuario logeado al perfilfragment.
+
+Clase Adaptadorevento: Esta clase se encarga de cargar el layaout y los datos del usuario logueado y sus eventos.
+
+![diagramaPaquetePopUpEventos](./readmeAssets/Diagramas/diagramaPaquetePopUpEventos.png)
+
+Clases PopupCrearEventoPresencial y PopupCrearEventoMeeting: Estas clases se encargan de crear un evento propio, verificando que los datos estén correctamente puestos.
+
+Clases PopupModificiarEventoPresencial y PopupModificiarEventoMeeting: Estas clases se encargan de modificiar un evento propio, verificando que los datos estén correctamente puestos y si este evento ya esta citado, no se permitirá modificarlo, además de poder eliminar estos eventos.
+
+Clases PopupCitarEventoPresencial y PopupCitarEventoMeeting: Estas clases se encargan de mostrar la información de un evento, y permitir al usuario citador citar el evento.
+
+Clases PopupInfoEventoPresencial y PopupInfoEventoMeeting: Estas clases se encargan de mostrar la información de un evento.
+
+Clase PopupMostrarUbicación: Esta clase se encarga de mostrar un mapa en el cual se mostrará la ubicacion del evento.
+
+![diagramaPaqueteChats](./readmeAssets/Diagramas/diagramaPaqueteChats.png)
+
+Clase Chatsfragment: Esta clase se encarga de utilizar el bluetooth del smartphone y poder acceder a los chats individuales con los dispositivos bluetooth.
+
+Clase Adaptadorchat: Esta clase se encarga de cargar el layaout y los datos de los dispositivos bluetooth encontrados.
+
+Clase ChatActivity: Esta clase se encarga de cargar el historial del chat del dispositivo, realizar una conexion bluetooth con este dispositivo y poder realizar una conversación con este.
+
+Clase AdaptardorChatIndividual: Se encarga de cargar los layaouts correspondiestes con sus datos de los mensajes de la conversación.
+
+Clase Chatutils: Se encarga de las conexiones, informar de los estados de las conexiones y cambios de la conexion y enviar y recibir los mensajes del chat.
+
+![diagramaPaqueteCore](./readmeAssets/Diagramas/diagramaPaqueteCore.png)
+
+Clase FunctionsDatabase: Esta clase se encarga de interactuar con la base de datos en el smartphone y realizar sus respectivas acciones. Esta clase se utiliza en clases externas al paquete para que esta clase le envie la información que necesiten de la base de datos.
+
+Clase Corefunctions: Esta clase se encarga de varias funcionalidades importantes de la aplicación como prevenir la inyecciones SQL, comprobar si el smartphone esta rooteado...
+
 
 ## Diagrama E/R
 
