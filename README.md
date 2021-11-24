@@ -372,6 +372,26 @@ Base de datos: La base de datos esta hosteada en amazon ya que se utiliza un plu
 
 En este punto se explicarán las diferentes tecnologías utilizadas para la realización del proyecto, así como los elementos más importantes que permitan entender el funcionamiento del sistema.
 
+Googgle Maps: Esta aplicación para cargar los mapas, utiliza una api de google maps.
+
+One Signal: Permite mandar notificaciones push a los clientes.
+
+Bcrypt: Permite cifrar las contraseñas de los usuarios para que sus datos se almacenen seguros.
+
+SQLite: Es el gestor de base de datos que se usa para guardar los datos de forma local.
+
+SQL Cipher: Es una variante de MySQLite, la cual nos permite crear y almacenar los datos cifrados.
+
+Safetynet: No permite realizar funcionalidades de seguridad en nuestra aplicación como la de agregar captchas.
+
+Rootber: Nos permite identificar si el dispositivo esta rooteado.
+
+Volley: Es una librearia de Google, que nos permite realizar peticiones a la api rest del CMS.
+
+Conceal: Es una librería de facebook, la cual nos permite cifrar y descrifrar archivos y cadenas de texto.
+
+JWT: Esta tecnologia de web token, nos permite poder realizar una peticiones autorizadas a la api rest del CMS.
+
 ## Instrucciones para la compilación, ejecución y despliegue de la aplicación
 
 Describe los pasos a seguir para poder compilar el proyecto y ejecutarlo.
