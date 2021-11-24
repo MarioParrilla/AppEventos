@@ -358,7 +358,15 @@ de algoritmos, etc.
 
 ## Arquitectura del sistema
 
-Describir la arquitectura del sistema (diagrama de despliegue).
+![diagramaDespliegue](./readmeAssets/Diagramas/diagramaDespliegue.png)
+
+CMS:  El CMS esta desplegado en la plataforma de Heroku. Este CMS esta desarrollado con Spring boot.
+
+MyEventsApp: Esta es la aplicación android desarrolladoa con java.
+
+Navegador: Se trata de un cliente web como chrome, firefox... 
+
+Base de datos: La base de datos esta hosteada en amazon ya que se utiliza un plugin en heroku que te la hostea ahí.
 
 ## Entorno de desarrollo, librerías y servicios
 
