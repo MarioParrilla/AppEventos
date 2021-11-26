@@ -350,11 +350,15 @@ Prueba 2: Comprobar usuario agregado: Se pasará un objeto usuario y si el usuar
 
 ## Diagrama de paquetes y de componentes
 
-Se debe incluir un diagrama de paquetes, de componentes, etc.
+![diagramaPaquetes](./readmeAssets/Diagramas/diagramaPaquetes.png)
 
-También se puede incluir la estructura y descripción de los ficheros que forman parte del proyecto. Descripción 
+Paquete res: En este paquete se almacenan diferentes paquetes donde se almacenan archivos importantes como los layouts, los drawables o valores entre otras cosas...
 
-de algoritmos, etc.
+Paquete MyEventsApp: En este paquete encontraremos las clases de objetos como las que se guardan en las bd, otros objetos que se usan a lo largo de la aplicación y las clases de funcionalidad en la carga principal.
+
+Paquete Core: En este paquete se almacenan las clases las cuales contienen las funcionalidades mas importantes como conexiones con la base de datos, conectar con la api, funciones de seguridad, ...
+
+Paquete UI: En este paquete se almacenan paquetes que continen las clases que manejan las vistas de la aplicacion.
 
 ## Arquitectura del sistema
 

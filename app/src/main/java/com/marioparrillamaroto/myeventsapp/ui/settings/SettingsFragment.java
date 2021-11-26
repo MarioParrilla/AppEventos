@@ -1,4 +1,4 @@
-package com.marioparrillamaroto.myeventsapp;
+package com.marioparrillamaroto.myeventsapp.ui.settings;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.marioparrillamaroto.myeventsapp.R;
 import com.marioparrillamaroto.myeventsapp.core.FunctionsDatabase;
 import com.marioparrillamaroto.myeventsapp.databinding.FragmentHomeBinding;
 
