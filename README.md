@@ -318,7 +318,9 @@ enabled: Nos servirá para saber si el usuario puede utilizarse o no, que es de 
 
 eventID: Es la clave principal de la tabla, que será el identificador del evento, que es de tipo bigint. NotNull.
 
-username: Es el nombre de evento, que es de tipo varchar. NotNull.
+eventname: Es el nombre de evento, que es de tipo varchar. NotNull.
+
+eventname: Es el tema del evento, que es de tipo varchar. NotNull.
 
 start_time: Es la fecha y hora del inicio del evento, que es de tipo Datetime. NotNull.
 
@@ -335,6 +337,16 @@ available: Con este dato sabremos si el evento esta activado o no según su valo
 user_owner_id_user: es la id del usuario que ha creado el evento, es de tipo bigint. NotNull.
 
 user_summoner_id_user: es la id del usuario que ha citado al creador el evento, es de tipo bigint.
+
+### TABLA -- LOGININFO
+
+userid: Es el identificador del usuario que esta logueado en la app, es de tipo integer.
+
+username: Es el nombre del usuario logueado en la app, es de tipo text.
+
+password: Es la contraseña del usuario que esta logueado en la app, es de tipo text.
+
+saveSession: Es el estado de si ha elegido guardar sesion a la hora del logueo, es de tipo bool.
 
 ![entidadRealacion](./readmeAssets/Diagramas/entidadRelacion.png)
 
