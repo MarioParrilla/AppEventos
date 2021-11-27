@@ -141,6 +141,8 @@ El usuario podrá editar sus eventos e incluso cancelarlos.
 
 App:
 
+CAMBIAR GIFT
+
 ![gifApp](./readmeAssets/DisennoGrafico/app.gif)
 
 Login:
@@ -167,6 +169,10 @@ Chats:
 
 ![chats](./readmeAssets/DisennoGrafico/chats.jpg)
 
+Chat Individual: 
+
+![chatIndividual](./readmeAssets/DisennoGrafico/chatIndividual.jpg)
+
 Buscar:
 
 ![buscar](./readmeAssets/DisennoGrafico/buscar.jpg)
@@ -187,10 +193,6 @@ Perfil Personal:
 
 ![perfil](./readmeAssets/DisennoGrafico/perfil.jpg)
 
-Perfil Personal Opciones: 
-
-![perfil2](./readmeAssets/DisennoGrafico/perfil2.jpg)
-
 Crear Evento Meeting:
 
 ![crearEventoMeeting](./readmeAssets/DisennoGrafico/crearEventoMeeting.jpg)
@@ -206,6 +208,14 @@ Modificar/Borrar Evento Meeting:
 Modificar/Borrar Evento Presencial:
 
 ![modificarEventoPresencial](./readmeAssets/DisennoGrafico/modificarEventoPresencial.jpg)
+
+Ver Mapa:
+
+![verMapa](./readmeAssets/DisennoGrafico/verMapa.jpg)
+
+Notificación Push:
+
+![notificacionPush](./readmeAssets/DisennoGrafico/notificacionPush.jpg)
 
 
 ## Diagrama de clases
