@@ -438,8 +438,18 @@ Incluye pantallazos de la ejecución de los casos de prueba realizadas en dispos
 
 ## Conocimientos adquiridos
 
-Reflexiona sobre el trabajo realizado durante el desarrollo de la aplicación móvil y sobre los conocimientos adquiridos, problemas encontrados, etc.
+En este trabajo, he tenido que desarrollar una aplicación la cual tenía que cumplir gran variedad de competencias las cuales unas eran más faciles que otras, pero en el transcurso del desarrollo, he aprendido bastante de como funcionan por dentro las aplicaciones android, de como recibir datos de una api, de como almacenar datos en una base de datos en android, de utilizar mapas, ... entre otras cosas. En el transcurso del desarrollo de la aplicación he tenido que ir cambiando funcionalidades como la creación de los eventos como podemos ver si comparamos el wireframe con la versión final. Uno de los problemas que me encontre a la hora de desarrollar la aplicación fue, que al encriptar la base de datos de la aplicación, la aplicación tardaba mucho en cargar las pantallas, asi que tuve que quitar esta opción de la versión de producción, además otro problema que he tenido, ha sido que a la hora de recibir datos de la API, al ser peticiones asincronas, tardan en recibirse, pero esto si se llegara a seguir el desarrollo de la aplicación se pondría un solución pero al tener un tiempo limitado cercano, he tenido que dejarlo como esta.
+
+En conclusión, gracias a este desarrollo he aprendido bastante a manejar un desarrollo con un tiempo limitado como si fuera un proyecto real de empresa, ademas de desarrollar aplicaciones android entre otras cosas.
 
 ## Mejoras futuras
 
-Incluye aspectos y nueva funcionalidad que incluirías en la aplicación en un futuro próximo. 
+- Incluir pantallas de registro en la app.
+
+- Incluir pantallas y la opcion de recuperar una contraseña olvidada.
+
+- Incluir chat online y eliminar chat bluetooth.
+
+- Incluir imagen de perfil.
+
+- Mejorar el recibimiento de respuestas de la API
