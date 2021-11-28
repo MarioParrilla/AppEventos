@@ -420,7 +420,7 @@ JWT: Esta tecnologia de web token, nos permite poder realizar una peticiones aut
 
 ## Instrucciones para la compilación, ejecución y despliegue de la aplicación
 
-Describe los pasos a seguir para poder compilar el proyecto y ejecutarlo.
+En el dispositivo android se deberá tener la versión android minima Android Oreo 8.1 (SDK 26).
 
 ## Informe de pruebas
 
