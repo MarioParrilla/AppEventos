@@ -143,7 +143,7 @@ App:
 
 CAMBIAR GIFT
 
-![gifApp](./readmeAssets/DisennoGrafico/app.gif)
+![rooted](./readmeAssets/DisennoGrafico/rooted.jpg)
 
 Login:
 
