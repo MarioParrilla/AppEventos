@@ -440,9 +440,7 @@ Emulador:
 
 ### Pruebas remotas
 
-Incluye pantallazos de la ejecución de los casos de prueba realizadas en dispositivos reales remotos.
-
-
+![remoto](./readmeAssets/DisennoGrafico/remoto.png)
 
 # Conclusiones
 
