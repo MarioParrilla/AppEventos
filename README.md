@@ -422,11 +422,21 @@ JWT: Esta tecnologia de web token, nos permite poder realizar una peticiones aut
 
 En el dispositivo android se deberá tener la versión android minima Android Oreo 8.1 (SDK 26).
 
+Si quierse cambiar la url de la api para recibir y enviar datos tendrás que hacerlo aqui: 
+
+![propURL](./readmeAssets/propURL.png)
+
 ## Informe de pruebas
 
 ### Pruebas en emuladores y dispositivos reales
 
-Incluye pantallazos de la ejecución de los casos de prueba realizadas en los emuladores y dispositivos reales.
+Dispositivo Real:
+
+![dispositivo](./readmeAssets/DisennoGrafico/dispositivo.png)
+
+Emulador:
+
+![emulador](./readmeAssets/DisennoGrafico/emulador.png)
 
 ### Pruebas remotas
 
