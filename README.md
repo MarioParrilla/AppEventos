@@ -440,6 +440,9 @@ Emulador:
 
 ### Pruebas remotas
 
+![remotodisp](./readmeAssets/DisennoGrafico/remotodis.png)
+
+
 ![remoto](./readmeAssets/DisennoGrafico/remoto.png)
 
 # Conclusiones
