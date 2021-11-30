@@ -141,82 +141,16 @@ El usuario podrá editar sus eventos e incluso cancelarlos.
 
 App:
 
-CAMBIAR GIFT
+![p1](./readmeAssets/DisennoGrafico/p1.png)
 
-![rooted](./readmeAssets/DisennoGrafico/rooted.jpg)
 
-Login:
+![p2](./readmeAssets/DisennoGrafico/p2.png)
 
-![login](./readmeAssets/DisennoGrafico/login.jpg)
+![p3](./readmeAssets/DisennoGrafico/p3.png)
 
-Inicio: Aquí podemos ver como se ven las cardviews meeting, presencial y cuando no se tengan eventos disponibles.
+![p4](./readmeAssets/DisennoGrafico/p4.png)
 
-![inicio](./readmeAssets/DisennoGrafico/inicio.jpg)
-
-Info Evento Meeting: 
-
-![infoEventoMeeting](./readmeAssets/DisennoGrafico/infoEventoMeeting.jpg)
-
-Info Evento Presencial:
-
-![infoEventoPresencial](./readmeAssets/DisennoGrafico/infoEventoPresencial.jpg)
-
-Ajustes:
-
-![ajustes](./readmeAssets/DisennoGrafico/ajustes.jpg)
-
-Chats:
-
-![chats](./readmeAssets/DisennoGrafico/chats.jpg)
-
-Chat Individual: 
-
-![chatIndividual](./readmeAssets/DisennoGrafico/chatIndividual.jpg)
-
-Buscar:
-
-![buscar](./readmeAssets/DisennoGrafico/buscar.jpg)
-
-Perfil Externo:
-
-![perfilExterno](./readmeAssets/DisennoGrafico/perfilExterno.jpg)
-
-Citar Evento Meeting:
-
-![citarEventoMeeting](./readmeAssets/DisennoGrafico/citarEventoMeeting.jpg)
-
-Citar Evento Presencial:
-
-![citarEventoPresencial](./readmeAssets/DisennoGrafico/citarEventoPresencial.jpg)
-
-Perfil Personal:
-
-![perfil](./readmeAssets/DisennoGrafico/perfil.jpg)
-
-Crear Evento Meeting:
-
-![crearEventoMeeting](./readmeAssets/DisennoGrafico/crearEventoMeeting.jpg)
-
-Crear Evento Presencial:
-
-![crearEventoPresencial](./readmeAssets/DisennoGrafico/crearEventoPresencial.jpg)
-
-Modificar/Borrar Evento Meeting:
-
-![modificarEventoMeeting](./readmeAssets/DisennoGrafico/modificarEventoMeeting.jpg)
-
-Modificar/Borrar Evento Presencial:
-
-![modificarEventoPresencial](./readmeAssets/DisennoGrafico/modificarEventoPresencial.jpg)
-
-Ver Mapa:
-
-![verMapa](./readmeAssets/DisennoGrafico/verMapa.jpg)
-
-Notificación Push:
-
-![notificacionPush](./readmeAssets/DisennoGrafico/notificacionPush.jpg)
-
+![p5](./readmeAssets/DisennoGrafico/p5.png)
 
 ## Diagrama de clases
 
