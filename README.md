@@ -398,3 +398,19 @@ En conclusión, gracias a este desarrollo he aprendido bastante a manejar un des
 - Incluir imagen de perfil.
 
 - Mejorar el recibimiento de respuestas de la API
+
+## Publicacion de la APP
+
+![p1](./readmeAssets/Publicacion/p1.png)
+
+![p2](./readmeAssets/Publicacion/p2.png)
+
+![p3](./readmeAssets/Publicacion/p3.png)
+
+![p4](./readmeAssets/Publicacion/p4.png)
+
+![p5](./readmeAssets/Publicacion/p5.png)
+
+![p6](./readmeAssets/Publicacion/p6.png)
+
+![p7](./readmeAssets/Publicacion/p7.png)
