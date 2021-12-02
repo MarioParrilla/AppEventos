@@ -356,7 +356,6 @@ JWT: Esta tecnologia de web token, nos permite poder realizar una peticiones aut
 
 Para poder loguearte debes usar el ususario rogelio con la contraseña admin
 
-
 En el dispositivo android se deberá tener la versión android minima Android Oreo 8.1 (SDK 26).
 
 Si quierse cambiar la url de la api para recibir y enviar datos tendrás que hacerlo aqui: 
