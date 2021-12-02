@@ -298,9 +298,9 @@ saveSession: Es el estado de si ha elegido guardar sesion a la hora del logueo, 
 
 Prueba 1: Comprobar Existencia del un Usuario en el login: Se pasaran como parametros un usuario y una contraseña y si el usuario existe, nos devolverá un true, si no, nos devolverá false.
 
-Prueba 2: Comprobar usuario agregado: Se pasará un objeto usuario y si el usuario se agrega correctamente, nos devolverá un true, si no, nos devolverá un flase.
+Prueba 2: Comprobar usuario agregado: Se pasará un objeto usuario y si el usuario se agrega correctamente, nos devolverá un true, si no, nos devolverá un false.
 
-🏗️⚠️PLAN DE PRUEBAS EN DESARROLLO⚠️🏗️
+Prueba 3: Se comprobará si se agregan datos a la base de datos local correctamente.
 
 # Diseño Técnico
 
