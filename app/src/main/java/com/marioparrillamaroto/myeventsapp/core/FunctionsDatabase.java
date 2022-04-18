@@ -70,7 +70,7 @@ public class FunctionsDatabase extends SQLiteOpenHelper {
     private static final String LOGIN_TABLE = "'LoginInfo'";
     private static final String COLUMN_SAVESESSION = "'saveSession'";
     private SQLiteDatabase db;
-    private static final String URLAPI = "https://myeventsapp-mario.herokuapp.com/api";
+    private static final String URLAPI = "x";
     private Context contextRoot;
 
     public SQLiteDatabase getDb() {
