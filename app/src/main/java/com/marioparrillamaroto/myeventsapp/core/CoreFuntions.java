@@ -57,9 +57,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class CoreFuntions {
-    private final static String SiteKey = "6LfdeBMdAAAAAPk5TRWlW-ySQn1qaprU187xsq1r";
-    private final static String SecretKey = "6LfdeBMdAAAAAAEnLQKF4X9fOjBuFcoTB7Q_Vkcu";
-    private final static String SECRET = "MyEventsApp";
+    private final static String SiteKey = "x";
+    private final static String SecretKey = "x";
+    private final static String SECRET = "x";
 
     public static String createJWT(){
         Key key = new SecretKeySpec(SECRET.getBytes(), SignatureAlgorithm.HS256.getJcaName());
